@@ -1,0 +1,2 @@
+# mathly
+Lua + Mathly documentation
