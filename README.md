@@ -1,2 +1,2 @@
 # mathly
-Documentation of Lua + Mathly [https://github.com/fdformula/MathlyLua]
+Documentation of Mathly for Lua [https://github.com/fdformula/MathlyLua]
