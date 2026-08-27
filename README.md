@@ -26,7 +26,7 @@ Mathly is developed in Lua 5.4.6. It works with Lua 5.5.0 and might also work wi
 for Microsoft Windows in, say, https://joedf.github.io/LuaBuilds/ and https://www.nuget.org/packages/lua/. Another way to get prebuilt Lua is to download
 ZeroBrane Studio (https://studio.zerobrane.com/), a lightweight Lua IDE for various platforms. It comes with multiple versions of Lua.
 
-Two text editors, [CudaText](https://github.com/fdformula/MathlyLua/tree/main/IDE%20-%20CudaText) and [Lite XL](https://github.com/fdformula/MathlyLua/tree/main/IDE%20-%20Lite%20XL), are each a very good "IDE" for Lua + Mathly. You may download the editors here with Lua and Mathly included and integrated.
+Two text editors, [CudaText](https://github.com/fdformula/mathly/tree/main/IDE%20-%20CudaText) and [Lite XL](https://github.com/fdformula/mathly/tree/main/IDE%20-%20Lite%20XL), are each a very good "IDE" for Lua + Mathly. You may download the editors here with Lua and Mathly included and integrated.
 
 By the way, [Mozilla Firefox](https://www.mozilla.org/) is the internet browser. If you use a different browser, <em>you need to edit the file `browser-setting.lua`</em> coming with Mathly. See comments in the very file.
 
