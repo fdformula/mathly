@@ -53,4 +53,4 @@ cp -R ~/.config/lite-xl/plugins/terminal/* /Applications/Lite\ XL.app/Contents/R
 cp lite-xl-2.1.8-for-mathly-macos_intel/Applications/Lite\ XL.app/Contents/Resources/terminal/init.lua /Applications/Lite\ XL.app/Contents/Resources/terminal/
 rm -fr ~/.config/lite-xl/
 ```
-`Note`: [CudaText](https://github.com/fdformula/MathlyLua/tree/main/IDE%20-%20CudaText) is another very good "IDE" for Lua + Mathly.
+`Note`: [CudaText](https://github.com/fdformula/mathly/tree/main/IDE%20-%20CudaText) is another very good "IDE" for Lua + Mathly.
