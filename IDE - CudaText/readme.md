@@ -30,7 +30,7 @@ Mathly included and integrated. Unzip it to C:\ (the root directory of the C dri
 &rArr; Linux users may download the file, [cudatext-for-mathly-linux.tar.gz](https://github.com/fdformula/mathly/blob/main/IDE%20-%20CudaText/cudatext-for-mathly-linux.tar.gz).
 Run `tar xfz cudatext-for-mathly-linux.tar.gz` and refer to the included file, `cudatext-for-mathly-linux/note.txt`, for further steps.
 
-&rArr; MacOS users? Download the file, [cudatext-for-mathly-macosx.tar.gz](https://github.com/fdformula/mathly/blob/main/cudatext-for-mathly-macos.tar.gz). Expand the downloaded file
+&rArr; MacOS users? Download the file, [cudatext-for-mathly-macosx.tar.gz](https://github.com/fdformula/mathly/blob/main/IDE%20-%20CudaText/cudatext-for-mathly-macos.tar.gz). Expand the downloaded file
 and refer to the included file, `note.txt`, for other steps.
 
 `Note`: [Lite XL](https://github.com/fdformula/mathly/tree/main/IDE%20-%20Lite%20XL) is another very good "IDE" for Lua + Mathly.
