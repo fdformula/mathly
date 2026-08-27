@@ -27,7 +27,7 @@ Only one interpreter is allowed at a time. To change an interpreter, you may ent
 Mathly included and integrated. Unzip it to C:\ (the root directory of the C drive). <em>Do not change the name of the folder,
 `C:\mathly`</em>.
 
-&rArr; Linux users may download the file, [cudatext-for-mathly-linux.tar.gz](https://github.com/fdformula/mathly/blob/main/cudatext-for-mathly-linux.tar.gz).
+&rArr; Linux users may download the file, [cudatext-for-mathly-linux.tar.gz](https://github.com/fdformula/mathly/blob/main/IDE%20-%20CudaText/cudatext-for-mathly-linux.tar.gz).
 Run `tar xfz cudatext-for-mathly-linux.tar.gz` and refer to the included file, `cudatext-for-mathly-linux/note.txt`, for further steps.
 
 &rArr; MacOS users? Download the file, [cudatext-for-mathly-macosx.tar.gz](https://github.com/fdformula/mathly/blob/main/cudatext-for-mathly-macos.tar.gz). Expand the downloaded file
