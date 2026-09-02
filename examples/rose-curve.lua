@@ -2,7 +2,7 @@
 -- See: https://iviveros.github.io/param-eq/
 jscode = [[
 function displaytitle() {
-  return "<font size=5>Rose curves: polar function r(&theta;) = cos(n/d &bull; &theta;)</font>"
+  return "<font size=5>Rose curves: polar function r(&theta;) = cos(n/d &sdot; &theta;)</font>"
 }
 function displaytext() {
   return "&theta; &in; [0, 40&pi;]"
