@@ -1,10 +1,11 @@
--- https://iviveros.github.io/param-eq/
+-- by David Wang, dwang@liberty.edu, on 09/01/2026
+-- See: https://iviveros.github.io/param-eq/
 jscode = [[
 function displaytitle() {
   return "<font size=5>Rose curves: polar function r(&theta;) = cos(n/d &bull; &theta;)</font>"
 }
 function displaytext() {
-  return "&theta; &in; [0, 40&pi;]. See: <a href=https://iviveros.github.io/param-eq/ target=_blank>https://iviveros.github.io/param-eq/</a>"
+  return "&theta; &in; [0, 40&pi;]"
 }
 ]]
 
