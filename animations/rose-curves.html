@@ -4,7 +4,8 @@
 <head>
  <meta charset="utf-8">
  <title>Mathly Function Animation</title>
- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ <script src="file:///c:/mathly/bin/plotly-2.9.0.min.js"></script>
+ <!--  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 <style>
 label {
  display: inline-block;
@@ -32,11 +33,11 @@ input:focus {outline: none;}
 <button type="button" title="Previous value" onclick="mthlynNext(-1)" style="width:48px;left:348px;top:60px;position:absolute">Prev</button>
 <button type="button" title="Next value" onclick="mthlynNext(1)" style="width:48px;left:399px;top:60px;position:absolute">Next</button>
 <label for="mthlySldrn" style='top:60px;'>n:</label>
-<input type="range" id="mthlySldrn" min="1" max="10" value="1" style='left:72px;top:60px;' step="0.5"></input><span id="mthlySldrnvalue" style="left:293px;top:60px;position:absolute">&nbsp;</span>
+<input type="range" id="mthlySldrn" min="1" max="20" value="1" style='left:72px;top:60px;' step="1"></input><span id="mthlySldrnvalue" style="left:293px;top:60px;position:absolute">&nbsp;</span>
 <button type="button" title="Previous value" onclick="mthlydNext(-1)" style="width:48px;left:348px;top:90px;position:absolute">Prev</button>
 <button type="button" title="Next value" onclick="mthlydNext(1)" style="width:48px;left:399px;top:90px;position:absolute">Next</button>
 <label for="mthlySldrd" style='top:90px;'>d:</label>
-<input type="range" id="mthlySldrd" min="1" max="10" value="1" style='left:72px;top:90px;' step="0.5"></input><span id="mthlySldrdvalue" style="left:293px;top:90px;position:absolute">&nbsp;</span>
+<input type="range" id="mthlySldrd" min="1" max="20" value="1" style='left:72px;top:90px;' step="1"></input><span id="mthlySldrdvalue" style="left:293px;top:90px;position:absolute">&nbsp;</span>
 <span id="displaytext" style="left:74px;top:120px;position:absolute">&nbsp;</span>
 <script type="text/javascript">
 function displaytext() { return ""; } // to be overwritten
@@ -73,10 +74,10 @@ const mthlyLayout = {
 
 var mthlySldrn = document.getElementById('mthlySldrn');
 var mthlySldrd = document.getElementById('mthlySldrd');
-mthlySldrn.value = 3.5;
-var n = 3.5;
-mthlySldrd.value = 2;
-var d = 2;
+mthlySldrn.value = 1;
+var n = 1;
+mthlySldrd.value = 8;
+var d = 8;
 p = 1;
 for (let i = 0; i <= p * (125.66370614359172 + 0) - 0; i += 0.025132741228718346) { t.push(i); }
 
@@ -84,8 +85,8 @@ var mthlyTraces = [];
 const mthlyxMin = -1.2, mthlyxMax = 1.2, mthlyxStep = 1;
 const mthlyyMin = -1.2, mthlyyMax = 1.2;
 const mthlytMin = 0, mthlytMax = 125.66370614359172, mthlytStep = 0.01;
-const mthlynMin = 1, mthlynMax = 10, mthlynStep = 0.5;
-const mthlydMin = 1, mthlydMax = 10, mthlydStep = 0.5;
+const mthlynMin = 1, mthlynMax = 20, mthlynStep = 1;
+const mthlydMin = 1, mthlydMax = 20, mthlydStep = 1;
 
 function mthlyUpdateTraces() {
   mthlyTraces = [];
