@@ -11,8 +11,8 @@ function displaytext() {
 
 opts = {
   t = {0, 40 * pi, 0.01},
-  n = {1, 10, 0.5, default = 3.5},
-  d = {1, 10, 0.5, default = 2},
+  n = {1, 20, default = 1},
+  d = {1, 20, default = 8},
   javascript = jscode,
   xrange = {-1.2, 1.2}, yrange = {-1.2, 1.2},
   resolution = 5000,
