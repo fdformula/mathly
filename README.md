@@ -8,7 +8,7 @@ than working in most other programming languages. Besides, `animate` and `manipu
 Mathly uses Plotly JavaScript graphing tools (see https://plotly.com/javascript/) to plot graphs. Therefore, graphs and animations are
 displayed in an internet browser, which makes it easy to share your animations with others.
 
-The entire MathLua tool, including Lua interpreter, is less than 5 MB, while providing enough features for instructors and college students
+The entire MathLua tool, including Lua interpreter, Mathly, and Plotly, is less than 5 MB, while providing enough features for instructors and college students
 to implement numerical algorithms. <b>Because it is super lightweight and fast as well, it can run fast even on old and slow devices</b> like 
 Microsoft Surface Pro 4 (Intel Core i5-6300U with 8 GB RAM). In contrast to it, MATLAB needs a few GB of storage space. In addition, 
 it takes about 22 seconds to start MATLAB R2024b on a new high-end Intel Core i9-14900HX laptop with 56 GB RAM. Thus, it can hardly 
