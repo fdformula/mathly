@@ -6,7 +6,7 @@ as well. If there are things many love the most about MATLAB, these tools are. T
 than working in most other programming languages. Besides, `animate` and `manipulate` allow easy and cool animation of 2D curves.
 
 Mathly uses Plotly JavaScript graphing tools (see https://plotly.com/javascript/) to plot graphs. Therefore, graphs and animations are
-displayed in an internet browser.
+displayed in an internet browser, which makes it easy to share your animations with others.
 
 The entire MathLua tool, including Lua interpreter, is less than 5 MB, while providing enough features for instructors and college students
 to implement numerical algorithms. <b>Because it is super lightweight and fast as well, it can run fast even on old and slow devices</b> like 
