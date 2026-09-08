@@ -89,8 +89,33 @@ eps = 2.220446049250313e-16  -- machine epsilon
 phi = 1.6180339887499        -- golden radio
 T = 'T' -- reserved by mathly, transpose of a matrix, A^T
 
-function div(a, d) return a // d end
-function mod(a, d) return a % d  end
+local function _map2(f, a, d)
+  if type(f) == 'string' then f = ff(f) end
+  if type(a) ~= 'table' and type(d) ~= 'table' then
+    return f(a, d)
+  else
+    local v, q
+    if type(a) == 'table' then
+      q = getmetatable(a) == mathly_meta or ismatrix(a)
+      if type(d) == 'table' then
+        local f = function(x, y) return f(x, y) end
+        v = map(f, a, d)
+        q = q or getmetatable(d) == mathly_meta or ismatrix(d)
+      else
+        local f = function(x) return f(x, d) end
+        v = map(f, a)
+      end
+    else
+      q = getmetatable(d) == mathly_meta or ismatrix(d)
+      local f = function(x) return f(a, x) end
+      v = map(f, d)
+    end
+    if q then setmetatable(v, mathly_meta) end
+    return v
+  end
+end
+function div(a, d) return _map2('@(x, y) x // y', a, d) end
+function mod(a, d) return _map2('@(x, y) x % y', a, d) end
 
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end

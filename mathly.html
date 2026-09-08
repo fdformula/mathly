@@ -179,9 +179,38 @@ disp(E)
 disp(sin{1, 2, {3, {4}, 5}})
 </code></pre>
 
-<p>&#x2713; &nbsp; <a name=eps></a><a name=div></a><a name=mod></a>Functions <code>div</code> and <code>mod</code> are simply the names of <a href=manual.html#3.4.1>Lua operators <code>//</code> and <code>%</code></a>, respectively.
+<p>&#x2713; &nbsp; <a name=eps></a><a name=div></a><a name=mod></a>Functions <code>div</code> and <code>mod</code> can simply be the names of <a href=manual.html#3.4.1>Lua operators <code>//</code> and <code>%</code></a>, respectively.
 They make Lua code more understandable to people who are new to Lua. They follow the definition: if <code>d &gt; 0</code>, <code>r = mod(a, d)</code> is the remainder of <code>a</code>
-divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d)</code> gives the quotient.</p>
+divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d)</code> gives the quotient. They can work on tables and Mathly matrices. Both have the same usage.</p>
+<pre><code>mathly = require('mathly')
+mod(77, 9)
+77 % 9
+-- 5
+div(77, 9)
+77 // 9
+-- 8
+
+mod({77, 78, 79}, 10)
+-- 7 8 9
+disp{77 % 10, 78 % 10, 79 % 10}
+-- {7, 8, 9}
+disp(mod(121, {77, 78, {79}}))
+disp{121 % 77, 121 % 78, {121 % 79}}
+-- {44, 43, {42}}
+
+mod({121, 231, 350}, {77, 78, 79})
+disp{121 % 77, 231 % 78, 350 % 79}
+-- 44 75 34
+
+x = randi({1, 100}, 2, 5)
+y = randi({1, 100}, 2, 5)
+disp(x)
+disp(y)
+div(x, 32)
+mod(32, x) * 2 + 100
+mod(x, y)
+</code></pre>
+
 
 <p>In addition, Mathly provides four commonly used constants:</p>
 <table><tbody>
