@@ -116,6 +116,10 @@ local function _map2(f, a, d)
 end
 function div(a, d) return _map2('@(x, y) x // y', a, d) end
 function mod(a, d) return _map2('@(x, y) x % y', a, d) end
+function plus(a, d) return _map2('@(x, y) x + y', a, d) end
+function minus(a, d) return _map2('@(x, y) x - y', a, d) end
+function times(a, d) return _map2('@(x, y) x * y', a, d) end
+function divide(a, d) return _map2('@(x, y) x / y', a, d) end
 
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
