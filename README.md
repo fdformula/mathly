@@ -45,7 +45,7 @@ package.path = "./?.luac;;"
 `randi`, `randn`, `range`, `remake`, `repmat`, `reshape`, `reverse`, `round`, `rr`, `rref`, `save`, `seq`, `size`, `sleep`, `sort`, `sprintf`, `std`, `strcat`, `submatrix`, `subtable`,
 `sum`, `table1`, `tblcat`, `tic`, `toc`, `transpose`, `tt`, `unique`, `var`, `vectorangle`, `vertcat`, `who`, `zeros`; `bin2dec`, `oct2hex`, ...
 
-`plus`, `minus`, `times`, `divide`, `div`, `mod`
+`plus`, `minus`, `times`, `divide`; `div`, `mod`
 
 `cat`, `isdir`, `isfile`, `iswindows`, `ls` (or `dir`), `mv`, `pwd`, `rm`
 
