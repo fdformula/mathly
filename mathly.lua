@@ -28,6 +28,8 @@ FUNCTIONS PROVIDED IN THIS MODULE
   sum, table1, tblcat, text, tic, toc, transpose, tt, unique, var, vectorangle,
   vertcat, who, zeros
 
+  plus, minus, times, divide, div, mod
+
   dec2bin, dec2hex, dec2oct, bin2dec, bin2hex, bin2oct, oct2bin, oct2dec,
   oct2hex, hex2bin, hex2dec, hex2oct
 
@@ -120,6 +122,7 @@ function plus(a, d) return _map2('@(x, y) x + y', a, d) end
 function minus(a, d) return _map2('@(x, y) x - y', a, d) end
 function times(a, d) return _map2('@(x, y) x * y', a, d) end
 function divide(a, d) return _map2('@(x, y) x / y', a, d) end
+-- functions like mathly.matlabvmul may be rewritten through these functions??? 9/8/26
 
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
@@ -4715,7 +4718,7 @@ function mathly.numtableadd(t, n, op)
 end
 
 -- Special case: if m1 is a row/column mathly matrix, m2 can be a Lua table of any type.
--- This case saves the trouble of accessing b as b[i] rathern than b[i][1] while doing Ax - b or Ax + b
+-- This case saves the trouble of accessing b as b[i] rather than b[i][1] while doing Ax - b or Ax + b
 function mathly.add_sub_shared(m1, m2, op)
   if type(m1) == 'number' and type(m2) == 'table' then
     if op == '-' then
@@ -4736,7 +4739,7 @@ function mathly.add_sub_shared(m1, m2, op)
 
   local msg = 'm1 ' .. op .. ' m2: dimensions do not match.'
 	local t = {}
-  local M1, M2 -- removed qq(..(qq(..)))
+  local M1, M2
   if rc == 0 then
     M1, M2 = m1, m2
   elseif rc == 1 then
