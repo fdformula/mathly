@@ -38,12 +38,14 @@ package.path = "./?.luac;;"
 
 ## Functions provided in Mathly
 
-`..` (or `horzcat`), `all`, `any`, `apply`, `cc`, `clc`, `clear`, `copy`, `corr`, `cross`, `demathly`, `det`, `diag`, `diff` (or `diff1`), `diff2`, `disp`, `display`, `div`, `dot`,
+`..` (or `horzcat`), `all`, `any`, `apply`, `cc`, `clc`, `clear`, `copy`, `corr`, `cross`, `demathly`, `det`, `diag`, `diff` (or `diff1`), `diff2`, `disp`, `display`, `dot`,
 `eval`, `expand`, `eye`, `factorial`, `ff`, `findroot`, `flatten`,  `fliplr`, `flipud`, `format`, `fzero`, `gcd`, `hasindex`, `help`, `input`, `integral`, `integral2`, `integral3`,
 `inv`, `isempty`, `isinteger`, `iseven`, `isodd`, `ismatrix`, `ismember`, `isvector`, `lagrangepoly`, `length`, `linsolve`, `linspace`, `lu`, `map`, `map1`, `match`, `mathly`, `max`, `mean`,
-`merge`, `min`, `mod`, `namedargs`, `nchoosek`, `nck`, `newtonpoly`, `norm`, `npk`, `ones`, `polyfit`, `polynomial`, `polyval`, `powermod`, `printf`, `prod`, `qq`, `qr`, `rand`,
+`merge`, `min`, `namedargs`, `nchoosek`, `nck`, `newtonpoly`, `norm`, `npk`, `ones`, `polyfit`, `polynomial`, `polyval`, `powermod`, `printf`, `prod`, `qq`, `qr`, `rand`,
 `randi`, `randn`, `range`, `remake`, `repmat`, `reshape`, `reverse`, `round`, `rr`, `rref`, `save`, `seq`, `size`, `sleep`, `sort`, `sprintf`, `std`, `strcat`, `submatrix`, `subtable`,
 `sum`, `table1`, `tblcat`, `tic`, `toc`, `transpose`, `tt`, `unique`, `var`, `vectorangle`, `vertcat`, `who`, `zeros`; `bin2dec`, `oct2hex`, ...
+
+`plus`, `minus`, `times`, `divide`, `div`, `mod`
 
 `cat`, `isdir`, `isfile`, `iswindows`, `ls` (or `dir`), `mv`, `pwd`, `rm`
 
