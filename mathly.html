@@ -198,12 +198,12 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <code><p><a href=#horzcat>.. (or horzcat)</a>, <a href=#all>all</a>, <a href=#any>any</a>, <a href=#apply>apply</a>, <a href=#cc>cc</a>, <a href=#clc>clc</a>,
 <a href=#clear>clear</a>, <a href=#copy>copy</a>, <a href=#corr>corr</a>, <a href=#cross>cross</a>, <a href=#demathly>demathly</a>, <a href=#det>det</a>,
 <a href=#diag>diag</a>, <a href=#diff>diff</a> (or <a href=#diff1>diff1</a>), <a href=#diff2>diff2</a>, <a href=#disp>disp</a>, <a href=#display>display</a>,
-<a href=#dot>dot</a>, <a href=#eval>eval</a>, <a href=#expand>expand</a>, <a href=#eye>eye</a>, <a href=#factorial>factorial</a>,
+<a href=#dot>dot</a>, <a href=#eq>eq</a>, <a href=#eval>eval</a>, <a href=#expand>expand</a>, <a href=#eye>eye</a>, <a href=#factorial>factorial</a>,
 <a href=#ff>ff</a>, <a href=#findroot>findroot</a>, <a href=#flatten>flatten</a>, <a href=#fliplr>fliplr</a>, <a href=#flipud>flipud</a>, <a href=#format>format</a>,
-<a href=#fzero>fzero</a>, <a href=#gcd>gcd</a>, <a href=#hasindex>hasindex</a>, <a href=#help>help</a>, <a href=#input>input</a>, <a href=#integral>integral</a>,
+<a href=#fzero>fzero</a>, <a href=#gcd>gcd</a>, <a href=#ge>ge</a>, <a href=#gt>gt</a>, <a href=#hasindex>hasindex</a>, <a href=#help>help</a>, <a href=#input>input</a>, <a href=#integral>integral</a>,
 <a href=#integral2>integral2</a>, <a href=#integral3>integral3</a>, <a href=#inv>inv</a>, <a href=#isempty>isempty</a>, <a href=#isinteger>isinteger</a>,
 <a href=#iseven>iseven</a>, <a href=#isodd>isodd</a>, <a href=#ismatrix>ismatrix</a>, <a href=#ismember>ismember</a>, <a href=#isvector>isvector</a>,
-<a href=#lagrangepoly>lagrangepoly</a>, <a href=#length>length</a>, <a href=#linsolve>linsolve</a>, <a href=#linspace>linspace</a>, <a href=#lu>lu</a>,
+<a href=#lagrangepoly>lagrangepoly</a>, <a href=#le>le</a>, <a href=#length>length</a>, <a href=#linsolve>linsolve</a>, <a href=#linspace>linspace</a>, <a href=#lt>lt</a>, <a href=#lu>lu</a>,
 <a href=#map>map</a>, <a href=#map1>map1</a>, <a href=#match>match</a>, <a href=#mathly>mathly</a>, <a href=#max>max</a>, <a href=#mean>mean</a>, <a href=#merge>merge</a>,
 <a href=#min>min</a>, <a href=#namedargs>namedargs</a>, <a href=#nck>nchoosek</a>, <a href=#nck>nck</a>, <a href=#newtonpoly>newtonpoly</a>,
 <a href=#norm>norm</a>, <a href=#nck>npk</a>, <a href=#ones>ones</a>, <a href=#polyfit>polyfit</a>, <a href=#polynomial>polynomial</a>, <a href=#polyval>polyval</a>,
@@ -216,7 +216,7 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <a href=#transpose>transpose</a>, <a href=#tt>tt</a>, <a href=#unique>unique</a>, <a href=#var>var</a>, <a href=#vectorangle>vectorangle</a>,
 <a href=#vertcat>vertcat</a>, <a href=#who>who</a>, <a href=#zeros>zeros</a>; <a href=#bin2dec>bin2dec</a>, <a href=#oct2hex>oct2hex, ...</a></p>
 
-<p><a href=#div>plus, minus, times, divide; div, mod</a></p>
+<p><a href=#div>plus, minus, times, divide; div, mod; eq, ge, gt, le, lt</a></p>
 
 <p><a href=#cat>cat</a>, <a href=#dir>dir</a>, <a href=#isdir>isdir</a>, <a href=#isfile>isfile</a>, <a href=#iswindows>iswindows</a>,
 <a href=#ls>ls</a>, <a href=#mv>mv</a>, <a href=#pwd>pwd</a>, <a href=#rm>rm</a></p>
@@ -258,6 +258,7 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <tr><td> </td><td><a href=#display><code>display(x, ...)</code></a></td><td> </td><td>Print a table of any type, including Mathly matrices, with structure.</td></tr>
 <tr><td> </td><td><a href=#dot><code>dot(a, b)</code></a></td><td> </td><td>Calculate the dot/inner product of <code>a = {a<sub>1</sub>, a<sub>2</sub>, ..., a<sub>n</sub>}</code> and <code>b = {b<sub>1</sub>, b<sub>2</sub>, ..., b<sub>n</sub>}</code>.</td></tr>
 <tr><td> </td><td><a href=#dotplot><code>dotplot(x, y, style)</code></a></td><td> </td><td>Return a graphics object for <code>plot</code> to plot a dot plot.</td></tr>
+<tr><td> </td><td><a href=#div><code>eq, ge, gt, le, lt</code></a></td><td> </td><td>The names of relational operators <code>==, &gt;=, &gt;, &lt;=</code>, and <code>&lt;</code>, respectively.</td></tr>
 <tr><td> </td><td><a href=#eval><code>eval(str)</code></a></td><td> </td><td>Evaluate the expression in <code>str</code> and return the result.</td></tr>
 <tr><td> </td><td><a href=#expand><code>expand(A, m, n, v)</code></a></td><td> </td><td>Return an expanded/shrunk <code>mxn</code> Mathly matrix with value <code>v</code>'s added or entries dropped.</td></tr>
 <tr><td> </td><td><a name=eye></a><code>eye(n)</code></td><td> </td><td>Return a <code>nxn</code> identity Mathly matrix.</td></tr>
@@ -1248,19 +1249,35 @@ plot(f, '@(x) f(x0) + diff(f, x0)*(x - x0)') --&gt; <a href=img/dp.png target=_b
 </code></pre>
 
 
-<h4>&bull; &nbsp; <a name=plus></a><a name=minus></a><a name=times></a><a name=divide></a><a name=mod></a><a name=div href=#m><code>div(a, d), mod, plus, minus, times, divide</code></a></h4>
+<h4>&bull; &nbsp; <a name=eq></a><a name=ge></a><a name=gt></a><a name=le></a><a name=lt></a><a name=plus></a><a name=minus></a><a name=times></a><a name=divide></a><a name=mod></a><a name=div href=#m><code>div(a, d), mod, plus, minus, times, divide; eq, ge, gt, le, lt</code></a></h4>
 <p>These functions have the same usage. Each can be treated as the name of a corresponding operation as follows.
 <table>
+<tbody>
+  <tr><td><table>
   <tbody>
     <tr><td><b>Name</b></td><td width=40></td><td><b>Operation</b></td></tr>
-    <tr><td><code>plus</code></td><td></td><td><code>+</code></td>
-    <tr><td><code>minus</code></td><td></td><td><code>-</code></td>
-    <tr><td><code>times</code></td><td></td><td><code>*</code></td>
-    <tr><td><code>divide</code></td><td></td><td><code>/</code></td>
-    <tr><td><code>div</code></td><td></td><td><code>//</code></td>
-    <tr><td><code>mod</code></td><td></td><td><code>%</code></td>
+    <tr><td><hr></td><td></td><td><hr></td></tr>
+    <tr><td><code>plus</code></td><td></td><td><code>+</code></td></tr>
+    <tr><td><code>minus</code></td><td></td><td><code>-</code></td></tr>
+    <tr><td><code>times</code></td><td></td><td><code>*</code></td></tr>
+    <tr><td><code>divide</code></td><td></td><td><code>/</code></td></tr>
+    <tr><td><code>div</code></td><td></td><td><code>//</code></td></tr>
+    <tr><td><code>mod</code></td><td></td><td><code>%</code></td></tr>
   </tbody>
+</table></td><td width=30></td><td><table>
+  <tbody>
+    <tr><td><b>Name</b></td><td width=40></td><td><b>Operator</b></td></tr>
+    <tr><td><hr></td><td></td><td><hr></td></tr>
+    <tr><td><code>eq</code></td><td></td><td><code>==</code></td></tr>
+    <tr><td><code>ge</code></td><td></td><td><code>&gt;=</code></td></tr>
+    <tr><td><code>gt</code></td><td></td><td><code>&gt;</code></td></tr>
+    <tr><td><code>le</code></td><td></td><td><code>&lt;=</code></td></tr>
+    <tr><td><code>lt</code></td><td></td><td><code>&lt;</code></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td></tr>
+  </tbody>
+</table></td></tr>
 </table>
+
 <p>Each function can take two numbers, two tables of the same structure, or a table and a number. If a table is or can be converted to a Mathly matrix, the resulted table is returned as a Mathly matrix.</p>
 <pre><code>mathly = require('mathly')
 
@@ -1300,12 +1317,44 @@ x * 2 - 9 -- or minus(times(x, 2), 9)
 -- -1  1  3
 --  5  7  9
 
+2 == sqrt(2)^2
+-- false
+eq(2, sqrt(2)^2)
+-- 1 -- 1: true, 0: false
+
+2 >= sqrt(2)^2
+-- false
+ge(2, sqrt(2)^2)
+
+x = {{1, 2, 3}, {4, 5, 6}}
+y = {{1, 5, 3}, {2, 4, 6}}
+le(x, y) -- x <= y
+-- 1 1 1
+-- 0 0 1
+disp(match(y, le(x, y)))
+-- {1, 5, 3, 6}
+disp(match(x, eq(x, y)))
+-- {1, 3, 6}
+disp(match(x, gt(x, y)))
+-- {4, 5}
+
 -- these functions are especially useful when we need elementwise operations on tables that can't be
 -- converted to Mathly matrices. e.g., x * 2 - 9 where
 x = {{1, 2, {3}}, 4, {5, 6, {7, {8, 9}}}}
 y = minus(times(x, 2), 9) -- x * 2 - 9 doesn't work
 disp(y)
 -- {{-7, -5, {-3}}, -1, {1, 3, {5, {7, 9}}}}
+
+x = {{1, {2, 3}}, {4, 5, 6}}
+y = {{1, {5, 3}}, {2, 4, 6}}
+disp(le(x, y)) -- x <= y
+-- {{1, {1, 1}}, {0, 0, 1}}
+disp(match(y, le(x, y)))
+-- {1, 5, 3, 6}
+disp(match(x, eq(x, y)))
+-- {1, 3, 6}
+disp(match(x, gt(x, y)))
+-- {4, 5}
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=diag href=#m><code>diag(A, ...)</code></a></h4>

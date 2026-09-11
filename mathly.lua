@@ -124,6 +124,45 @@ function times(a, d) return _map2('@(x, y) x * y', a, d) end
 function divide(a, d) return _map2('@(x, y) x / y', a, d) end
 -- functions like mathly.matlabvmul may be rewritten through these functions??? 9/8/26
 
+-- functions, eq, le, ge, lt, gt, behaves like ==, <=, >=, <, > in MATLAB for matrics
+-- Note: no ==, <=, >=, <, > on tables in Lua because results are "always converted to a boolean" (see: manual.html#2.4)
+function eq(a, b) -- 9/11/26
+  local f = function(x, y)
+    local v
+    if math.type(x) == 'integer' and math.type(y) == 'integer' then
+      v = x == y
+    else
+      v = math.abs(x - y) < 10*eps
+    end
+    if v then return 1 else return 0 end
+  end
+  return _map2(f, a, b)
+end
+
+function le(a, b)
+  local f = function(x, y)
+    local v
+    if math.type(x) == 'integer' and math.type(y) == 'integer' then
+      v = x == y
+    else
+      v = math.abs(x - y) < 10*eps
+    end
+    v = v or x < y
+    if v then return 1 else return 0 end
+  end
+  return _map2(f, a, b)
+end
+
+function lt(a, b)
+  local f = function(x, y)
+    if x < y then return 1 else return 0 end
+  end
+  return _map2(f, a, b)
+end
+
+function ge(a, b) return le(b, a) end
+function gt(a, b) return lt(b, a) end
+
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
 
@@ -4951,27 +4990,9 @@ mathly_meta.__pow = function(m1, opt)
   end
 end
 
-function mathly.equal(m1, m2)
-  if getmetatable(m1) ~= mathly_meta then
-    m1, m2 = m2, m1 -- m1 is a mathly matrix
-  end
-  if type(m2) ~= 'table' or #m1 ~= #m2 or type(m2[1]) ~= 'table' or #m1[1] ~= #m2[1] then
-    return false
-  else
-    for i = 1, #m1 do
-      if type(m2[i]) ~= 'table' or #m2[i] ~= #m1[1] then return false end
-      for j = 1, #m1[1] do
-        if m1[i][j] ~= m2[i][j] then return false end
-      end
-    end
-  end
-  return true
-end
-
--- Set equal "==" behaviour
-mathly_meta.__eq = function(...)
-	return mathly.equal(...)
-end
+-- removed b/c useless, 9/11/26
+-- function mathly.equal(m1, m2) ...
+-- mathly_meta.__eq = function(...) ...
 
 -- Set concat ".." behaviour
 mathly_meta.__concat = function(...)
