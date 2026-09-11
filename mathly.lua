@@ -125,43 +125,21 @@ function divide(a, d) return _map2('@(x, y) x / y', a, d) end
 -- functions like mathly.matlabvmul may be rewritten through these functions??? 9/8/26
 
 -- functions, eq, le, ge, lt, gt, behaves like ==, <=, >=, <, > in MATLAB for matrics
--- Note: no ==, <=, >=, <, > on tables in Lua because results are "always converted to a boolean" (see: manual.html#2.4)
-function eq(a, b) -- 9/11/26
-  local f = function(x, y)
-    local v
-    if math.type(x) == 'integer' and math.type(y) == 'integer' then
-      v = x == y
-    else
-      v = math.abs(x - y) < 10*eps
-    end
-    if v then return 1 else return 0 end
+-- Note: no meaningful ==, <=, >=, <, > on tables in Lua b/c results are "always converted to a boolean" (see: manual.html#2.4)
+local function _eq_(x, y)
+  local v
+  if math.type(x) == 'integer' and math.type(y) == 'integer' then
+    v = x == y
+  else
+    v = math.abs(x - y) < 10*eps
   end
-  return _map2(f, a, b)
+  if v then return 1 else return 0 end
 end
-
-function le(a, b)
-  local f = function(x, y)
-    local v
-    if math.type(x) == 'integer' and math.type(y) == 'integer' then
-      v = x == y
-    else
-      v = math.abs(x - y) < 10*eps
-    end
-    v = v or x < y
-    if v then return 1 else return 0 end
-  end
-  return _map2(f, a, b)
-end
-
-function lt(a, b)
-  local f = function(x, y)
-    if x < y then return 1 else return 0 end
-  end
-  return _map2(f, a, b)
-end
-
-function ge(a, b) return le(b, a) end
-function gt(a, b) return lt(b, a) end
+function eq(a, b) return _map2(_eq_, a, b) end
+function ge(a, b) return _map2(function(x, y) if _eq_(x, y) == 1 or x > y then return 1 else return 0 end end, a, b) end
+function gt(a, b) return _map2(function(x, y) if _eq_(x, y) == 0 and x > y then return 1 else return 0 end end, a, b) end
+function le(a, b) return _map2(function(x, y) if _eq_(x, y) == 1 or x < y then return 1 else return 0 end end, a, b) end
+function lt(a, b) return _map2(function(x, y) if _eq_(x, y) == 0 and x < y then return 1 else return 0 end end, a, b) end
 
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
