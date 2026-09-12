@@ -138,8 +138,8 @@ end
 function eq(a, b) return _map2(_eq_, a, b) end
 function ge(a, b) return _map2(function(x, y) if _eq_(x, y) == 1 or x > y then return 1 else return 0 end end, a, b) end
 function gt(a, b) return _map2(function(x, y) if _eq_(x, y) == 0 and x > y then return 1 else return 0 end end, a, b) end
-function le(a, b) return _map2(function(x, y) if _eq_(x, y) == 1 or x < y then return 1 else return 0 end end, a, b) end
-function lt(a, b) return _map2(function(x, y) if _eq_(x, y) == 0 and x < y then return 1 else return 0 end end, a, b) end
+function le(a, b) return ge(b, a) end
+function lt(a, b) return gt(b, a) end
 
 function  printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
@@ -4966,10 +4966,6 @@ mathly_meta.__pow = function(m1, opt)
 	  return setmetatable(mathly.pow(m1, opt), mathly_meta)
   end
 end
-
--- removed b/c useless, 9/11/26
--- function mathly.equal(m1, m2) ...
--- mathly_meta.__eq = function(...) ...
 
 -- Set concat ".." behaviour
 mathly_meta.__concat = function(...)
