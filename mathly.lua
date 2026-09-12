@@ -710,8 +710,7 @@ function match(A, f)
     error('match(A, f): f must be a boolean function or a table.')
   end
 
-  local X = {}
-  local k = 1
+  local X, k = {}, 1
   map(function(x, y) if abs(x) > 10*eps then X[k] = y; k = k + 1 end end, B, A)
   return X, B
 end

@@ -1250,7 +1250,7 @@ plot(f, '@(x) f(x0) + diff(f, x0)*(x - x0)') --&gt; <a href=img/dp.png target=_b
 
 
 <h4>&bull; &nbsp; <a name=eq></a><a name=ge></a><a name=gt></a><a name=le></a><a name=lt></a><a name=plus></a><a name=minus></a><a name=times></a><a name=divide></a><a name=mod></a><a name=div href=#m><code>div(a, d), mod, plus, minus, times, divide; eq, ge, gt, le, lt</code></a></h4>
-<p>These functions have the same usage. Each can be treated as the name of a corresponding operation as follows.
+<p>These functions have the same usage. Each can be treated as the name of a corresponding operation/operator as follows.
 <table>
 <tbody>
   <tr><td><table>
@@ -1278,6 +1278,8 @@ plot(f, '@(x) f(x0) + diff(f, x0)*(x - x0)') --&gt; <a href=img/dp.png target=_b
 </table></td></tr>
 </table>
 
+<p>Note: In the returned values of <code>eq, ge, gt, le</code>, and <code>lt</code>, 1 and 0 stand for true and false, respectively.</p>
+
 <p>Each function can take two numbers, two tables of the same structure, or a table and a number. If a table is or can be converted to a Mathly matrix, the resulted table is returned as a Mathly matrix.</p>
 <pre><code>mathly = require('mathly')
 
@@ -1292,7 +1294,7 @@ mod(77, 9)
 2 == sqrt(2)^2
 -- false
 eq(2, sqrt(2)^2)
--- 1 -- 1: true, 0: false
+-- 1
 
 2 >= sqrt(2)^2
 -- false
@@ -1331,18 +1333,25 @@ x * 2 - 9 -- or minus(times(x, 2), 9)
 --  5  7  9
 
 x = mathly{{1, 2, 3}, {4, 5, 6}}
-y = mathly{{1, 3, 2}, {2, 4, 6}}
 disp(x)
+-- 1 2 3
+-- 4 5 6
+y = mathly{{1, 3, 2}, {2, 4, 6}}
 disp(y)
+-- 1 3 2
+-- 2 4 6
 le(x, y) -- x <= y
 -- 1 1 0
 -- 0 0 1
-disp(match(y, le(x, y)))
--- {1, 3, 6}
-disp(match(x, eq(x, y)))
+disp(match(y, eq(x, y)))
 -- {1, 6}
-disp(match(x, gt(x, y)))
--- {3, 4, 5}
+a, b = match(x, eq(x, y))
+disp(a)
+-- {1, 6}
+disp(b)
+-- 1 0 0
+-- 0 0 6
+
 gt(x, 4) -- x > 4
 -- 0 0 0
 -- 0 1 1
@@ -1350,7 +1359,7 @@ gt(x, 4) -- x > 4
 -- these functions are especially useful when we need elementwise operations on tables that can't be
 -- converted to Mathly matrices. e.g., x * 2 - 9 where
 x = {{1, 2, {3}}, 4, {5, 6, {7, {8, 9}}}}
-y = minus(times(x, 2), 9) -- x * 2 - 9 doesn't work
+y = minus(times(x, 2), 9) -- x * 2 - 9
 disp(y)
 -- {{-7, -5, {-3}}, -1, {1, 3, {5, {7, 9}}}}
 
@@ -1359,11 +1368,11 @@ y = {{1, {3, 2}}, {2, 4, 6}}
 disp(le(x, y)) -- x <= y
 -- {{1, {1, 0}}, {0, 0, 1}}
 disp(match(y, le(x, y)))
+a, b = match(y, le(x, y))
+disp(a)
 -- {1, 3, 6}
-disp(match(x, eq(x, y)))
--- {1, 6}
-disp(match(x, gt(x, y)))
--- {3, 4, 5}
+disp(b)
+-- {{1, {3, 0}}, {0, 0, 6}}
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=diag href=#m><code>diag(A, ...)</code></a></h4>
@@ -2459,6 +2468,19 @@ disp(y)
 -- {2, 4, 6, 8, 10, 12, 14}
 disp(A)
 -- {0, 2, {0, 4, 0, {6, 0, 8, {0, 10}}, 0, 12}, 0, 14}
+
+A = mathly{{1, -9, 3}, {9, 5, 6}, {7, 8, 9}}
+disp(A)
+-- 1 -9  3
+-- 9  5  6
+-- 7  8  9
+a, b = match(A, function(x) return abs(x) >= max(max(abs(A))) end)
+disp(a)
+-- {-9, 9, 9}
+disp(b)
+-- 0 -9  0
+-- 9  0  0
+-- 0  0  9
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=mathly href=#m><code>mathly(...)</code></a></h4>
