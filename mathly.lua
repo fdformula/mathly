@@ -450,8 +450,7 @@ function apply(f, args)
 	return f(table.unpack(args))
 end
 
--- 1. make a COPY of A, or
--- 2. COPY to A from B
+-- make a COPY of A, or COPY to A from B
 function copy(A, rrange, crange, B, rrange1, crange1)
 	local function _copy(x) -- for general purpose
 		local y = {}
@@ -1413,8 +1412,8 @@ local function _stdvar(x, opt, sqrtq)
 	end
 end -- _stdvar
 
--- calculates the standard deviation (or variance) of all elements of a table
--- calculates the standard deviation (or variance) of all elements of each column in a matrix
+-- calculates the standard deviation (or variance) of all elements of a table or
+-- each column of a matrix
 --
 -- if opt = 0 (default), find the standard deviation (or variance) of a population
 -- otherwise, find that of a sample
@@ -1443,7 +1442,7 @@ function vectorangle(a, b)
 	return x, '(' .. tostring(deg(x)) .. ' degree)'
 end
 
--- generates an evenly spaced sequence/table of numbers starting at 'start' and likely ending at 'stop' by 'step'.
+-- generate an evenly spaced sequence/table of numbers starting at 'start' and likely ending at 'stop' by 'step'.
 function range(start, stop, step) -- Python, but inclusive
 	assert(start ~= nil, 'range(start, stop, step): no input.')
 	if stop == nil then
@@ -1507,7 +1506,7 @@ end
 
 function findroot(f, i, t) return fzero(f, i, t) end -- mathematica
 
---// for lagrangepoly(...), newtonpoly(...), polynomial(...), and scatter(...)
+--// for lagrangepoly, newtonpoly, polynomial, and scatter(...)
 local function _poly_input(data) -- {{x1, y1}, {x2, y2}, ...}
 	local x, y = {}, {}
 	if type(data) == 'table' and type(data[1]) == 'table' then
@@ -1667,7 +1666,7 @@ local function _polystring(B)
 		end
 	end
 	return s
-end -- _polystring
+end
 
 -- if xx is provided, return the value(s) of a polynomial, defined by data (x, y)'s, at xx;
 -- otherwise, return the string and the coefficeints of the polynomial
@@ -1686,7 +1685,7 @@ function polynomial(x, y, xx)
 	local s = _polystring(B)
 	if xx == nil then return s, B end
 	return _set_matrix_meta(map(ff('@(x) ' .. s), xx))
-end -- polynomial
+end
 
 -- use a polynomial of degree n to curve fit data with least sum of squares of errors
 function polyfit(x, y, n, xx)
@@ -1713,7 +1712,7 @@ function polyfit(x, y, n, xx)
 	local s = _polystring(B)
 	if xx == nil then return s, B end
 	return _set_matrix_meta(map(ff('@(x) ' .. s), xx))
-end -- polyfit
+end
 
 -- calculate linear correlation coefficient
 function corr(x, y)
@@ -2096,7 +2095,7 @@ function integral2(f, g, x)
 		A, B = B, B + siz
 	end
 	return m * s
-end -- integral2
+end
 
 -- ∫∫∫f(x,y,z)dzdydx over E:
 --	z in [g1(x, y), g2(x, y)]
@@ -2605,7 +2604,7 @@ function plot3d(f, xrange, yrange, title, resolution)
 	local trace = {x = X, y = Y, z = Z, type = 'surface'}
 	plotly.plots({trace}):show()
 	plotly.layout, _3d_plotq = {}, false
-end -- plot3d
+end
 
 -- plot rho, a spherical function of theta and phi, where theta is in the range thetarange = {θ1, θ2}
 -- and phi is in the range phirange = {φ1, φ2}
@@ -2709,7 +2708,7 @@ function plotparametriccurve3d(xyz, trange, title, resolution, orientationq)
 	plotly.plots(traces):show(); traces = nil
 	plotly.layout = {}
 	_3d_plotq = false
-end -- plotparametriccurve3d
+end
 
 local _anmt_fregex = '^%s*@%s*(%(%s*[%w,%s]*%))%s*(.+)%s*$' -- catch expression of a function
 local _anmt_animateq, _anmt_act = false, '' -- animate or manipulate
