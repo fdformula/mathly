@@ -1314,7 +1314,7 @@ disp({1*3, 2*4, {3*5}})
 
 -- a table and a number
 times({1, 2, 3}, 3) -- same as times({1, 2, 3}, {3, 3, 3})
--- 3, 6, 9
+-- 3 6 9
 disp(times(3, {1, 2, {3}})) -- same as disp(times({3, 3, {3}}, {1, 2, 3}))
 -- {3, 6, {9}}
 
@@ -1431,13 +1431,13 @@ diag({1, 2, 3, 4}, 3, 2)
 -- 1  0
 -- 0  2
 -- 0  0
-diag({1, 2, 3},2)
+diag({1, 2, 3}, 2)
 -- 0  0  1  0  0
 -- 0  0  0  2  0
 -- 0  0  0  0  3
 -- 0  0  0  0  0
 -- 0  0  0  0  0
-diag({1, 2, 3},-1)
+diag({1, 2, 3}, -1)
 -- 0  0  0  0
 -- 1  0  0  0
 -- 0  2  0  0
@@ -2369,7 +2369,7 @@ disp(map('@(x, y, z) x + y + z', {1, 2, 3}, 10, {100, 200, 300}))
 -- 111  212  313
 
 disp(map('@(x, y) x .. y', {'1', '2', '3'}, '10')) -- '10' is treated as {'10', '10', '10'}
--- {'110', '210', '310'}
+-- {"110", "210", "310"}
 
 disp(map('@(x, y) 2 * x * y + 1', {1, {2, {3, {4}}}}, 10)) -- 10 is treated as {10, {10, {10, {10}}}}
 -- {21, {41, {61, {81}}}}
@@ -2704,7 +2704,7 @@ norm({1, 2, {3, {4, 5}}, 6}) -- flattened first; same as norm({1, 2, 3, 4, 5, 6}
 <tr><td width=20></td><td><code>ones(m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is 1.</td></tr>
 <tr><td width=20></td><td><code>randi(x, m, n)</code></a></td><td> </td><td width=10> </td><td>Return a Mathly matrix of which each element is a random integer in a specified range.</td></tr>
 <tr><td width=20></td><td><code>zeros(m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is 0.</td></tr>
-<tr><td width=20></td><td><code>rand(m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is a random number in [0, 1].</td></tr>
+<tr><td width=20></td><td><code>rand(m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is a pseudo-random number on [0, 1).</td></tr>
 <tr><td width=20></td><td><code>randn(m, n, &mu;, &sigma;)</code></a></td><td> </td><td width=10> </td><td>Return a Mathly matrix of normally distributed numbers (&mu; and &sigma; default to 0 and 1, respectively).</td></tr>
 <tr><td width=20></td><td> </td><td> </td><td width=10> </td><td> </td></tr>
 <tr><td width=20></td><td> </td><td> </td><td width=10> </td><td><u>Note</u>: Each function returns a table rather than a Mathly column vector if <code>m = 1</code>.</td></tr>
@@ -2752,11 +2752,12 @@ disp(randn(3, 5, 70, 12.55))
 </code></pre>
 <table><tbody>
 <p>&#x2713; &nbsp; The usage of <code>randi(...)</code> is different.</p>
-<tr><td><code>randi(imax)</code></td><td> </td><td width=10> </td><td>Return a random integer in <code>[1, imax]</code>.</tr>
-<tr><td><code>randi({imin, imax})</code></td><td> </td><td width=10> </td><td>Return a random integer in <code>[imin, imax]</code>.</tr>
-<tr><td><code>randi(imax, m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is in <code>[1, imax]</code>. (<code>n</code> is optional. The default is <code>m</code>.)</tr>
-<tr><td><code>randi({imin, imax}, m, n)</code></td><td> </td><td width=10> </td><td>Return a mxn Mathly matrix of which each element is in <code>[imin, imax]</code>. (<code>n</code> is optional. The default is <code>m</code>.)</tr>
+<tr><td><code>randi(imax)</code></td><td> </td><td width=10> </td><td>Return a random integer on <code>[1, imax]</code> where imax defaults to 100.</tr>
+<tr><td><code>randi({imin, imax})</code></td><td> </td><td width=10> </td><td>Return a random integer on <code>[imin, imax]</code>.</tr>
+<tr><td><code>randi(imax, m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is on <code>[1, imax]</code>. (<code>n</code> is optional. The default is <code>m</code>.)</tr>
+<tr><td><code>randi({imin, imax}, m, n)</code></td><td> </td><td width=10> </td><td>Return a mxn Mathly matrix of which each element is on <code>[imin, imax]</code>. (<code>n</code> is optional. The default is <code>m</code>.)</tr>
 </tbody></table>
+<p>&#x2713; &nbsp; Special usage: <code>rand()</code> returns a random number on [0, 1).</p>
 
 <h4>&bull; &nbsp; <a name=plot href=#m><code>plot(...)</code></a></h4>
 <p>Plot the graph(s) of functions defined by data points, using specifications/options.</p>
@@ -3011,7 +3012,7 @@ disp(polynomial({1, 2}, {3, 4}))
 disp(polynomial({1, 2}, {3, 4}, 5))
 -- 7.0
 disp(polynomial({1, 2}, {3, 4}, {5, -6, 100}), '')
--- {7.0, -4.0, 102.0}
+-- {7.0000, -4.0000, 102.0000}
 
 x, y = {1, 2, 3}, {3, 1, 4}
 s, coefs = polynomial(x, y)
@@ -3059,7 +3060,7 @@ For example, <code>p(x) = -2x<sup>4</sup> + 4x<sup>2</sup> - 5x</code>, <code>co
 polyval({1, 2, 1}, 0) -- evaluate x<sup>2</sup> + 2x + 1 at x = 0
 -- 1.0000
 disp(polyval({1, 2, 1}, {0, 5, 9, 100}), '') -- evaluate at x = 0, 5, 9, 100
--- {1.0, 36.0, 100.0, 10201.0}
+-- {1.0000, 36.0000, 100.0000, 10201.0000}
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=powermod href=#m><code>powermod(b, n, m)</code></a></h4>
@@ -3599,7 +3600,7 @@ disp(tblcat(x, z, 11), '') -- a column vector is automatically converted into a 
 -- {1, 2, 6, 7, 8, 9, 11}
 
 disp(tblcat(1, {c = 2, a = {3, 4}}, true, {ab = {5, 6, 'OK'}, aa = 7}))
--- {1, 3, 4, 2, true, 5, 6, 'OK', 7}
+-- {1, 3, 4, 2, true, 7, 5, 6, "OK"}
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=text href=#m><code>text(x, y, txt, style)</code></a></h4>
