@@ -2757,6 +2757,13 @@ disp(randn(3, 5, 70, 12.55))
 <tr><td><code>randi(imax, m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> Mathly matrix of which each element is on <code>[1, imax]</code>. (<code>n</code> is optional. It defaults to <code>m</code>.)</tr>
 <tr><td><code>randi({imin, imax}, m, n)</code></td><td> </td><td width=10> </td><td>Return a mxn Mathly matrix of which each element is on <code>[imin, imax]</code>. (<code>n</code> is optional. It defaults to <code>m</code>.)</tr>
 </tbody></table>
+<pre><code>
+randi(10, 2, 3) -- or randi({1, 10}, 2, 3)
+randi({-100, 100}, 2, 3)
+randi({-100, 100}, 2)
+randi({-100, 100})
+randi() -- or randi({1, 100})
+</code></pre>
 <p>&#x2713; &nbsp; Special usage: <code>rand()</code> returns a random number on [0, 1).</p>
 
 <h4>&bull; &nbsp; <a name=plot href=#m><code>plot(...)</code></a></h4>
