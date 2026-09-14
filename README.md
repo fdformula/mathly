@@ -15,7 +15,7 @@ it takes about 22 seconds to start MATLAB R2024b on a new high-end Intel Core i9
 be installed on slow or pretty old computers and run smoothly. In addition, multiple sessions/instances of MathLua can coexist for
 multiple tasks at the same time with each instance in its own workspace.
 
-MathLua is especially a good choice for instructors of linear algebra and numerical computing for teaching. It takes no time to
+MathLua is especially a good choice for instructors of linear algebra and numerical computing. It takes no time to
 start Lua with Mathly loaded. While developing code and doing computation in a lecture, they can simply focus on delivery
 of course contents and never need to worry if their computers work too slowly. Moreover, Lua is so
 simple and natural a language that students without programming skills can understand most of Lua code.
