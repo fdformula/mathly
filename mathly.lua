@@ -1191,7 +1191,7 @@ function ls(path, re, printq)
 		end
 	end
 	if printq then
-		for i = 1, #files do print('	 ' ..	files[i]) end
+		for i = 1, #files do print('   ' ..  files[i]) end
 	end
 	return files, path, folders
 end
@@ -2262,7 +2262,7 @@ function plot(...)
 			elseif v[1] == 'graph' then -- graph objects: {'graph', x, y, style}
 				for i = 2, #v, 3 do
 					if #v == 5 and i == 5 then break end -- orientation
-					if type(v[i]) == 'table' and _hasanyindex(v[i], {'layout', 'names'}) then	-- last item as seen in hist1(...)!
+					if type(v[i]) == 'table' and _hasanyindex(v[i], {'layout', 'names'}) then -- last item as seen in hist1(...)!
 						args[#args + 1] = v[i]
 						break
 					end
@@ -2299,7 +2299,7 @@ function plot(...)
 		if type(args[i]) == 'function' then
 			args[i] = {0, args[i]}
 			table.insert(args, i + 1, {0, 0}) -- pretend to be x, y, ...; to be modified before plotting
-		elseif i <= #args and type(args[i]) == 'table' and _hasanyindex(args[i], {'range', 'xrange', 'yrange', 'xranges', 'yranges', 'layout', 'names'})	then
+		elseif i <= #args and type(args[i]) == 'table' and _hasanyindex(args[i], {'range', 'xrange', 'yrange', 'xranges', 'yranges', 'layout', 'names'}) then
 			layout_arg[#layout_arg + 1] = args[i] -- to be processed finally					↑ deprecated
 			i = i + 1
 		else
@@ -2867,30 +2867,30 @@ local function _amnt_write_subtraces(traces, tr, file, resolution)	 -- traces = 
 			if obj.line then
 				trace = fmt("{ x: [%s, %s], y: [%s, %s], mode: 'lines', line: { color: '%s', width: %d %s } }",
 										toJS(obj.x[1]), toJS(obj.x[2]), toJS(obj.y[1]), toJS(obj.y[2]), color, obj.width or 3, style)
-				file:write(fmt("	%smthlyTraces.push(%s);\n", head, trace))
+				file:write(fmt("  %smthlyTraces.push(%s);\n", head, trace))
 			elseif obj.point then
 				trace = fmt("{ x: [%s], y: [%s], mode: 'markers', marker: { color: '%s', size: %f %s } }",
 										toJS(obj.x), toJS(obj.y), color, obj.size or 8, style)
-				file:write(fmt("	%smthlyTraces.push(%s);\n", head, trace))
+				file:write(fmt("  %smthlyTraces.push(%s);\n", head, trace))
 			elseif obj.text ~= nil then
 				trace = fmt("{ x: [%s], y: [%s], text: '%s', mode: 'text', type: 'scatter', textposition: 'bottom center', name: '', textfont: { color: '%s', size: %f %s } }",
 										toJS(obj.x), toJS(obj.y), obj.text, color, obj.size or 10, style)
-				file:write(fmt("	%smthlyTraces.push(%s);\n", head, trace))
+				file:write(fmt("  %smthlyTraces.push(%s);\n", head, trace))
 			elseif obj.parametriceqs then
 				local tr1, res, localtrq = obj.t, 500, true
 				if tr1 == nil then
 					if tr ~= nil then localtrq = false else tr1 = {-5, 5, 0.1} end
 				end
-				file:write(head .. "	if (true) {\n")	-- 'if (true) ' can be deleted)
+				file:write(head .. "  if (true) {\n") -- 'if (true) ' can be deleted)
 				if localtrq then
-					file:write(head .. "		const t = [];\n") -- local t
+					file:write(head .. "    const t = [];\n") -- local t
 					if type(obj.resolution) == 'number' then res = min({500, obj.resolution}) end
 					local step = tr1[3] or (tr1[2] - tr1[1]) / res
-					file:write(fmt("		%sfor (let i = %s; i <= %s; i += %s) { t.push(i); }\n", head, tostring(tr1[1]), tostring(tr1[2]), tostring(step)))
+					file:write(fmt("    %sfor (let i = %s; i <= %s; i += %s) { t.push(i); }\n", head, tostring(tr1[1]), tostring(tr1[2]), tostring(step)))
 				end
 				trace = fmt("{ x: t.map(t => %s), y: t.map(t => %s), mode: 'lines', line: { simplify: false, color: '%s', width: %f %s }%s }",
 										obj.x, obj.y, color, obj.width or 3, style, _anmt_fill(obj.fill))
-				file:write(fmt("		%smthlyTraces.push(%s);\n%s	}\n", head, trace, head))
+				file:write(fmt("    %smthlyTraces.push(%s);\n%s }\n", head, trace, head))
 			end
 		end
 	end
@@ -2910,7 +2910,7 @@ local function _amnt_write_traces(cs, opts, tr, file, xexpr, jxexpr, jyexpr, enh
 		if opts.width ~= nil then s = s .. ", width: " .. opts.width end
 		if opts.style ~= nil then s = s .. ", " .. opts.style end
 		s = s .. " }" .. _anmt_fill(opts.fill) .. " }"
-		file:write(fmt("	mthlyTraces.push(%s);\n", s))
+		file:write(fmt("  mthlyTraces.push(%s);\n", s))
 	end
 	if type(enhancements) == 'table' then
 		_amnt_write_subtraces(enhancements, tr, file, resolution)
@@ -2969,7 +2969,7 @@ input:focus {outline: none;}
 		end
 		if type(opts.layout) == 'table' then
 			layout = opts.layout
-			if type(layout.width)	== 'number' and layout.width > 0 then	w = layout.width end
+			if type(layout.width)	== 'number' and layout.width > 0 then w = layout.width end
 			if type(layout.height) == 'number' and layout.height > 0 then h = layout.height end
 		end
 	end
@@ -3040,7 +3040,7 @@ var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
 
 	local squareq = true
 	if layout ~= nil and layout.square == false then squareq = false end
-	file:write(fmt("\nconst mthlyLayout = {\n	xaxis: { range: [%s, %s]", tostring(xr[1]), tostring(xr[2])))
+	file:write(fmt("\nconst mthlyLayout = {\n  xaxis: { range: [%s, %s]", tostring(xr[1]), tostring(xr[2])))
 	if layout ~= nil then _anmt_layout_opts(layout.xaxis, fmt, file) end
 	file:write("}, // plot with fixed axes\n")
 
@@ -3049,10 +3049,10 @@ var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
 	elseif type(yr) ~= 'table' or yr[1] >= yr[2] then
 		error('Range of y is invalid.')
 	end
-	file:write(fmt("	yaxis: { range: [%s, %s]", tostring(yr[1]), tostring(yr[2])))
+	file:write(fmt("  yaxis: { range: [%s, %s]", tostring(yr[1]), tostring(yr[2])))
 	if layout ~= nil then _anmt_layout_opts(layout.yaxis, fmt, file) end
 	if squareq then file:write(", scaleanchor: 'x', scaleratio: 1") end -- square aspect ratio
-	file:write(" },\n	showlegend: false\n};\n\n")
+	file:write(" },\n  showlegend: false\n};\n\n")
 	if title == nil then
 		if xexpr == nil then
 			title = 'y = ' .. yexpr
@@ -3100,10 +3100,10 @@ var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
 	for i = 1, #cs do
 		file:write("const mthly" .. cs[i].. "Min = " .. tostring(rs[i][1]) .. ", mthly" .. cs[i].. "Max = " .. tostring(rs[i][2]) .. ", mthly" .. cs[i] .. "Step = " .. tostring(rs[i][3] or 1) .. ';\n')
 	end
-	file:write("\nfunction mthlyUpdateTraces() {\n	mthlyTraces = [];\n") -- // mthlyTraces = new Array(); mthlyTraces.splice(0); ... no good
-	if type(jscode) == 'string' and jscode ~= '' then file:write("\n	// vvvvv user's javascript vvvvv\n" .. jscode .. "	// ^^^^^ user's javascript ^^^^^\n\n") end
+	file:write("\nfunction mthlyUpdateTraces() {\n  mthlyTraces = [];\n") -- // mthlyTraces = new Array(); mthlyTraces.splice(0); ... no good
+	if type(jscode) == 'string' and jscode ~= '' then file:write("\n  // vvvvv user's javascript vvvvv\n" .. jscode .. "  // ^^^^^ user's javascript ^^^^^\n\n") end
 	_amnt_write_traces(cs, opts, tr, file, xexpr, jxexpr, jyexpr, enhancements, resolution)
-	if _anmt_animateq then file:write("	mthlyPlayButtnTxt();\n") end
+	if _anmt_animateq then file:write("  mthlyPlayButtnTxt();\n") end
 	file:write([[
 	document.getElementById("displaytext").innerHTML = displaytext();
 	document.getElementById("title").innerHTML = displaytitle();
@@ -3131,24 +3131,24 @@ var mthlyNewCs = [], mthlyOldCs = []])
 	end
 
 	for i = 1, #cs do -- values of control sliders
-		file:write(fmt("	%s = Number(mthlySldr%s.value);\n", cs[i], cs[i]))
+		file:write(fmt("  %s = Number(mthlySldr%s.value);\n", cs[i], cs[i]))
 	end
 
 	if _anmt_animateq then
 		if xexpr ~= nil then -- parametric eqs
-			file:write(fmt("	t = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { t.push(i); };\n	T = t[t.length - 1];\n",
+			file:write(fmt("  t = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { t.push(i); };\n  T = t[t.length - 1];\n",
 										 tostring(tr[1]), tostring(tr[2]), qq(tr[1] > 0, '-', '+'), tostring(abs(tr[1])),
 										 qq(tr[1] > 0, '+', '-'), tostring(abs(tr[1])), tostring((tr[2] - tr[1]) / resolution)))
-			file:write(fmt("	if (true) { const t = T; X = %s; Y = %s; };\n", jxexpr, jyexpr))
+			file:write(fmt("  if (true) { const t = T; X = %s; Y = %s; };\n", jxexpr, jyexpr))
 		else
-			file:write(fmt("	x = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { x.push(i); }; t = x;\n	X = x[x.length - 1];",
+			file:write(fmt("  x = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { x.push(i); }; t = x;\n  X = x[x.length - 1];",
 										 tostring(xr[1]), tostring(xr[2]), qq(xr[1] > 0, '-', '+'), tostring(abs(xr[1])),
 										 qq(xr[1] > 0, '+', '-'), tostring(abs(xr[1])), tostring((xr[2] - xr[1]) / resolution)))
-			file:write(fmt("	if (true) { const x = X; Y = %s; T = x; };\n", jyexpr))
+			file:write(fmt("  if (true) { const x = X; Y = %s; T = x; };\n", jyexpr))
 		end
 	end
 
-	file:write("	// has any controls changed?\n	mthlyNewCs = [") -- new values of controls
+	file:write("  // has any controls changed?\n  mthlyNewCs = [") -- new values of controls
 	for i = 1, #cs do
 		if i > 1 then file:write(", ") end
 		file:write(cs[i])
@@ -3156,7 +3156,7 @@ var mthlyNewCs = [], mthlyOldCs = []])
 	file:write("];\n")
 
 	if #cs == 1 then
-		file:write("	if (Math.abs(mthlyOldCs[0] - mthlyNewCs[0]) < 0.00001) { return; }\n")
+		file:write("  if (Math.abs(mthlyOldCs[0] - mthlyNewCs[0]) < 0.00001) { return; }\n")
 	else
 		file:write(fmt([[
 	var unchangedq = true;
@@ -3169,7 +3169,7 @@ var mthlyNewCs = [], mthlyOldCs = []])
 ]], #cs))
 	end
 
-	file:write("	mthlyOldCs = [") -- new values of controls
+	file:write("  mthlyOldCs = [") -- new values of controls
 	for i = 1, #cs do
 		if i > 1 then file:write(", ") end
 		file:write(cs[i])
@@ -3324,7 +3324,7 @@ function table1(str, opts) -- Mathematica
 		for i = 1, #opts.controls do
 			_anmt_new_control(opts.controls:sub(i, i), cs, rs, opts)
 		end
-	elseif type(str) == 'string' and str:sub(1, 1) ~= '!' then	-- order of controls is in str implicitly
+	elseif type(str) == 'string' and str:sub(1, 1) ~= '!' then -- order of controls is in str implicitly
 		_anmt_scan_controls(str, cs, rs, opts)
 	end
 	if #cs == 0 then
@@ -3337,12 +3337,12 @@ function table1(str, opts) -- Mathematica
 	local c, idx = '', 1 -- c: code
 	for i = 1, #cs do c = c .. fmt('local t%d = {}\n', i) end
 	local function luacode(i)
-		local head = ''; for j = 2, i do head = head .. '	' end
+		local head = ''; for j = 2, i do head = head .. '  ' end
 		local t = fmt('t%d', idx); idx = idx + 1
 		local T = fmt('t%d', idx)
 		c = c .. head .. 'for ' .. cs[i] .. ' = ' .. tostring(rs[i][1]) .. ', ' .. tostring(rs[i][2]) ..', ' .. tostring(rs[i][3]) .. ' do\n'
 		if i == #rs then
-			c = c .. head .. fmt("	%s[#%s + 1] = ", t, t)
+			c = c .. head .. fmt("  %s[#%s + 1] = ", t, t)
 			local ty = type(str)
 			if ty == 'number' then
 				c = c .. tostring(str)
@@ -3365,7 +3365,7 @@ function table1(str, opts) -- Mathematica
 			c = c .. '\n'
 		else
 			luacode(i + 1)
-			c = c .. head .. fmt('	%s[#%s + 1] = %s; %s = {}\n', t, t, T, T)
+			c = c .. head .. fmt('  %s[#%s + 1] = %s; %s = {}\n', t, t, T, T)
 		end
 		c = c .. head .. "end\n"
 	end
@@ -5037,15 +5037,15 @@ local _mode_shorthand = {["m"] = "markers", ["l"]="lines", ["m+l"]="lines+marker
 All js options can be found here: https://plotly.com/javascript/reference/index/
 Easy to call like: figure:plot{x, y, ...}
 Shorthand options:
-| key | explanation |
-| :----: | :---------: |
-| *1* | x-values	|
-| *2* | y-values	 |
-| *ls* | line-style (options: "-", ".", "--")	|
-| *lw* | line-width (numeric value - default 2) |
-| *ms* | marker-size (numeric value - default 2) |
-| *c* or *color* | sets color of line and marker |
-| *mode* | shorter mode forms (options: "m"="markers", "l"="lines", "m+l" or "l+m"="markers+lines") |
+ key            | explanation
+ ---------------+------------
+ *1*            | x-values
+ *2*            | y-values
+ *ls*           | line-style (options: "-", ".", "--")
+ *lw*           | line-width (numeric value - default 2)
+ *ms*           | marker-size (numeric value - default 2)
+ *c* or *color* | sets color of line and marker
+ *mode*         | shorter mode forms (options: "m"="markers", "l"="lines", "m+l" or "l+m"="markers+lines")
 ]]
 ---@param self plotly.figure
 ---@param trace table
@@ -5268,7 +5268,7 @@ end
 
 local _dk_escapecodes = {
 	["\""] = "\\\"", ["\\"] = "\\\\", ["\b"] = "\\b", ["\f"] = "\\f",
-	["\n"] = "\\n",	["\r"] = "\\r",	["\t"] = "\\t"
+	["\n"] = "\\n",  ["\r"] = "\\r",  ["\t"] = "\\t"
 }
 
 local function _dk_escapeutf8(uchar)
