@@ -10,8 +10,8 @@ opts = {
     -- title = "<h3>Smiley Face</h3>",
     xaxis = { visible = false }, yaxis = { visible = false }
   },
-  pdefault = 0.5, -- start playing at the middle
-  enhancements = {
+  pdefault = 0.5,  -- start playing at the middle
+  enhancements = { -- data and functions to be converted to JavaScript code by MathLua
     {x = '@(t) 3*cos(t)', y = '@(t) 1 + 3*sin(t)', t = {0, 2*3.15}, color = 'black'}, -- face
     {x = '@(t) -1 + 0.3*cos(t)', y = '@(t) 2 + 0.3*sin(t)', t = {0, 2*3.15}, fill = 'fs', color = 'black'}, -- left eye
     {x = '@(t)  1 + 0.3*cos(t)', y = '@(t) 2 + 0.3*sin(t)', t = {0, 2*3.15}, fill = 'fs', color = 'black'}, -- right eye
