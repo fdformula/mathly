@@ -4,7 +4,7 @@
 mathly = require('mathly')
 
 jscode = [[
-  function displaytext() { return "<em>x</em>(<em>t</em>) = 2 cos(<em>-t</em>), <em>y</em>(<em>t</em>) = 3 sin(<em>-t</em>)"; }
+  function displaytext() { return "<em>x</em>(<em>t</em>) = 2 cos(<em>-t</em>), <em>y</em>(<em>t</em>) = 3 sin(<em>-t</em>) (Clockwise)"; }
 ]]
 
 opts = {
@@ -12,7 +12,7 @@ opts = {
   javascript = jscode,
   layout = {
     width = 500, height = 500, square = true,
-    title = "<font size=4>(<em>x</em>/2)<sup>2</sup> + (<em>y</em>/3)<sup>2</sup> = 1 (Clockwise)</font>",
+    title = "<font size=4>(<em>x</em>/2)<sup>2</sup> + (<em>y</em>/3)<sup>2</sup> = 1</font>",
     xaxis = { showgrid = false }, yaxis = { showgrid = false }
   },
   enhancements = {
