@@ -36,7 +36,7 @@ input:focus {outline: none;}
 <span id="displaytext" style="left:74px;top:90px;position:absolute">&nbsp;</span>
 <script type="text/javascript">
 function displaytext() { return ""; } // to be overwritten
-function displaytitle() { return "<font size=4><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 3<sup>2</sup> (Counterclockwise)</font>"; }
+function displaytitle() { return "<font size=4>(<em>x</em>/2)<sup>2</sup> + (<em>y</em>/3)<sup>2</sup> = 1 (Clockwise)</font>"; }
 var x = [], t = [], X, Y, T, p, mthlyGlobal = [], mthlyGlobal1 = [], mthlyGlobal2 = [], mthlyGlobal3 = [], mthlyGlobal4 = [], mthlyGlobal5 = [];
 
 var mthlyAutoPlayq = true, mthlyIntervalId = null, mthlyInterval = 200;
@@ -63,7 +63,7 @@ mthlySldrp.value = 0;
 var p = 0;
 for (let i = 0; i <= p * (6.2831853071795862 + 0) - 0; i += 0.012566370614359173) { t.push(i); }
 let mthlyTmp = t[t.length - 1];
-if (true) { const t = mthlyTmp; X = 3*Math.cos(t); Y = 3*Math.sin(t); T = mthlyTmp; }
+if (true) { const t = mthlyTmp; X = 2*Math.cos(-t); Y = 3*Math.sin(-t); T = mthlyTmp; }
 
 var mthlyTraces = [];
 const mthlyxMin = -4.5, mthlyxMax = 4.5, mthlyxStep = 1;
@@ -75,10 +75,10 @@ function mthlyUpdateTraces() {
 	mthlyTraces = [];
 
   // vvvvv user's javascript vvvvv
-  function displaytext() { return "<em>x</em>(<em>t</em>) = 3 cos <em>t</em>, <em>y</em>(<em>t</em>) = 3 sin <em>t</em>"; }
+  function displaytext() { return "<em>x</em>(<em>t</em>) = 2 cos(<em>-t</em>), <em>y</em>(<em>t</em>) = 3 sin(<em>-t</em>)"; }
   // ^^^^^ user's javascript ^^^^^
 
-	mthlyTraces.push({ x: t.map(t => 3*Math.cos(t)), y: t.map(t => 3*Math.sin(t)), mode: 'lines', line: { simplify: false }, fill: 'none' });
+	mthlyTraces.push({ x: t.map(t => 2*Math.cos(-t)), y: t.map(t => 3*Math.sin(-t)), mode: 'lines', line: { simplify: false }, fill: 'none' });
 	mthlyTraces.push({ x: [X], y: [Y], mode: 'markers', marker: { color: 'red', size: 10.000000  } });
 	mthlyPlayButtnTxt();
 	document.getElementById("displaytext").innerHTML = displaytext();
@@ -100,7 +100,7 @@ function mthlyAnimatePlot() {
 	p = Number(mthlySldrp.value);
 	t = []; for (let i = 0; i <= p * (6.2831853071795862 + 0) - 0; i += 0.012566370614359173) { t.push(i); };
 	T = t[t.length - 1];
-	if (true) { const t = T; X = 3*Math.cos(t); Y = 3*Math.sin(t); };
+	if (true) { const t = T; X = 2*Math.cos(-t); Y = 3*Math.sin(-t); };
 	// has any controls changed?
 	mthlyNewCs = [p];
 	if (Math.abs(mthlyOldCs[0] - mthlyNewCs[0]) < 0.00001) { return; }
