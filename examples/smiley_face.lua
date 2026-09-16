@@ -1,5 +1,4 @@
 -- "Neat Example" in the documentation of Mathematica 15.0.1.0
--- by David Wang, dwang@liberty.edu, 09/16/2026
 
 mathly = require('mathly')
 
