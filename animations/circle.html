@@ -36,7 +36,7 @@ input:focus {outline: none;}
 <span id="displaytext" style="left:74px;top:90px;position:absolute">&nbsp;</span>
 <script type="text/javascript">
 function displaytext() { return ""; } // to be overwritten
-function displaytitle() { return "<font size=4><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 3<sup>2</sup> (Counterclockwise)</font>"; }
+function displaytitle() { return "<font size=4><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 3<sup>2</sup></font>"; }
 var x = [], t = [], X, Y, T, p, mthlyGlobal = [], mthlyGlobal1 = [], mthlyGlobal2 = [], mthlyGlobal3 = [], mthlyGlobal4 = [], mthlyGlobal5 = [];
 
 var mthlyAutoPlayq = true, mthlyIntervalId = null, mthlyInterval = 200;
@@ -75,7 +75,7 @@ function mthlyUpdateTraces() {
 	mthlyTraces = [];
 
   // vvvvv user's javascript vvvvv
-  function displaytext() { return "<em>x</em>(<em>t</em>) = 3 cos <em>t</em>, <em>y</em>(<em>t</em>) = 3 sin <em>t</em>"; }
+  function displaytext() { return "<em>x</em>(<em>t</em>) = 3 cos <em>t</em>, <em>y</em>(<em>t</em>) = 3 sin <em>t</em> (Counterclockwise)"; }
   // ^^^^^ user's javascript ^^^^^
 
 	mthlyTraces.push({ x: t.map(t => 3*Math.cos(t)), y: t.map(t => 3*Math.sin(t)), mode: 'lines', line: { simplify: false }, fill: 'none' });
