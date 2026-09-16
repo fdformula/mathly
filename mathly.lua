@@ -2,7 +2,7 @@
 
 LUA MODULE
 
-	Mathly - Turning Lua into a Tiny, Free but Powerful MATLAB and More
+	MathLua - Turning Lua into a Tiny, Free but Powerful MATLAB and More
 
 DESCRIPTION
 
@@ -28,7 +28,7 @@ FUNCTIONS PROVIDED IN THIS MODULE
 	sum, table1, tblcat, text, tic, toc, transpose, tt, unique, var, vectorangle,
 	vertcat, who, zeros
 
-	plus, minus, times, divide, div, mod
+	plus, minus, times, divide; div, mod; eq, ge, gt, le, lt
 
 	dec2bin, dec2hex, dec2oct, bin2dec, bin2hex, bin2oct, oct2bin, oct2dec,
 	oct2hex, hex2bin, hex2dec, hex2oct
@@ -2934,7 +2934,7 @@ local function _write_manipulate_html(fname, cs, rs, xr, yr, tr, title, xexpr, y
 <html>
 <head>
 <meta charset="utf-8">
-<title>Mathly Function Animation</title>
+<title>MathLua Function Animation</title>
 <script src="%s"></script>
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
 <style>
