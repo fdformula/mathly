@@ -434,7 +434,13 @@ longdashdot</code>, etc.</li>
 <li>Field <code>opts.resolution</code> may be needed for smooth parametric curves. It defaults to 500. The larger, the smoother, but more computing power is needed.
 With each parametric curve in <code>enhancements</code>, field <code>resolution</code> can be defined separately, and its default and minimum value is 500.<br><br></li>
 
-<li>Show no title? Add <code>layout = { title = '' }</code>. No square aspect ratio? Add <code>layout = { square = false }</code>.<br><br></li>
+<li>Show no title? Add <code>layout = { title = '' }</code>.<br><br></li>
+
+<li>No square aspect ratio? Add option <code>layout = { square = false }</code>.<br><br></li>
+
+<li>Start playing an animation at a specific moment? Set the value of option <code>pdefault</code> between 0 and 1. The default value is 0.<br><br></li>
+
+<li>Do not show axes? Add option <code>layout = { xaxis = { visible = false }, yaxis = { visible = false } }</code>.<br><br></li>
 
 <li>As with <code><a href=#plot>plot</a></code>, <code>xrange</code> and <code>yrange</code> in table <code>opts</code> define the ranges of <code>x</code> and <code>y</code> displayed on a graph.</li>
 </ol></p>

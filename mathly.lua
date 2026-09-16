@@ -2920,7 +2920,7 @@ end
 local function _anmt_layout_opts(axis, fmt, file) -- axis = layout.xaxis & yaxis
 	if axis ~= nil then
 		map(function(k) if axis[k] ~= nil then file:write(fmt(", %s: %s", k, qq(axis[k] == true, 'true', 'false'))) end end,
-				{'showgrid', 'zeroline', 'showticklabels'})
+				{'showgrid', 'visible', 'zeroline', 'showticklabels'})
 	end
 end
 
@@ -3069,6 +3069,7 @@ var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
 		local v = rs[i].default;
 		if v == nil then v = rs[i][1] end
 		file:write(fmt("mthlySldr%s.value = %s;\nvar %s = %s;\n", cs[i], tostring(v), cs[i], tostring(v)))
+		if i == 1 and opts.pdefault then file:write(fmt("mthlySldrp.value = %f;\n", opts.pdefault)) end
 	end -- why Number(...)? Values of sliders in JavaScript are STRINGS!
 
 	if not _anmt_animateq then file:write("p = 1;\n") end
