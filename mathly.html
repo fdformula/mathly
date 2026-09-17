@@ -509,6 +509,7 @@ opts = {
 }
 animate(fstr, opts) --&gt; <a href=img/animate4.html target=_blank>Play</a>
 
+
 -- polar curves: the code below may be used as a template
 -- butterfly curve: polar function r(θ) = e^sin(θ) - 2cos(4θ) + sin^5(θ/12)
 -------------------------------------------------------------------------
@@ -2302,15 +2303,14 @@ opts = {
   resolution = 6000,
   layout = {
     width = 640, height = 540,
-    title = '&lt;font size=5&gt;Polar curve: r(t) = sin&lt;sup&gt;2&lt;/sup&gt;(1.6t) + cos&lt;sup&gt;5&lt;/sup&gt;(nt)&lt;/font&gt;',
+    title = '<font size=5>Polar curve: <em>r</em>(<em>&theta;</em>) = sin<sup>2</sup>(1.6<em>&theta;</em>) + cos<sup>5</sup>(<em>n&theta;</em>)</font>',
     xaxis = { visible = false },
     yaxis = { visible = false }}}
 manipulate(fstr, opts) --&gt; <a href="animations/beautiful-polar-curves.html" target=_blank>Play</a>
-
 -- to view how the curves are dynamically drawn, replace 'manipulate' with 'animate'.
 sleep(1.2) -- see <a href=#sleep><code>sleep</code></a>
 opts.enhancements = {{x = 'X', y = 'Y', point = true, color = 'red'}} -- add a red "pen tip"
-animate(fstr, opts) --&gt; <a href=img/manipulate6.html target=_blank>Play</a>
+animate(fstr, opts) --&gt; <a href="animations/beautiful-polar-curves_plotting.html" target=_blank>Play</a>
 </code></pre>
 
 <p>JavaScript and enhancements are allowed as with <code>animate</code>.</p>
