@@ -544,6 +544,7 @@ variables and functions defined in the JavaScript code.</p>
 <li>The title of a graph can be dynamically changed through the interface, <code>displaytitle()</code>, a user-defined JavaScript function that returns a string, the title.</li>
 <li>If needed, an extra message can be displayed through the interface, <code>displaytext()</code>, a user-defined JavaScript function that returns a string, the message.</li>
 </ol>
+
 <p>See detailed examples below:</p>
 <ol>
 <li><a href=examples/animate_stick_endpoints.lua target="_blank">Animating one end of a stick of which the other end moves along a circle</a> &rarr; <a href=animations/endpoints-of-a-stick.html target=_blank>Play</a></li>
@@ -2344,27 +2345,7 @@ opts = {
 manipulate(fstr, opts) --&gt; <a href="animations/y=a(x-h)^2+k.html" target=_blank>Play</a>
 </code></pre>
 
-<p>See more animation examples:</p>
-<ol>
-<li><a href=examples\animate-taylor-series_exp.lua target="_blank">Using Taylor series to approximate <em>e<sup>x</sup></em> </a> &rarr; <a href="animations/taylor-series_exp.html" target=_blank>Play</a></li>
-<li><a href=examples\animate-taylor-series_sine.lua target="_blank">Using Taylor series to approximate <em>sin</em>(<em>x</em>)</a> &rarr; <a href="animations/taylor-series_sine.html" target=_blank>Play</a></li>
-<li><a href=examples\animate-taylor-series_natural_base.lua target="_blank">Using Taylor series to approximate <em>e</em></a> &rarr; <a href="animations/taylor-series_natural-base.html" target=_blank>Play</a></li>
-<li><a href=examples\animate-sequence_natural_base.lua target="_blank">Using a sequence to approximate <em>e</em></a> &rarr; <a href="animations/sequence_natural-base.html" target=_blank>Play</a></li>
-<p></p>
-<li><a href=examples/newton_method_for_root.lua target="_blank">Newton's method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/newton's-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
-<li><a href=examples/midpoint_method_for_root.lua target="_blank">Bisection method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/bisection-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
-<li><a href=examples/secant_method_for_root.lua target="_blank">Secant method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/secant-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
-<li><a href=examples/regula_falsi_method_for_root.lua target="_blank">Regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/regula-falsi-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
-<li><a href=examples/regula_falsi_method_for_root_modified.lua target="_blank">Modified regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/regula-falsi-method-for-solving-f(x)=0_modified.html" target=_blank>Play</a><br><br></li>
-<li><a href=examples/animate_derivative.lua target="_blank">Derivative of <code>y = f(x)</code> at <code>x = x<sub>0</sub></code></a> &rarr; <a href="animations/animating-a-derivative.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_definite_integral.lua target="_blank">Definite integral of <code>f(x)</code> on <code>[a, b]</code></a> &rarr; <a href="animations/animating-a-definite-integral.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_double_integral.lua target="_blank">Double integral of <code>f(x, y)</code> over <code>[a, b] x [c, d]</code></a> &rarr; <a href="animations/animating-a-double-integral.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_euler's_method_for_y'=f(x,y),y(x0)=y0.lua target="_blank">Euler's method for first-order initial-value problems</a> &rarr; <a href="animations/euler's_method_for_y'=f(x,y),y(x0)=y0.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_shooting_method_by_guesses.lua target="_blank">Shooting method for second-order initial-value problems by guesses (for demonstration)</a> &rarr; <a href="animations/shooting-method-by-guesses.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_shooting_method_by_computed_guesses.lua target="_blank">Shooting method for second-order initial-value problems by computing guesses</a> &rarr; <a href="animations/shooting-method-by-computing_guesses.html" target=_blank>Play</a></li>
-<li><a href=examples/animate_matrix_operators_on_graph.lua target="_blank">Matrix operators on the graph of <code>f(x)</code></a> &rarr; <a href="animations/matrix_operators_on_graph.html" target=_blank>Play</a></li>
-</ol>
-<p><p>&#x2713; &nbsp; You may run these Lua scripts in a terminal like: <code>lua -e "dofile('examples/animate-sequence_natural_base.lua')"</code>.</p>
+<p>For more examples, visit <a href=animations/index.html target=_blank>Gallery of Animations</a>.</p>
 
 <h4>&bull; &nbsp; <a name=map href=#m><code>map(f, tbl1, tbl2, ...)</code></a></h4>
 <p>Apply recursively function <code>f</code> to each group of corresponding <u>atomic</u> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</p>
