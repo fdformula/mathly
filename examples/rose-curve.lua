@@ -16,7 +16,7 @@ opts = {
   javascript = jscode,
   xrange = {-1.2, 1.2}, yrange = {-1.2, 1.2},
   resolution = 5000,
-  layout = {width = 600, height = 600, square = true}
+  layout = {width = 600, height = 600, square = true, xaxis = { visible = false }, yaxis = { visible = false }}
 }
 manipulate({
     '@(t) cos(n/d*t)*cos(t)',

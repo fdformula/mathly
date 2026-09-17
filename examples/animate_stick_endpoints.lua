@@ -31,8 +31,7 @@ opts = {
   xrange = {-3, 5}, yrange = {-5, 5},
   layout = {
     width = 640, height = 480, title = '',
-    xaxis = { showgrid = false, zeroline = false, showticklabels = false },
-    yaxis = { showgrid = false, zeroline = false, showticklabels = false }
+    xaxis = { visible = false }, yaxis = { visible = false }
   },
   javascript = jscode,
   enhancements = {
