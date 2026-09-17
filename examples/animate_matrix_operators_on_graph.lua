@@ -59,6 +59,6 @@ opts = {
   r = {0, 1, 1, default = 0, label = 'Reflect about y = x'},
   xrange = {-6, 6}, yrange = {-6, 6}, controls = 'abqcdmnr',
   javascript = jcode,
-  layout = { width = 640, height = 640, square = true, title = '' } -- no title
+  layout = { width = 640, height = 640, square = true, title = 'Matrix operators on a graph' }
 }
 manipulate(fstr, opts)
