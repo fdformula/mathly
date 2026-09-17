@@ -115,14 +115,14 @@ mthlySldrb.value = 2.7;
 var b = 2.7;
 mthlySldrL.value = 5;
 var L = 5;
-for (let i = 0; i <= p * (6.2831853071795862 + 0) - 0; i += 0.012566370614359173) { t.push(i); }
+for (let i = 0; i <= p * (6.3 + 0) - 0; i += 0.0126) { t.push(i); }
 let mthlyTmp = t[t.length - 1];
 if (true) { const t = mthlyTmp; X = R * Math.cos(t) + 0*b + 0*L; Y = R * Math.sin(t); T = mthlyTmp; }
 
 var mthlyTraces = [];
 const mthlyxMin = -3, mthlyxMax = 5, mthlyxStep = 1;
 const mthlyyMin = -5, mthlyyMax = 5;
-const mthlytMin = 0, mthlytMax = 6.2831853071795862, mthlytStep = 0.01;
+const mthlytMin = 0, mthlytMax = 6.3, mthlytStep = 0.01;
 const mthlypMin = 0, mthlypMax = 1, mthlypStep = 0.01;
 const mthlyRMin = 0.1, mthlyRMax = 5, mthlyRStep = 0.1;
 const mthlybMin = 0.1, mthlybMax = 5, mthlybStep = 0.1;
@@ -151,12 +151,12 @@ function mthlyUpdateTraces() {
 	mthlyTraces.push({ x: t.map(t => R * Math.cos(t) + 0*b + 0*L), y: t.map(t => R * Math.sin(t)), mode: 'lines', line: { simplify: false }, fill: 'none' });
 	if (true) {
 		const t = [];
-		for (let i = 0; i <= 6.2831853071795862; i += 0.012566370614359173) { t.push(i); }
+		for (let i = 0; i <= 6.3; i += 0.0126) { t.push(i); }
 		mthlyTraces.push({ x: t.map(t => R * Math.cos(t) + 0*b + 0*L), y: t.map(t => R * Math.sin(t)), mode: 'lines', line: { simplify: false, color: 'blue', width: 3.000000  }, fill: 'none' });
 	}
 	if (true) {
 		const t = [];
-		for (let i = 0; i <= 6.2831853071795862; i += 0.012566370614359173) { t.push(i); }
+		for (let i = 0; i <= 6.3; i += 0.0126) { t.push(i); }
 		mthlyTraces.push({ x: t.map(t => b + (L / Math.sqrt(R**2 + b**2 - 2 * b * R * Math.cos(t)) - 1) * (b - R * Math.cos(t))), y: t.map(t => R * (1 - L / Math.sqrt(R**2 + b**2 - 2 * b * R * Math.cos(t))) * Math.sin(t)), mode: 'lines', line: { simplify: false, color: 'cyan', width: 3.000000  }, fill: 'none' });
 	}
 	mthlyTraces.push({ x: [X, xx], y: [Y, yy], mode: 'lines', line: { color: 'orange', width: 3  } });
@@ -184,7 +184,7 @@ function mthlyAnimatePlot() {
 	R = Number(mthlySldrR.value);
 	b = Number(mthlySldrb.value);
 	L = Number(mthlySldrL.value);
-	t = []; for (let i = 0; i <= p * (6.2831853071795862 + 0) - 0; i += 0.012566370614359173) { t.push(i); };
+	t = []; for (let i = 0; i <= p * (6.3 + 0) - 0; i += 0.0126) { t.push(i); };
 	T = t[t.length - 1];
 	if (true) { const t = T; X = R * Math.cos(t) + 0*b + 0*L; Y = R * Math.sin(t); };
 	// has any controls changed?
