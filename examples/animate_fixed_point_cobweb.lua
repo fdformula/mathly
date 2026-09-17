@@ -2,10 +2,10 @@
 -- by David Wang, dwang@liberty.edu, October 2025
 
 mathly = require('mathly')
---↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ cobweb for x = g(x) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓--
+--vvvvvvvvvvvvvvvvvvvv cobweb for x = g(x) vvvvvvvvvvvvvvvvvvvv--
 g = '1 - sqrt(x)'  -- g(x) = 1 - sqrt(x); divergent? g = '1-x^2'
 MaxIterations = 30
---↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ cobweb for x = g(x) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑--
+--^^^^^^^^^^^^^^^^^^^^ cobweb for x = g(x) ^^^^^^^^^^^^^^^^^^^^--
 jscode = [[
   function g(x) { return %s; }
   var xs = [a]; // xs[i] == g(xs[i-1]); jscript index starts at 0 & xs[0] is extra
