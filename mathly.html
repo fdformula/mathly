@@ -434,11 +434,11 @@ longdashdot</code>, etc.</li>
 <li>Field <code>opts.resolution</code> may be needed for smooth parametric curves. It defaults to 500. The larger, the smoother, but more computing power is needed.
 With each parametric curve in <code>enhancements</code>, field <code>resolution</code> can be defined separately, and its default and minimum value is 500.<br><br></li>
 
-<li>Show no title? Add <code>layout = { title = '' }</code>.<br><br></li>
+<li>Show no title? Add option <code>layout = { title = '' }</code>.<br><br></li>
 
 <li>No square aspect ratio? Add option <code>layout = { square = false }</code>.<br><br></li>
 
-<li>Start playing an animation at a specific moment? Set the value of option <code>pdefault</code> between 0 and 1. The default value is 0.<br><br></li>
+<li>Let <code>animate</code> start playing an animation at a specific moment? Set the value of option <code>pdefault</code> between 0 (beginning) and 1 (end). The default value is 0. Variable <code>p</code> accesses the value of the Play slider and is available to JavaScript code. See <a href="examples/smiley_face.lua">smiley_face.lua</a>.<br><br></li>
 
 <li>Do not show axes? Add option <code>layout = { xaxis = { visible = false }, yaxis = { visible = false } }</code>.<br><br></li>
 
@@ -451,23 +451,46 @@ fstr = '@(x) x^2'
 opts = {
   xrange = {-6, 6}, yrange = {-2, 40},
   layout = {width = 500, height = 350, square = false}, -- square aspect ratio, square = true, by default
-  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}}
+  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}
+}
 animate(fstr, opts) --&gt; <a href=img/animate1.html target=_blank>Play</a>
 
-fstr = {'@(t) 4*sin(t)', '@(t) 4*cos(t)'}
-opts = {t = {-2*pi, 2*pi},
-  layout = { width = 500, height = 500 },
-  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}}
-animate(fstr, opts) --&gt; <a href=img/animate2.html target=_blank>Play</a>
 
-fstr = {'@(t) 6*cos(t)', '@(t) 4*sin(t)'}
+jscode = [[
+  function displaytext() { return "<em>x</em>(<em>t</em>) = 3 cos <em>t</em>, <em>y</em>(<em>t</em>) = 3 sin <em>t</em> (Counterclockwise)"; }
+]]
 opts = {
-  t = {0, 2*pi}, xrange = {-6.4, 6.4}, yrange = { -4.3, 4.3 },
-  layout = { width = 600, height = 400 },
-  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}}
-animate(fstr, opts) --&gt; <a href=img/animate3.html target=_blank>Play</a>
+  xrange = {-4.5, 4.5}, yrange = {-4.5, 4.5}, t = {0, 2*pi},
+  javascript = jscode,
+  layout = {
+    width = 500, height = 500, square = true,
+    title = "<font size=4><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 3<sup>2</sup></font>",
+    xaxis = { showgrid = false }, yaxis = { showgrid = false }
+  },
+  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}
+}
+animate({'@(t) 3*cos(t)', '@(t) 3*sin(t)'}, opts) --&gt; <a href=animations/circle.html target=_blank>Play</a>
 
--- MathLua
+
+jscode = [[
+  function displaytext() { return "<em>x</em>(<em>t</em>) = 2 cos(<em>-t</em>), <em>y</em>(<em>t</em>) = 3 sin(<em>-t</em>) (Clockwise)"; }
+]]
+opts = {
+  xrange = {-4.5, 4.5}, yrange = {-4.5, 4.5}, t = {0, 2*pi},
+  javascript = jscode,
+  layout = {
+    width = 500, height = 500, square = true,
+    title = "<font size=4>(<em>x</em>/2)<sup>2</sup> + (<em>y</em>/3)<sup>2</sup> = 1</font>",
+    xaxis = { showgrid = false }, yaxis = { showgrid = false }
+  },
+  enhancements = {
+    {x = 'X', y = 'Y', color = 'red', size = 10, point = true}
+  }
+}
+animate({'@(t) 2*cos(-t)', '@(t) 3*sin(-t)'}, opts) --&gt; <a href=animations/ellipse.html target=_blank>Play</a>
+
+
+-- Mathly around Lua
 fstr = {'@(t) 5 * cos(t)', '@(t) 5 * sin(t)'}
 opts = {
   p = {0, 1, 0.4}, t = {0, 2 * pi, 0.01}, xrange = {-10, 10}, width = 0, color = 'darkblue',
@@ -475,7 +498,7 @@ opts = {
     width = 500, height = 500,
     xaxis = { showgrid = false, zeroline = false, showticklabels = false },
     yaxis = { showgrid = false, zeroline = false, showticklabels = false }},
-  enhancements = {
+  enhancements = { -- data and functions to be converted to JavaScript code by MathLua
     {x = '@(t) 5.5 * cos(t)', y = '@(t) 5.5 * sin(t)', t = {0, 2 * pi}, color = 'darkblue', width = 0, fill = 'fs'},
     {x = '@(t) 2.2 + 1.6 * cos(t)', y = '@(t) 2.2 + 1.6 * sin(t)', t = {0, 2 * pi}, color = 'white', width = 0, fill = 'fs'},
     {x = 0, y = 0.7, text = 'Lua', color = 'white', size = 75},
@@ -498,16 +521,18 @@ opts = {
   resolution = 1000,
   layout = {
     width = 500, height = 500, square = true, title = '',
-    xaxis = { showgrid = false, zeroline = false, showticklabels = false },
-    yaxis = { showgrid = false, zeroline = false, showticklabels = false }},
-  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}}
-animate(fstr, opts) --&gt; <a href=img/animate5.html target=_blank>Play</a>
+    xaxis = { visible = false }, -- or: showgrid = false, zeroline = false, showticklabels = false },
+    yaxis = { visible = false}
+  },
+  enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}
+}
+animate(fstr, opts) --&gt; <a href=animations/polar-curves_butterfly.html target=_blank>Play</a>
 </code></pre>
 
 <p>See more examples below:</p>
 <ol>
-<li><a href=examples/animate_hypocycloid.lua target="_blank">Animating hypocycloid</a> &rarr; <a href=img/animateA.html target=_blank>Play</a></li>
-<li><a href=examples/animate_epicycloid.lua target="_blank">Animating epicycloid</a> &rarr; <a href=img/animateB.html target=_blank>Play</a></li>
+<li><a href=examples/animate_epicycloid.lua target="_blank">Animating epicycloid</a> &rarr; <a href=animations/epicycloid.html target=_blank>Play</a></li>
+<li><a href=examples/animate_hypocycloid.lua target="_blank">Animating hypocycloid</a> &rarr; <a href=animations/hypocycloid.html target=_blank>Play</a></li>
 </ol>
 <p>&#x2713; &nbsp; You may run these Lua scripts in a terminal like: <code>lua -e "dofile('examples/animate_hypocycloid.lua')"</code>.</p>
 
@@ -520,10 +545,10 @@ variables and functions defined in the JavaScript code.</p>
 </ol>
 <p>See detailed examples below:</p>
 <ol>
-<li><a href=examples/animate_stick_endpoints.lua target="_blank">Animating one end of a stick of which the other end moves along a circle</a> &rarr; <a href=img/animateC.html target=_blank>Play</a></li>
-<li><a href=examples/animate_osculating_circle_1.lua target="_blank">Animating osculating circle of <code>y=sin(x)</code></a> &rarr; <a href=img/animateD.html target=_blank>Play</a></li>
-<li><a href=examples/animate_osculating_circle_2.lua target="_blank">Animating osculating circle of <code>y=x<sup>2</sup></code></a> &rarr; <a href=img/animateE.html target=_blank>Play</a></li>
-<li><a href=examples/animate_fixed_point_cobweb.lua target="_blank">Animating the fixed-point method or the generation of a cobweb for <code>x=g(x)</code></a> &rarr; <a href=img/animateF.html target=_blank>Play</a></li>
+<li><a href=examples/animate_stick_endpoints.lua target="_blank">Animating one end of a stick of which the other end moves along a circle</a> &rarr; <a href=animations/endpoints-of-a-stick.html target=_blank>Play</a></li>
+<li><a href=examples/animate_osculating_circle_1.lua target="_blank">Animating osculating circle of <code>y=sin(x)</code></a> &rarr; <a href="animations/osculating-circle_sin(x).html" target=_blank>Play</a></li>
+<li><a href=examples/animate_osculating_circle_2.lua target="_blank">Animating osculating circle of <code>y=x<sup>2</sup></code></a> &rarr; <a href="animations/osculating-circle_x^2.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_fixed_point_cobweb.lua target="_blank">Animating the fixed-point method or the generation of a cobweb for <code>x=g(x)</code></a> &rarr; <a href="animations/fixed-point-method_cobweb.html" target=_blank>Play</a></li>
 </ol>
 
 <p>&#x2713; &nbsp; If there are multiple points, lines, and/or curves to be animated, use <code>fstr</code> to animate (the primary) one,
@@ -535,12 +560,12 @@ fstr = '@(x) 4*sin(x)'
 opts = {
   t = {0, 2*pi}, xrange = {-6.1, 6.1}, yrange = { -4.3, 4.3 }, color = 'blue', width = 5, style = "dash: 'dot'",
   layout = { width = 600, height = 400, square = true, title = 'Demo' },
-  enhancements = {
+  enhancements = { -- data and functions to be converted to JavaScript code by MathLua
     {x = 'X', y = 'Y', color = 'blue', size = 8, point = true},
-    {x = '@(t) -2 + cos(t)', y = '@(t) 1 + sin(t)', t = {0, pi}},                                 -- t's range is given: independent of fstr; static
-    {x = '@(t)  2 + cos(t)', y = '@(t) 1 + sin(t)', t = {0, pi}},                                 --
-    {x = '@(t) 1.5*cos(t)', y = '@(t) -0.5 + 1.5*sin(t)', t = {pi, 2*pi}},                        --
-    {x = '@(t) t', y = '@(t) 3 * sin(t)', color = 'green'},                                       -- t's range is not given: sync with fstr. note: if fstr = '@(x) ...', t = x
+    {x = '@(t) -2 + cos(t)', y = '@(t) 1 + sin(t)', t = {0, pi}},                               -- t's range is given: independent of fstr; static
+    {x = '@(t)  2 + cos(t)', y = '@(t) 1 + sin(t)', t = {0, pi}},                               --
+    {x = '@(t) 1.5*cos(t)', y = '@(t) -0.5 + 1.5*sin(t)', t = {pi, 2*pi}},                      --
+    {x = '@(t) t', y = '@(t) 3 * sin(t)', color = 'green'},                                     -- t's range is not given: sync with fstr. note: if fstr = '@(x) ...', t = x
     {x = '@(t) -t', y = '@(t) 3 * cos(t)', color = 'red', style = "dash: 'dashdot'"},           --
     {x = 'T', y = '3* sin(T)', point = true, color = 'green', style = "symbol: 'circle-open'"}, -- lines, points? use T, X, and Y
     {x = '-T', y = '3* cos(T)', point = true, color = 'red', style = "symbol: 'star'"},
@@ -2191,15 +2216,23 @@ is dynamically generated.</p>
 <pre><code>mathly = require('mathly')
 
 -- Lissajous curves
-fstr = {'@(t) a*sin(m * t)', '@(t) b*sin(n * t)'}
+jscode = [[
+  function displaytext() { return "<em>x</em>(<em>t</em>) = <code>a</code> sin(<em>mt</em>), <em>y</em>(<em>t</em>) = <em>b</em> sin(<em>nt</em>)"; }
+]]
 opts = {
   t = {0, 2*pi, 0.01},
   a = {0.1, 5, 0.1, default = 1}, m = {1, 20, 1, default = 2},
   b = {0.1, 5, 0.1, default = 2}, n = {1, 20, 1, default = 1},
   xrange = {-5.1, 5.1},
   resolution = 2000,
-  layout = { width = 640, height = 540, title = '&lt;h3&gt;Lissajous Curves&lt;/h3&gt;' }}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate1.html target=_blank>Play</a>
+  javascript = jscode,
+  layout = {
+    width = 640, height = 540, title = '&lt;h3&gt;Lissajous Curves&lt;/h3&gt;',
+    xaxis = { visible = false }, yaxis = { visible = false }
+  }
+}
+manipulate({'@(t) a*sin(m * t)', '@(t) b*sin(n * t)'}, opts) --&gt; <a href=animations/lissajous-curves.html target=_blank>Play</a>
+
 
 fstr = {'@(t) cos(t) + 1/m * cos(a*t) + 1/n * cos(b*t+3.1416/2)',
         '@(t) sin(t) + 1/m * sin(a*t) + 1/n * sin(b*t+3.1416/2)'}
@@ -2209,10 +2242,16 @@ opts = {
   a = {-10, 10, 1, default = 8}, b = {-20, 20, 1, default = -13},
   xrange = {-4, 4},
   resolution = 2000,
-  layout = {width = 500, height = 500, square = true}}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate2.html target=_blank>Play</a>
+  layout = {
+    width = 500, height = 500, square = true,
+    title = '<em>x</em>(<em>t</em>) = cos <em>t</em> + 1/<em>m</em> cos(<em>at</em>) + 1/<em>n</em> cos(<em>bt + &pi;</em>/2)<br><em>y</em>(<em>t</em>) = sin <em>t</em> + 1/<em>m</em> sin(<em>at</em>) + 1/<em>n</em> sin(<em>bt + &pi;</em>/2)',
+    xaxis = { visible = false }, yaxis = { visible = false }
+  }
+}
+manipulate(fstr, opts) --&gt; <a href="animations/parametric-curves-I.html" target=_blank>Play</a>
 -- m = 2, (n = 5 | 9), a = 9, b = -15
 -- m = 2, n = 2, a = 8, b = -6
+
 
 -- polar curves: the code below may be used as a template
 ---------------------------------------------------------
@@ -2225,7 +2264,8 @@ opts = {
   resolution = 2000,
   fill = 'fs',
   layout = {width = 500, height = 500, square = true, title = '&lt;h3&gt;Polar curve: r(t) = sin(nt)&lt;/h3&gt;'}}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate3.html target=_blank>Play</a>
+manipulate(fstr, opts) --&gt; <a href="animations/polar-curves_sin(nt).html" target=_blank>Play</a>
+
 
 r = 'm + 1/n * sin(a*t)'
 s = 't + sin(b*t)/c'
@@ -2240,15 +2280,18 @@ opts = {
   resolution = 2000,
   layout = {
     width = 500, height = 500, square = true, title = '',
-    xaxis = { showgrid = false, zeroline = false, showticklabels = false },
-    yaxis = { showgrid = false, zeroline = false, showticklabels = false }}}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate4.html target=_blank>Play</a>
+    title = '<em>x</em>(<em>t</em>) = [<em>m</em> + 1/<em>n</em> sin(<em>at</em>)] cos[<em>t</em> + sin(<em>bt</em>)/<em>c</em>]<br><em>y</em>(<em>t</em>) = [<em>m</em> + 1/<em>n</em> sin(<em>at</em>)] sin[<em>t</em> + sin(<em>bt</em>)/<em>c</em>]',
+    xaxis = { visible = false }, yaxis = { visible = false }
+  }
+}
+manipulate(fstr, opts) --&gt; <a href="animations/parametric-curves-II.html" target=_blank>Play</a>
 -- m = -2, n = 7, a = -9, b = -2, c = 1
 -- m = n = c = 1, (a = -1, b = -10) | (a = +-10, b = 4)
 -- m = 3, n = 1, a = 8, b = 16, c = ...
 -- m = n = 3, a = 7, b = -14, c = 6
 -- m = 3, n = 1, a = -9, b = 15, c = 6
 -- m = n = 3, a = 8, b = -2, c = 1
+
 
 -- <a name=anmt_sleep></a>
 -- polar curves: r(θ) = sin(1.6θ)^2 + cos(nθ)^5
@@ -2260,9 +2303,10 @@ opts = {
   layout = {
     width = 640, height = 540,
     title = '&lt;font size=5&gt;Polar curve: r(t) = sin&lt;sup&gt;2&lt;/sup&gt;(1.6t) + cos&lt;sup&gt;5&lt;/sup&gt;(nt)&lt;/font&gt;',
-    xaxis = { showgrid = false, zeroline = false, showticklabels = false },
-    yaxis = { showgrid = false, zeroline = false, showticklabels = false }}}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate5.html target=_blank>Play</a>
+    xaxis = { visible = false },
+    yaxis = { visible = false }}}
+manipulate(fstr, opts) --&gt; <a href="animations/beautiful-polar-curves.html" target=_blank>Play</a>
+
 -- to view how the curves are dynamically drawn, replace 'manipulate' with 'animate'.
 sleep(1.2) -- see <a href=#sleep><code>sleep</code></a>
 opts.enhancements = {{x = 'X', y = 'Y', point = true, color = 'red'}} -- add a red "pen tip"
@@ -2273,48 +2317,51 @@ animate(fstr, opts) --&gt; <a href=img/manipulate6.html target=_blank>Play</a>
 <pre><code>mathly = require('mathly')
 
 jcode = [[
-  function displaytitle() { // dynamically update the title nicely
+  function displaytext() { // dynamically show the function
     let op1 = '-', op2 = '+', h1 = h, k1 = k, x = 'x', t = '', ax = ''
     if (h < 0) { op1 = '+'; h1 = -h; }
     if (k < 0) { op2 = '-'; k1 = -k; }
     if (h != 0) { x = '(x ' + op1 + ' ' + h1 + ')'; }
     if (k != 0) { t = op2 + ' ' + k1; }
     if (a != 0) {
-      ax = '' + ((a == 1)? '' : ((a == -1)? '-' : a)) + x + '&lt;sup&gt;2&lt;/sup&gt; ';
+      ax = '' + ((a == 1)? '' : ((a == -1)? '-' : a)) + x + '<sup>2</sup> ';
     } else {
       t = k;
     }
-    return '&lt;h3&gt;y = ' + ax + t + '&lt;/h3&gt;'
+    return 'y = ' + ax + t
   }
 ]]
-
 fstr = '@(x) a * (x - h)^2 + k' -- a, h, and k are each a control here
 opts = {
   a = {-3, 3, 0.02, default = 3}, h = {-10, 10, 0.5, default = 0}, k = {-90, 90, default = 0},
   xrange = {-10, 10}, yrange = {-100, 100},
   javascript = jcode,
-  layout = { width = 600, height = 400, square = false }}
-manipulate(fstr, opts) --&gt; <a href=img/manipulate7.html target=_blank>Play</a>
+  layout = {
+    width = 600, height = 400, square = false,
+    title = "<em>y = a</em> (<em>x - h</em>)<sup>2</sup> + <em>k</em>"
+  }
+}
+manipulate(fstr, opts) --&gt; <a href="animations/y=a(x-h)^2+k.html" target=_blank>Play</a>
 </code></pre>
 
 <p>See more animation examples:</p>
 <ol>
-<li><a href=examples\animate-taylor-series_exp.lua target="_blank">Using Taylor series to approximate <em>e<sup>x</sup></em> </a> &rarr; <a href=img/manipulateA.html target=_blank>Play</a></li>
-<li><a href=examples\animate-taylor-series_sine.lua target="_blank">Using Taylor series to approximate <em>sin</em>(<em>x</em>)</a> &rarr; <a href=img/manipulateB.html target=_blank>Play</a></li>
-<li><a href=examples\animate-taylor-series_natural_base.lua target="_blank">Using Taylor series to approximate <em>e</em></a> &rarr; <a href=img/manipulateC.html target=_blank>Play</a></li>
-<li><a href=examples\animate-sequence_natural_base.lua target="_blank">Using a sequence to approximate <em>e</em></a> &rarr; <a href=img/manipulateD.html target=_blank>Play</a></li>
+<li><a href=examples\animate-taylor-series_exp.lua target="_blank">Using Taylor series to approximate <em>e<sup>x</sup></em> </a> &rarr; <a href="animations/taylor-series_exp.html" target=_blank>Play</a></li>
+<li><a href=examples\animate-taylor-series_sine.lua target="_blank">Using Taylor series to approximate <em>sin</em>(<em>x</em>)</a> &rarr; <a href="animations/taylor-series_sine.html" target=_blank>Play</a></li>
+<li><a href=examples\animate-taylor-series_natural_base.lua target="_blank">Using Taylor series to approximate <em>e</em></a> &rarr; <a href="animations/taylor-series_natural-base.html" target=_blank>Play</a></li>
+<li><a href=examples\animate-sequence_natural_base.lua target="_blank">Using a sequence to approximate <em>e</em></a> &rarr; <a href="animations/sequence_natural-base.html" target=_blank>Play</a></li>
 <p></p>
-<li><a href=examples/newton_method_for_root.lua target="_blank">Newton's method for solving <code>f(x) = 0</code></a> &rarr; <a href=img/manipulateE.html target=_blank>Play</a></li>
-<li><a href=examples/secant_method_for_root.lua target="_blank">Secant method for solving <code>f(x) = 0</code></a> &rarr; <a href=img/manipulateF.html target=_blank>Play</a></li>
-<li><a href=examples/midpoint_method_for_root.lua target="_blank">Midpoint method for solving <code>f(x) = 0</code></a> &rarr; <a href=img/manipulateG.html target=_blank>Play</a></li>
-<li><a href=examples/regula_falsi_method_for_root.lua target="_blank">Regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href=img/manipulateH.html target=_blank>Play</a></li>
-<li><a href=examples/regula_falsi_method_for_root_modified.lua target="_blank">Modified regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href=img/manipulateI.html target=_blank>Play</a><br><br></li>
-<li><a href=examples/animate_derivative.lua target="_blank">Derivative of <code>y = f(x)</code> at <code>x = x<sub>0</sub></code></a> &rarr; <a href=img/manipulateJ.html target=_blank>Play</a></li>
-<li><a href=examples/animate_definite_integral.lua target="_blank">Definite integral of <code>f(x)</code> on <code>[a, b]</code></a> &rarr; <a href=img/manipulateK.html target=_blank>Play</a></li>
-<li><a href=examples/animate_double_integral.lua target="_blank">Double integral of <code>f(x, y)</code> over <code>[a, b] x [c, d]</code></a> &rarr; <a href=img/manipulateL.html target=_blank>Play</a></li>
-<li><a href=examples/animate_euler's_method_for_y'=f(x,y),y(x0)=y0.lua target="_blank">Euler's method for first-order initial-value problems</a> &rarr; <a href=img/manipulateM.html target=_blank>Play</a></li>
-<li><a href=examples/animate_shooting_method_by_guesses.lua target="_blank">Shooting method for second-order initial-value problems by guesses (for demonstration)</a> &rarr; <a href=img/manipulateN.html target=_blank>Play</a></li>
-<li><a href=examples/animate_shooting_method_by_computed_guesses.lua target="_blank">Shooting method for second-order initial-value problems by computing guesses</a> &rarr; <a href=img/manipulateO.html target=_blank>Play</a></li>
+<li><a href=examples/newton_method_for_root.lua target="_blank">Newton's method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/newton's-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
+<li><a href=examples/midpoint_method_for_root.lua target="_blank">Bisection method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/bisection-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
+<li><a href=examples/secant_method_for_root.lua target="_blank">Secant method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/secant-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
+<li><a href=examples/regula_falsi_method_for_root.lua target="_blank">Regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/regula-falsi-method-for-solving-f(x)=0.html" target=_blank>Play</a></li>
+<li><a href=examples/regula_falsi_method_for_root_modified.lua target="_blank">Modified regula falsi method for solving <code>f(x) = 0</code></a> &rarr; <a href="animations/regula-falsi-method-for-solving-f(x)=0_modified.html" target=_blank>Play</a><br><br></li>
+<li><a href=examples/animate_derivative.lua target="_blank">Derivative of <code>y = f(x)</code> at <code>x = x<sub>0</sub></code></a> &rarr; <a href="animations/animating-a-derivative.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_definite_integral.lua target="_blank">Definite integral of <code>f(x)</code> on <code>[a, b]</code></a> &rarr; <a href="animations/animating-a-definite-integral.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_double_integral.lua target="_blank">Double integral of <code>f(x, y)</code> over <code>[a, b] x [c, d]</code></a> &rarr; <a href="animations/animating-a-double-integral.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_euler's_method_for_y'=f(x,y),y(x0)=y0.lua target="_blank">Euler's method for first-order initial-value problems</a> &rarr; <a href="animations/euler's_method_for_y'=f(x,y),y(x0)=y0.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_shooting_method_by_guesses.lua target="_blank">Shooting method for second-order initial-value problems by guesses (for demonstration)</a> &rarr; <a href="animations/shooting-method-by-guesses.html" target=_blank>Play</a></li>
+<li><a href=examples/animate_shooting_method_by_computed_guesses.lua target="_blank">Shooting method for second-order initial-value problems by computing guesses</a> &rarr; <a href="animations/shooting-method-by-computing_guesses.html" target=_blank>Play</a></li>
 <li><a href=examples/animate_matrix_operators_on_graph.lua target="_blank">Matrix operators on the graph of <code>f(x)</code></a> &rarr; <a href=img/manipulateP.html target=_blank>Play</a></li>
 </ol>
 <p><p>&#x2713; &nbsp; You may run these Lua scripts in a terminal like: <code>lua -e "dofile('examples/animate-sequence_natural_base.lua')"</code>.</p>
