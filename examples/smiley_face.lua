@@ -9,7 +9,8 @@ opts = {
     -- title = "<h3>Smiley Face</h3>",
     xaxis = { visible = false }, yaxis = { visible = false }
   },
-  pdefault = 0.5,  -- start playing at the middle
+  p = { default = 0.5 }, -- control p starts at p = 0.5, start playing at the middle
+  speed = 2,      -- start at a speed as if button Faster is clicked 2 times
   enhancements = {
     {x = '@(t) 3*cos(t)', y = '@(t) 1 + 3*sin(t)', t = {0, 2*3.15}, color = 'black'}, -- face
     {x = '@(t) -1 + 0.3*cos(t)', y = '@(t) 2 + 0.3*sin(t)', t = {0, 2*3.15}, fill = 'fs', color = 'black'}, -- left eye
