@@ -3036,6 +3036,7 @@ function mthlySpeedUp(step) {
 	mthlyIntervalId = setInterval(mthlyAnimatePlot, mthlyInterval);
 }
 var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
+		if type(opts.speed) == 'number' then file:write(fmt("mthlySpeedUp(%f);\n", opts.speed * 50)) end
 	end
 
 	local squareq = true
@@ -3069,7 +3070,6 @@ var mthlySldrpstep = ]] .. tostring(rs[1][3]) .. ";\n")
 		local v = rs[i].default;
 		if v == nil then v = rs[i][1] end
 		file:write(fmt("mthlySldr%s.value = %s;\nvar %s = %s;\n", cs[i], tostring(v), cs[i], tostring(v)))
-		if i == 1 and opts.pdefault then file:write(fmt("mthlySldrp.value = %f;\n", opts.pdefault)) end
 	end -- why Number(...)? Values of sliders in JavaScript are STRINGS!
 
 	if not _anmt_animateq then file:write("p = 1;\n") end

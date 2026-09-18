@@ -392,7 +392,7 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <h4>&bull; &nbsp; <a name=animate href=#m><code>animate(fstr, opts)</code></a></h4>
 <p>See also: <code><a href=#manipulate>manipulate</a></code>, <a href=animations/index.html target=_blank>Gallery of Math Animations</a>.</p>
 <p>Animate a parametric curve or the graph of a single-variable function <code>f(x)</code> with controls.
-Each control is a single letter, <code>a, b, ..., z, A, B, ...</code>, or <code>Z</code>, except <code>p, t, x, y, T, X</code>,
+Each control is a single letter, <code>a, b, ..., z, A, B, ...</code>, or <code>Z</code>, <u>except <code>p, t, x, y, T, X</code></u>,
 and <code>Y</code>. For example, <code>a, h</code>, and <code>k</code> are controls in
 <code>f(x) = a (x - h)^2 + k</code> for exploring the variation of the parabola as they change.</p>
 <p><code>fstr</code> must be a string for <code>y = f(x)</code> or a pair of strings for a parametric curve. The string(s) must be a function in the <a href=#easyf>shortcut string format</a>. <em><code>fstr</code> can also be <code>nil</code>,
@@ -438,12 +438,17 @@ With each parametric curve in <code>enhancements</code>, field <code>resolution<
 
 <li>No square aspect ratio? Add option <code>layout = { square = false }</code>.<br><br></li>
 
-<li>Let <code>animate</code> start playing an animation at a specific moment? Set the value of option <code>pdefault</code> between 0 (beginning) and 1 (end). The default value is 0. Variable <code>p</code> accesses the value of the Play slider and is available to JavaScript code. See <a href="examples/smiley_face.lua">smiley_face.lua</a>.<br><br></li>
-
 <li>Do not show axes? Add option <code>layout = { xaxis = { visible = false }, yaxis = { visible = false } }</code>.<br><br></li>
 
 <li>As with <code><a href=#plot>plot</a></code>, <code>xrange</code> and <code>yrange</code> in table <code>opts</code> define the ranges of <code>x</code> and <code>y</code> displayed on a graph.</li>
 </ol></p>
+
+<p>&#x2713; &nbsp; Let <code>animate</code> start playing an animation</p>
+<blockquote>
+<p>At a specific moment? Set the <code>default</code> value of the reserved control <code>p</code>, which corresponds to the Play slider, like <code>p = { default = x }</code> where <code>x</code> is between 0 (beginning, default) and 1 (end).</p>
+<p>At a specific speed? Add option <code>speed = n</code>. It is equivalent to pressing the button Slower (Faster) <code>|n|</code> times if <code>n</code> is negative (positive).</p>
+<p>See <a href="examples/smiley_face.lua">smiley_face.lua</a>.</p>
+</blockquote>
 
 <pre><code>mathly = require('mathly')
 
@@ -2275,7 +2280,7 @@ s = 't + sin(b*t)/c'
 fstr = {'@(t) (' .. r .. ') * cos(' .. s .. ')',
         '@(t) (' .. r .. ') * sin(' .. s .. ')'}
 opts = {
-  t = {0, 2 * pi, 0.01},         ----- adjust options if needed
+  t = {0, 2 * pi, 0.01}, ----- adjust options if needed
   m = {-10, 10, 1, default = 3}, n = {1, 10, 1},
   a = {-10, 10, 1, default = -9}, b = {-20, 20, 1, default = 9}, c = {1, 20, 1},
   xrange = {-5, 5},
@@ -2293,6 +2298,10 @@ manipulate(fstr, opts) --&gt; <a href="animations/parametric-curves-II.html" tar
 -- m = n = 3, a = 7, b = -14, c = 6
 -- m = 3, n = 1, a = -9, b = 15, c = 6
 -- m = n = 3, a = 8, b = -2, c = 1
+-- m, n, a, b, c = 3, 1, -7, 12, 2 -- super cool
+-- m, n, a, b, c = 3, 1, -7, 16, 3
+-- m, n, a, b, c = -2, 7, -9, -2, 1
+-- m, n, a, b, c = -2, 7, -5, -2, 1
 
 
 -- <a name=anmt_sleep></a>
