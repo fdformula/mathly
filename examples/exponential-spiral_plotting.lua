@@ -5,6 +5,7 @@ opts = {
   m = {-4, -0.1, 0.1, default = -0.4},
   xrange = {-1.2, 1.2}, yrange = {-1.2, 1.2},
   resolution = 10000,
+  speed = -2,
   layout = {
     width = 600, height = 600, square = true,
     xaxis = { visible = false }, yaxis = { visible = false },
