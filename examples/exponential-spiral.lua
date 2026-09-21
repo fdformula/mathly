@@ -1,10 +1,10 @@
 -- by David Wang, dwang@liberty.edu, on 09/21/2026
 opts = {
-  t = {0, 15 * pi, 0.01},
+  t = {0, 16 * pi, 0.01},
   k = {1, 20, default = 6},
   m = {-4, -0.1, 0.1, default = -1.1},
   xrange = {-1.2, 1.2}, yrange = {-1.2, 1.2},
-  resolution = 8000,
+  resolution = 10000,
   layout = {
     width = 600, height = 600, square = true,
     xaxis = { visible = false }, yaxis = { visible = false },
