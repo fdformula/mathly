@@ -24,7 +24,7 @@ opts = {
   javascript = jscode,
   enhancements = {
     {x = fstr[1], y = fstr[2], t = {-2*pi, 2*pi}, color = 'blue'},
-    {x = '@(t) cx + cos(t) / k(X)', y = '@(t) cy + sin(t) / k(X)', t = {0, 2*pi}, color = 'orange'},
+    {x = '@(t) cx + cos(t) / k(X)', y = '@(t) cy + sin(t) / k(X)', t = {0, 2*3.15}, color = 'orange'},
     {x = {'cx', 'X'}, y = {'cy', 'Y'}, line = true, width = '2', color = 'orange'},
     {x = 'cx', y = 'cy', color = 'orange', size = 7, point = true},
     {x = 'X', y = 'Y', color = 'red', size = 10, point = true}
