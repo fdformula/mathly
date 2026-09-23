@@ -1,5 +1,4 @@
--- https://www.matematica.pt/en/useful/list-curves.php
-
+-- Lituus spiral: polar equation r(t)^2 = a^2 / t
 mathly = require('mathly')
 
 jscode = [[
