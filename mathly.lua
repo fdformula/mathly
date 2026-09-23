@@ -12,7 +12,7 @@ DESCRIPTION
 	Part of modules dkjson.lua, http://dkolf.de/dkjson-lua, and plotly.lua,
 	https://github.com/kenloen/plotly.lua, is merged into this project
 	to reduce dependecies and make it easier for users to download and use
-	mathly. Though some changes have been made, full credit belongs to
+	MathLua. Though some changes have been made, full credit belongs to
 	the original authors for whom I am grateful.
 
 FUNCTIONS PROVIDED IN THIS MODULE
@@ -2716,9 +2716,15 @@ local _anmt_animateq, _anmt_act = false, '' -- animate or manipulate
 function _to_jscript_expr(expr)
 	local gsub = string.gsub
 	local jexpr = gsub(expr, "%^", "**")
+	jexpr = gsub(jexpr, "asin", "_Ac_S_")
+	jexpr = gsub(jexpr, "acos", "_Ac_C_")
+	jexpr = gsub(jexpr, "atan", "_Ac_T_")
 	jexpr = gsub(jexpr, "sin", "Math.sin")
 	jexpr = gsub(jexpr, "cos", "Math.cos")
 	jexpr = gsub(jexpr, "tan", "Math.tan")
+	jexpr = gsub(jexpr, "_Ac_S_", "Math.asin")
+	jexpr = gsub(jexpr, "_Ac_C_", "Math.acos")
+	jexpr = gsub(jexpr, "_Ac_T_", "Math.atan")
 	jexpr = gsub(jexpr, "exp", "Math.exp")
 	jexpr = gsub(jexpr, "log", "Math.log")
 	jexpr = gsub(jexpr, "sqrt", "Math.sqrt")
