@@ -3145,14 +3145,16 @@ var mthlyNewCs = [], mthlyOldCs = []])
 
 	if _anmt_animateq then
 		if xexpr ~= nil then -- parametric eqs
-			file:write(fmt("	t = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { t.push(i); };\n	T = t[t.length - 1];\n",
-										 tostring(tr[1]), tostring(tr[2]), qq(tr[1] > 0, '-', '+'), tostring(abs(tr[1])),
-										 qq(tr[1] > 0, '+', '-'), tostring(abs(tr[1])), tostring((tr[2] - tr[1]) / resolution)))
+			file:write(fmt(
+				"	t = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { t.push(i); };\n	T = t[t.length - 1];\n",
+				tostring(tr[1]), tostring(tr[2]), qq(tr[1] > 0, '-', '+'), tostring(abs(tr[1])),
+				qq(tr[1] > 0, '+', '-'), tostring(abs(tr[1])), tostring((tr[2] - tr[1]) / resolution)))
 			file:write(fmt("	if (true) { const t = T; X = %s; Y = %s; };\n", jxexpr, jyexpr))
 		else
-			file:write(fmt("	x = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { x.push(i); }; t = x;\n	X = x[x.length - 1];",
-										 tostring(xr[1]), tostring(xr[2]), qq(xr[1] > 0, '-', '+'), tostring(abs(xr[1])),
-										 qq(xr[1] > 0, '+', '-'), tostring(abs(xr[1])), tostring((xr[2] - xr[1]) / resolution)))
+			file:write(fmt(
+				"	x = []; for (let i = %s; i <= p * (%s %s %s) %s %s; i += %s) { x.push(i); }; t = x;\n	X = x[x.length - 1];",
+				tostring(xr[1]), tostring(xr[2]), qq(xr[1] > 0, '-', '+'), tostring(abs(xr[1])),
+				qq(xr[1] > 0, '+', '-'), tostring(abs(xr[1])), tostring((xr[2] - xr[1]) / resolution)))
 			file:write(fmt("	if (true) { const x = X; Y = %s; T = x; };\n", jyexpr))
 		end
 	end
@@ -3250,7 +3252,8 @@ function help(w)
 		'load', 'loadfile', 'next', 'pairs', 'pcall', 'print', 'rawequal', 'rawget', 'rawlen', 'rawset', 'require',
 		'select', 'setmetatable', 'tonumber', 'tostring', 'type', 'warn', 'xpcall', -- at beginning of the Index in lua5_5.html
 
-		'do', 'else', 'end', 'f', 'file', 'function', 'goto', 'if', 'io', 'math', 'os', 're', 'regex', 'repeat', 'string', 'table', 'then', 'until', 'while'} -- extra anchors added in manual.html
+		'do', 'else', 'end', 'f', 'file', 'function', 'goto', 'if', 'io', 'math', 'os', 're', 'regex',
+		'repeat', 'string', 'table', 'then', 'until', 'while'} -- extra anchors added in manual.html
 	local url
 	if mathq then
 			url = mathly_manual_url .. '#math'
