@@ -541,6 +541,25 @@ opts = {
   enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}
 }
 animate(fstr, opts) --&gt; <a href=animations/polar-curves_butterfly.html target=_blank>Play</a>
+
+
+-- Lituus spiral: polar equation r(t)^2 = a^2 / t
+r = 'a / sqrt(t)' -- try: a sqrt(t)
+-----------------------------------
+fstr1 = {'@(t) (' .. r .. ') * cos(t)', '@(t) (' .. r .. ') * sin(t)'}
+fstr2 = {'@(t) (-' .. r .. ') * cos(t)', '@(t) (-' .. r .. ') * sin(t)'}
+opts = {
+  t = {0.01, 15 * pi, 0.01}, xrange = {-28, 28}, color = 'blue',
+  a = {1, 150, default = 50},
+  layout = {
+    width = 500, height = 500, square = true,
+    xaxis = { visible = false }, yaxis = { visible = false },
+    title = '<font size=4>Lituus sipral: polar equation <em>r</em><sup>2</sup>(<em>&theta;</em>) = <em>a</em><sup>2</sup> / <em>&theta;</em></font>'
+  },
+  enhancements={{x = fstr2[1], y = fstr2[2], color = 'red', width = 2}}
+}
+animate(fstr1, opts) --&gt; <a href="animations/lituus-polar-curve.html" target=_blank>Play</a>
+
 </code></pre>
 
 <p>See more examples below:</p>
@@ -2280,24 +2299,6 @@ opts = {
   fill = 'fs',
   layout = {width = 500, height = 500, square = true, title = '&lt;h3&gt;Polar curve: r(t) = sin(nt)&lt;/h3&gt;'}}
 manipulate(fstr, opts) --&gt; <a href="animations/polar-curves_sin(nt).html" target=_blank>Play</a>
-
-
--- Lituus spiral: polar equation r(t)^2 = a^2 / t
-r = 'a / sqrt(t)' -- try: a sqrt(t)
------------------------------------
-fstr1 = {'@(t) (' .. r .. ') * cos(t)', '@(t) (' .. r .. ') * sin(t)'}
-fstr2 = {'@(t) (-' .. r .. ') * cos(t)', '@(t) (-' .. r .. ') * sin(t)'}
-opts = {
-  t = {0.01, 15 * pi, 0.01}, xrange = {-28, 28}, color = 'blue',
-  a = {1, 150, default = 50},
-  layout = {
-    width = 500, height = 500, square = true,
-    xaxis = { visible = false }, yaxis = { visible = false },
-    title = '<font size=4>Lituus sipral: polar equation <em>r</em><sup>2</sup>(<em>&theta;</em>) = <em>a</em><sup>2</sup> / <em>&theta;</em></font>'
-  },
-  enhancements={{x = fstr2[1], y = fstr2[2], color = 'blue', width = 2}}
-}
-manipulate(fstr1, opts) --&gt; <a href="animations/polar-curves_sin(nt).html" target=_blank>Play</a>
 
 
 r = 'm + 1/n * sin(a*t)'
