@@ -10,8 +10,8 @@ r = 'a / sqrt(t)' -- try: a sqrt(t)
 fstr1 = {'@(t) (' .. r .. ') * cos(t)', '@(t) (' .. r .. ') * sin(t)'}
 fstr2 = {'@(t) (-' .. r .. ') * cos(t)', '@(t) (-' .. r .. ') * sin(t)'}
 opts = {
-  t = {0, 10 * pi, 0.01}, xrange = {-7, 7}, color = 'blue',
-  a = {1, 12, default = 9},
+  t = {0.01, 15 * pi, 0.01}, xrange = {-28, 28}, color = 'blue',
+  a = {1, 150, default = 22},
   javascript = jscode,
   layout = {
     width = 500, height = 500, square = true,
@@ -20,4 +20,4 @@ opts = {
   },
   enhancements={{x = fstr2[1], y = fstr2[2], color = 'red', width = 2}}
 }
-manipulate(fstr1, opts)
+animate(fstr1, opts)
