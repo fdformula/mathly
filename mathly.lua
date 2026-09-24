@@ -78,6 +78,8 @@ function ceil(x)	 return map(math.ceil, x) end
 function floor(x)	 return map(math.floor, x) end
 function cos(x)		 return map(math.cos, x) end
 function sin(x)		 return map(math.sin, x) end
+function sec(x)		 return map(function(x) return 1 / math.cos(x) end, x) end
+function csc(x)		 return map(function(x) return 1 / math.sin(x) end, x) end
 function tan(x)		 return map(math.tan, x) end
 function acos(x)	 return map(math.acos, x) end
 function asin(x)	 return map(math.asin, x) end
@@ -2710,25 +2712,25 @@ function plotparametriccurve3d(xyz, trange, title, resolution, orientationq)
 	_3d_plotq = false
 end
 
-local _anmt_fregex = '^%s*@%s*(%(%s*[%w,%s]*%))%s*(.+)%s*$' -- catch expression of a function
-local _anmt_animateq, _anmt_act = false, '' -- animate or manipulate
+local _anmt_fregex = '^%s*@%s*(%(%s*[%w,%s]*%))%s*(.+)%s*$' -- expr of a function
+local _anmt_animateq, _anmt_act = false, ''
 
 function _to_jscript_expr(expr)
-	local gsub = string.gsub
-	local jexpr = gsub(expr, "%^", "**")
-	jexpr = gsub(jexpr, "asin", "_ArcS_")
-	jexpr = gsub(jexpr, "acos", "_ArcC_")
-	jexpr = gsub(jexpr, "atan", "_ArcT_")
-	jexpr = gsub(jexpr, "sin", "Math.sin")
-	jexpr = gsub(jexpr, "cos", "Math.cos")
-	jexpr = gsub(jexpr, "tan", "Math.tan")
-	jexpr = gsub(jexpr, "_ArcS_", "Math.asin")
-	jexpr = gsub(jexpr, "_ArcC_", "Math.acos")
-	jexpr = gsub(jexpr, "_ArcT_", "Math.atan")
-	jexpr = gsub(jexpr, "exp", "Math.exp")
-	jexpr = gsub(jexpr, "log", "Math.log")
-	jexpr = gsub(jexpr, "sqrt", "Math.sqrt")
-	return jexpr
+	local f = string.gsub
+	local s = f(expr, "%^", "**")
+	s = f(s, "asin", "_ArcS_")
+	s = f(s, "acos", "_ArcC_")
+	s = f(s, "atan", "_ArcT_")
+	s = f(s, "sin", "Math.sin")
+	s = f(s, "cos", "Math.cos")
+	s = f(s, "tan", "Math.tan")
+	s = f(s, "exp", "Math.exp")
+	s = f(s, "log", "Math.log")
+	s = f(s, "sqrt", "Math.sqrt")
+	s = f(s, "_ArcS_", "Math.asin")
+	s = f(s, "_ArcC_", "Math.acos")
+	s = f(s, "_ArcT_", "Math.atan")
+	return s
 end
 
 local function _anmt_adjust_traces(traces)
@@ -3242,13 +3244,13 @@ end
 function help(w)
 	local lua_manual_url = 'file:///' .. doc_folder .. 'manual.html'
 	local mathly_manual_url = 'file:///' .. doc_folder .. 'mathly.html'
-	local mathq = ismember(w, {'abs', 'acos', 'asin', 'atan', 'ceil', 'cos', 'deg', 'e', 'eps', 'exp', 'floor',
-		'log', 'log10', 'phi', 'pi', 'rad', 'random', 'sin', 'sqrt', 'tan'})
+	local mathq = ismember(w, {'abs', 'acos', 'asin', 'atan', 'ceil', 'cos', 'csc', 'deg', 'e', 'eps', 'exp', 'floor',
+		'log', 'log10', 'phi', 'pi', 'rad', 'random', 'sec', 'sin', 'sqrt', 'tan'})
 	local basics = {'_G', '_VERSION', 'assert', 'collectgarbage', 'dofile', 'error', 'getmetatable', 'ipairs',
 		'load', 'loadfile', 'next', 'pairs', 'pcall', 'print', 'rawequal', 'rawget', 'rawlen', 'rawset', 'require',
-		'select', 'setmetatable', 'tonumber', 'tostring', 'type', 'warn', 'xpcall', -- basic functions at beginning of the Index in lua5_5.html
+		'select', 'setmetatable', 'tonumber', 'tostring', 'type', 'warn', 'xpcall', -- at beginning of the Index in lua5_5.html
 
-		'do', 'else', 'end', 'f', 'file', 'function', 'goto', 'if', 'io', 'math', 'os', 're', 'regex', 'repeat', 'string', 'table', 'then', 'until', 'while'} -- extra anchors added to manual.html
+		'do', 'else', 'end', 'f', 'file', 'function', 'goto', 'if', 'io', 'math', 'os', 're', 'regex', 'repeat', 'string', 'table', 'then', 'until', 'while'} -- extra anchors added in manual.html
 	local url
 	if mathq then
 			url = mathly_manual_url .. '#math'
@@ -3270,17 +3272,17 @@ function help(w)
 end
 
 -- manipulate/animate interactively the graph of f(x) with 'controls' and enhancements
-function manipulate(fstr, opts) -- Mathematica
+function manipulate(f, opts) -- Mathematica
 	_anmt_animateq, _anmt_act = false, 'manipulate'
-	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(fstr, opts)
+	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(f, opts)
 	_write_manipulate_html(tmp_plot_html_file, cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode, opts)
 	_open_url(tmp_plot_html_file)
 	print("The graph is in " .. tmp_plot_html_file .. ' if you need it.')
 end
 
-function animate(fstr, opts) -- Mathematica
+function animate(f, opts) -- Mathematica
 	_anmt_animateq, _anmt_act = true, 'animate'
-	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(fstr, opts)
+	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(f, opts)
 	_write_manipulate_html(tmp_plot_html_file, cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode, opts)
 	_open_url(tmp_plot_html_file)
 	print("The graph is in " .. tmp_plot_html_file .. ' if you need it.')
