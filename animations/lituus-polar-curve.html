@@ -35,7 +35,7 @@ input:focus {outline: none;}
 <span id="displaytext" style="left:74px;top:90px;position:absolute">&nbsp;</span>
 <script type="text/javascript">
 function displaytext() { return ""; } // to be overwritten
-function displaytitle() { return "<font size=4>Lituus spiral: polar equation <em>r</em><sup>2</sup>(<em>&theta;</em>) = <em>a</em><sup>2</sup> / <em>&theta;</em></font>"; }
+function displaytitle() { return "<font size=4>Lituus spiral: polar equation <em>r</em><sup>2</sup> = <em>a</em><sup>2</sup> / <em>&theta;</em></font>"; }
 var x = [], t = [], X, Y, T, p, mthlyGlobal = [], mthlyGlobal1 = [], mthlyGlobal2 = [], mthlyGlobal3 = [], mthlyGlobal4 = [], mthlyGlobal5 = [];
 function mthlyaNext(x) {
 	x = a + x*mthlyaStep;
@@ -56,8 +56,8 @@ const mthlyLayout = {
 };
 
 var mthlySldra = document.getElementById('mthlySldra');
-mthlySldra.value = 4;
-var a = 4;
+mthlySldra.value = 9;
+var a = 9;
 p = 1;
 for (let i = 0; i <= p * (31.415926535897931 + 0) - 0; i += 0.062831853071795868) { t.push(i); }
 
