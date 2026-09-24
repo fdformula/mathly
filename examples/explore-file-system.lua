@@ -123,24 +123,24 @@ end
 
 -- examples
 if iswindows() then
-  explore('C:\\mathly',
+  explore('C:\\mathlua',
           { patterns = {'doc*', 'cuda*'},
             task = process,
             objects = 'files',
             subfolders = 'included'})
-  explore('C:\\mathly',
+  explore('C:\\mathlua',
           { patterns = {'doc*', 'cuda*'},
             task = process,
             objects = 'folders',
             subfolders = 'included'})
-  explore('C:\\mathly',
+  explore('C:\\mathlua',
           { patterns = {'doc*', 'cuda*'},
             task = process,
             objects = 'files+folders',
             subfolders = 'included'})
 else
   explore('/usr/share/cudatext',
-          { patterns = {'mathly*', 'c*', '*.txt'},
+          { patterns = {'mathlua*', 'c*', '*.txt'},
             task = process,
             objects = 'files',
             subfolders = 'excluded'})
