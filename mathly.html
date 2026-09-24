@@ -424,10 +424,13 @@ they will be recognized automatically from the string expression of <code>y = f(
 (See <a href=#gobjspecs><code>fill = 'fa'|'ff'|'fn'|'fs'</code></a>).<br><br></li>
 
 <li>The range of a control and the parameter of a parametric curve is of the form <code>{ start, stop, step }</code>. For the parametric curve defined in <code>fstr</code>,
-if the range of <code>t</code> is omitted, it defaults to the range of <code>x</code>, if the latter is specified, or <code>{-5, 5, 0.1}</code>. <em>For a parametric curve defined in
+if the range of <code>t</code> is omitted, it defaults to the range of <code>x</code>, if the latter is specified, or <code>{-5, 5, 0.1}</code>.
+<p></p>
+<p>&#x2713; &nbsp; For a parametric curve defined in
 <code>enhancements</code>, if the range of <code>t</code> is omitted, it defaults to the range of <code>t</code> in <code>fstr</code> (when <code>fstr = {'@(t) ...', '@(t) ...}</code>)
-or <code>x</code> (when <code>fstr = '@(x) ...'</code>), so, the curve is dynamical, i.e., the curve is animated together with the curve defined by <code>fstr</code></em>;
-otherwise, the curve is static.<br><br></li>
+or <code>x</code> (when <code>fstr = '@(x) ...'</code>), so, the curve is <b>dynamical</b>, i.e., it is animated together with the curve defined by <code>fstr</code>;
+otherwise, the curve is static.</li>
+
 <li>For each graphics object defined in <code>fstr</code> or in <code>enhancements</code>, field <code>style</code> can specify more properties of the object allowed by Plotly. It is a string like
 <code>style = "dash: 'dot'"</code> and <code>style = "dash: 'dot', color: 'red', width: 2"</code> for a curve or a line. Here, <code>dot</code> can be <code>dash, dashdot, longdash,
 longdashdot</code>, etc.</li>
@@ -448,6 +451,11 @@ With each parametric curve in <code>enhancements</code>, field <code>resolution<
 <p>At a specific moment? Set the <code>default</code> value of the reserved control <code>p</code>, hooked to the Play slider, like <code>p = { default = x }</code> where <code>x</code> is between 0 (beginning, default) and 1 (end).</p>
 <p>At a specific speed? Add option <code>speed = n</code>. It is equivalent to pressing the button Slower (Faster) <code>|n|</code> times if <code>n</code> is negative (positive).</p>
 <p>See <a href="examples/smiley_face.lua">smiley_face.lua</a>.</p>
+</blockquote>
+
+<p>&#x2713; &nbsp; Let <code>animate</code> work like <code>manipulate</code>.
+<blockquote>
+<p>Click the Pause button first. Then, click the Play slider and drag all the way to the end of the slider to show the entire graph if necessary. Now, manipulate the parameters.
 </blockquote>
 
 <pre><code>mathly = require('mathly')
@@ -2280,8 +2288,8 @@ r = 'a / sqrt(t)' -- try: a sqrt(t)
 fstr1 = {'@(t) (' .. r .. ') * cos(t)', '@(t) (' .. r .. ') * sin(t)'}
 fstr2 = {'@(t) (-' .. r .. ') * cos(t)', '@(t) (-' .. r .. ') * sin(t)'}
 opts = {
-  t = {0, 10 * pi, 0.01}, xrange = {-7, 7}, color = 'blue',
-  a = {1, 12, default = 4},
+  t = {0.01, 15 * pi, 0.01}, xrange = {-28, 28}, color = 'blue',
+  a = {1, 150, default = 50},
   layout = {
     width = 500, height = 500, square = true,
     xaxis = { visible = false }, yaxis = { visible = false },
