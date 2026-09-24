@@ -2330,9 +2330,7 @@ manipulate(fstr, opts) --&gt; <a href="animations/parametric-curves-II.html" tar
 -- m, n, a, b, c = -2, 7, -9, -2, 1
 -- m, n, a, b, c = -2, 7, -5, -2, 1
 
-
--- <a name=anmt_sleep></a>
--- polar curves: r(θ) = sin(1.6θ)^2 + cos(nθ)^5
+<a name=anmt_sleep></a>
 r = 'sin(1.6 * t)^2 + cos(n*t)^5'
 fstr = {'@(t) (' .. r .. ') * cos(t)', '@(t) (' .. r .. ') * sin(t)'}
 opts = {
