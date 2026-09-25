@@ -19,7 +19,7 @@ If you download CudaText (Windows) or related configuration files (Linux or MacO
 CudaText detects and selects the very language according to the extension of the present filename (defaults to Lua). See: The first few
 lines of the file, `cudatext/py/cuda_ex_terminal/__init__.py`.
 
-Other hotkeys? See `cudatext/cudatext-hotkeys-for-lua-mathlua.txt`.
+Other hotkeys? See `cudatext/cudatext-hotkeys-for-mathlua.txt`.
 
 Only one interpreter is allowed at a time. To change an interpreter, you may enter the interpreter terminal, and press ctrl-c or execute commands like `os.exit()`, `exit`, `quit`, `exit()`, etc., to exit the present interpreter. Then, go to the very file in the editor and press F2 to start the associated interpreter.
 
