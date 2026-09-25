@@ -18,7 +18,7 @@ versions for Windows, Linux, and MacOS. While in Lite XL, press
 Lite XL detects and selects the very language according to the extension of the present filename (defaults to Lua). See: The first few
 lines of the file, `lite-xl/data/plugins/language_lua_mathlua.lua`.
 
-Other hotkeys? See `lite-xl/lite_xl-hotkeys-for-lua-mathlua.txt`.
+Other hotkeys? See `lite-xl/lite_xl-hotkeys-for-mathlua.txt`.
 
 Only one interpreter is allowed at a time. To change an interpreter, you may enter the interpreter terminal, and press ctrl-c or execute
 commands like `os.exit()`, `exit`, `quit`, `exit()`, etc., to exit the present interpreter. Then, go to the very file in the editor and
