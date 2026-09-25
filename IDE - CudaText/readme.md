@@ -25,7 +25,7 @@ Only one interpreter is allowed at a time. To change an interpreter, you may ent
 
 &rArr; Microsoft Windows users may download on this very page the file, `cudatext-for-mathlua-win-*.zip`. It includes the text editor, CudaText, with Lua 5.5.0 and
 MathLua included and integrated. Unzip it to C:\ (the root directory of the C drive). <em>Do not change the name of the folder,
-`C:\mathly`</em>.
+`C:\mathlua`</em>.
 
 &rArr; Linux users may download the file, [cudatext-for-mathlua-linux.tar.gz](https://github.com/fdformula/mathly/blob/main/IDE%20-%20CudaText/cudatext-for-mathlua-linux.tar.gz).
 Run `tar xfz cudatext-for-mathlua-linux.tar.gz` and refer to the included file, `cudatext-for-mathlua-linux/note.txt`, for further steps.
