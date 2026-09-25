@@ -204,7 +204,7 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <a href=#integral2>integral2</a>, <a href=#integral3>integral3</a>, <a href=#inv>inv</a>, <a href=#isempty>isempty</a>, <a href=#isinteger>isinteger</a>,
 <a href=#iseven>iseven</a>, <a href=#isodd>isodd</a>, <a href=#ismatrix>ismatrix</a>, <a href=#ismember>ismember</a>, <a href=#isvector>isvector</a>,
 <a href=#lagrangepoly>lagrangepoly</a>, <a href=#le>le</a>, <a href=#length>length</a>, <a href=#linsolve>linsolve</a>, <a href=#linspace>linspace</a>, <a href=#lt>lt</a>, <a href=#lu>lu</a>,
-<a href=#map>map</a>, <a href=#map1>map1</a>, <a href=#match>match</a>, <a href=#mathly>mathly</a>, <a href=#max>max</a>, <a href=#mean>mean</a>, <a href=#merge>merge</a>,
+<a href=#map>map</a>, <a href=#map1>map1</a>, <a href=#match>match</a>, <a href=#mlua>mathlua (mlua, or mathly)</a>, <a href=#max>max</a>, <a href=#mean>mean</a>, <a href=#merge>merge</a>,
 <a href=#min>min</a>, <a href=#namedargs>namedargs</a>, <a href=#nck>nchoosek</a>, <a href=#nck>nck</a>, <a href=#newtonpoly>newtonpoly</a>,
 <a href=#norm>norm</a>, <a href=#nck>npk</a>, <a href=#ones>ones</a>, <a href=#polyfit>polyfit</a>, <a href=#polynomial>polynomial</a>, <a href=#polyval>polyval</a>,
 <a href=#powermod>powermod</a>, <a href=#printf>printf</a>, <a href=#prod>prod</a>, <a href=#qq>qq</a>,
@@ -304,7 +304,7 @@ divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d
 <tr><td> </td><td><a href=#map><code>map(f, tbl1, tbl2, ...)</code></a></td><td> </td><td>Apply recursively function <code>f</code> to each group of corresponding <u>atomic</u> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</td></tr>
 <tr><td> </td><td><a href=#map1><code>map1(f, tbl1, tbl2, ...)</code></a></td><td> </td><td>Apply non-recursively function <code>f</code> to each group of corresponding elements in tables, <code>tbl1, tbl2, ...</code>.</td></tr>
 <tr><td> </td><td><a href=#match><code>match(tbl, f)</code></a></td><td> </td><td>Return elements of table <code>tbl</code> that satisfy specified conditions.</td></tr>
-<tr><td> </td><td><a href=#mathly><code>mathly(...)</code></a></td><td> </td><td>Constructor of Mathly matrices.</td></tr>
+<tr><td> </td><td><a href=#mathly><code>mathlua (mlua or mathly)</code></a></td><td> </td><td>Constructor of Mathly matrices.</td></tr>
 <tr><td> </td><td><a href=#max><code>max(x)</code></a></td><td> </td><td>If <code>x</code> is a table/array, return the largest of all elements of the table; if it is a matrix, ...</td></tr>
 <tr><td> </td><td><a href=#mean><code>mean(x)</code></a></td><td> </td><td>Return mean value of numbers in <code>x</code>.</td></tr>
 <tr><td> </td><td><a href=#merge><code>merge(t1, t2)</code></a></td><td> </td><td>Merge two tables of any structure into one.</td></tr>
@@ -1277,7 +1277,7 @@ disp(cross({1, 2, 3}, {3, 4, 5}), '')
 -- {-2, 4, -2}
 </code></pre>
 
-<h4>&bull; &nbsp; <a name=demathly href=#m><code>demathly(x)</code></a></h4>
+<h4>&bull; &nbsp; <a name=demathlua></a><a name=demathly href=#m><code>demathlua(x), demathly(x)</code></a></h4>
 <p>Force <code>x</code> to be an ordinary Lua table. It is not a Mathly matrix now.</p>
 <p>It is provided for special purposes. If no matrix operations are needed/allowed or the structure of a
 matrix is damaged (on purpose), you had better call it.</p>
@@ -2551,14 +2551,15 @@ disp(b)
 -- 0  0  9
 </code></pre>
 
-<h4>&bull; &nbsp; <a name=mathly href=#m><code>mathly(...)</code></a></h4>
-<p>It is the constructor of mathly matrices.</p>
-<p>&#x2713; &nbsp; The command, <code>mathly = require('mathly')</code>, must be executed first.</p>
+<h4>&bull; &nbsp; <a name=mlua></a><a name=mathlua></a><a name=mathly href=#m><code>mathlua, mlua, mathly(...)</code></a></h4>
+<p>They are axactly one function, i.e., the constructor of Mathly matrices if you run MathLua script from inside CudaText or Lite XL that
+starts Lua interpreter with arguments: <code>-i -e 'mlua = require("mathly"); mathlua = mlua; mathly = mlua'</code>.</p>
+<p>&#x2713; &nbsp; If a system is not configured for MathLua, the command, <code>mlua = require("mathly"); mathlua = mlua; mathly = mlua</code>, must be executed first.</p>
 <table><tbody>
 <tr><td width=18%><code>mathly(m, n, val)</code></td><td>Create a <code>mxn</code> Mathly matrix of which each element assumes the value <code>val</code> (default: random numbers from 0 to 1).</td></tr>
 <tr><td><code>mathly(A, m, n)</code></td><td>Create a <code>mxn</code> Mathly matrix using elements of table/matrix <code>A</code> columnwisely; if <code>A</code> can't provide enough numbers, 0 is used; if <code>n</code> is not provided, it is so determined that least number of 0's are used.</td></tr>
 </tbody></table>
-<p>See also: <a href=#demathly><code>demathly</code></a>; <a href=#ones><code>ones, rand, randi, randn, zeros</code></a>; <a href=#remake><code>remake</code></a>, <a href=#reshape><code>reshape</code></a>; <a href=#repmat><code>repmat</code></a>.</p>
+<p>See also: <a href=#demathly><code>demathlua, demathly</code></a>; <a href=#ones><code>ones, rand, randi, randn, zeros</code></a>; <a href=#remake><code>remake</code></a>, <a href=#reshape><code>reshape</code></a>; <a href=#repmat><code>repmat</code></a>.</p>
 <pre><code>mathly = require('mathly')
 
 A = mathly(3, 4)

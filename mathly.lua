@@ -146,7 +146,8 @@ function lt(a, b) return gt(b, a) end
 function	printf(...) io.write(string.format(table.unpack{...})) end
 function sprintf(...) return string.format(table.unpack{...}) end
 
-function demathly(x) return setmetatable(x, nil) end -- x is no more a mathly matrix
+function demathlua(x) return setmetatable(x, nil) end -- x is no more a mathly matrix
+demathly = demathlua
 
 function eval(str, msg)
 	local s, v = pcall(load, 'return ' .. str)
