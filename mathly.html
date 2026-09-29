@@ -2946,18 +2946,20 @@ Z = {{z11,  ...,  z1n}, {z21,  ...,  z2n}, ..., {zn1,  ...,  zn2}}
 clear()
 plot3d('@(x, y) x^2 - y^2') --&gt; <a href=img/3d1.png target=_blank>View</a>
 
-plot3d('@(x, y) sin(sqrt(x^2 + y^2)) / sqrt(x^2 + y^2)', {-12, 12}, {-12, 12}) --&gt; <a href=img/plot3d.png target=_blank>View</a>
+function f(x, y) local t = sqrt(x^2 + y^2); return sin(t) / t end
+plot3d(f, {-12, 12}, {-12, 12}) --&gt; <a href=img/plot3d.png target=_blank>View</a>
 
+-- prepare x, y, and z for plot3d
 n = 100
-x = linspace(0, 2*pi, n)
-y = linspace(-pi, pi, n)
+x = linspace(-12, 12, n)
+y = x
 X, Y = {}, {}
 for i = 1, n do
   X[i] = mathly(1, n, x[i])
   Y[i] = y
 end
-Z = sin(X) * cos(Y)
-plot3d(X, Y, Z, 'Demo 2') --&gt; <a href=img/3d2.png target=_blank>View</a>
+Z = map(f, X, Y)
+plot3d(X, Y, Z) --&gt; <a href=img/plot3d.png target=_blank>View</a>
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=plotparametriccurve2d href=#m><code>plotparametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq)</code></a></h4>
