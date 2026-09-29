@@ -2946,6 +2946,8 @@ Z = {{z11,  ...,  z1n}, {z21,  ...,  z2n}, ..., {zn1,  ...,  zn2}}
 clear()
 plot3d('@(x, y) x^2 - y^2') --&gt; <a href=img/3d1.png target=_blank>View</a>
 
+plot3d('@(x, y) sin(sqrt(x^2 + y^2)) / sqrt(x^2 + y^2)', {-12, 12}, {-12, 12}) --&gt; <a href=img/plot3d.png target=_blank>View</a>
+
 n = 100
 x = linspace(0, 2*pi, n)
 y = linspace(-pi, pi, n)
