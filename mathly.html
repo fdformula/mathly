@@ -2949,7 +2949,7 @@ plot3d('@(x, y) x^2 - y^2') --&gt; <a href=img/3d1.png target=_blank>View</a>
 function f(x, y) local t = sqrt(x^2 + y^2); return sin(t) / t end
 plot3d(f, {-12, 12}, {-12, 12}) --&gt; <a href=img/plot3d.png target=_blank>View</a>
 
--- prepare x, y, and z for plot3d
+-- prepare data for plot3d
 n = 100
 x = linspace(-12, 12, n)
 y = x
