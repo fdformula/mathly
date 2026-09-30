@@ -115,12 +115,12 @@ function mthlyUpdateTraces() {
 	mthlyTraces.push({ x: [X], y: [Y], mode: 'markers', marker: { color: 'red', size: 10.000000  } });
 	if (true) {
 		const t = [];
-		for (let i = 0; i <= 6.2831853071795862; i += 0.012566370614359173) { t.push(i); }
+		for (let i = 0; i <= 6.3; i += 0.0126) { t.push(i); }
 		mthlyTraces.push({ x: t.map(t => a * Math.cos(t)), y: t.map(t => a * Math.sin(t)), mode: 'lines', line: { simplify: false, color: 'orange', width: 3.000000  }, fill: 'none' });
 	}
 	if (true) {
 		const t = [];
-		for (let i = 0; i <= 6.2831853071795862; i += 0.012566370614359173) { t.push(i); }
+		for (let i = 0; i <= 6.3; i += 0.0126) { t.push(i); }
 		mthlyTraces.push({ x: t.map(t => (a - b) * Math.cos(T) + b * Math.cos(t)), y: t.map(t => (a - b) * Math.sin(T) + b * Math.sin(t)), mode: 'lines', line: { simplify: false, color: 'green', width: 3.000000  }, fill: 'none' });
 	}
 	mthlyTraces.push({ x: [X, (a - b) * Math.cos(T)], y: [Y, (a - b) * Math.sin(T)], mode: 'lines', line: { color: 'green', width: 3  } });
