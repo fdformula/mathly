@@ -15,8 +15,8 @@ opts = {
   },
   enhancements = {
     {x = 'X', y = 'Y', color = 'red', size = 10, point = true},
-    {x = '@(t) a * cos(t)', y = '@(t) a * sin(t)', t = {0, 2 * pi}, color = 'orange'},
-    {x = '@(t) (a + b) * cos(T) + b * cos(t)', y = '@(t) (a + b) * sin(T) + b * sin(t)', t = {0, 2 * pi}, color = 'green'},
+    {x = '@(t) a * cos(t)', y = '@(t) a * sin(t)', t = {0, 2 * 3.15}, color = 'orange'},
+    {x = '@(t) (a + b) * cos(T) + b * cos(t)', y = '@(t) (a + b) * sin(T) + b * sin(t)', t = {0, 2 * 3.15}, color = 'green'},
     {x = {'X', '(a + b) * cos(T)'}, y = {'Y', '(a + b) * sin(T)'}, line = true, color = 'green'}
   }
 }
