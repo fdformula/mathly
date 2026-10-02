@@ -825,11 +825,11 @@ function powermod(b, n, m)
 				 isinteger(m) and m > 0,
 				 'powermod(b, n, m): b, n, and m must be nonnegative integers with m > 0.')
 	if b == 0 or m == 1 then return 0 end
-	local x, power = 1, b % m
+	local x, p = 1, b % m
 	local a = dec2bin(n) --	binary modular exponentiation
 	for i = #a, 1, -1 do
-		if string.sub(a, i, i) == '1' then x = (x * power) % m end
-		power = (power * power) % m
+		if string.sub(a, i, i) == '1' then x = (x * p) % m end
+		p = (p * p) % m
 	end
 	return x
 end
