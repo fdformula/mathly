@@ -68,18 +68,21 @@ local mathly = {_TYPE='module', _NAME='mathlua', _VERSION='09.30.2026.1'}
 
 local mathly_meta = {}
 
+e = math.exp(1)
+eps = 2.220446049250313e-16	-- machine epsilon
+phi = 1.618033988749895			-- golden radio
+pi = math.pi
+T = 'T' -- reserved by MathLua, transpose of a matrix, A^T
+
 function abs(x)		 return map(math.abs, x) end
 function random(x) return map(math.random, x) end
 function sqrt(x)	 return map(math.sqrt, x) end
 function exp(x)		 return map(math.exp, x) end
 function log(x)		 return map(math.log, x) end
-function log10(x)	 return map(function(x) return log(x) / log(10) end, x) end
 function ceil(x)	 return map(math.ceil, x) end
 function floor(x)	 return map(math.floor, x) end
 function cos(x)		 return map(math.cos, x) end
 function sin(x)		 return map(math.sin, x) end
-function sec(x)		 return map(function(x) return 1 / math.cos(x) end, x) end
-function csc(x)		 return map(function(x) return 1 / math.sin(x) end, x) end
 function tan(x)		 return map(math.tan, x) end
 function acos(x)	 return map(math.acos, x) end
 function asin(x)	 return map(math.asin, x) end
@@ -87,11 +90,12 @@ function atan(x)	 return map(math.atan, x) end
 function deg(x)		 return map(math.deg, x) end
 function rad(x)		 return map(math.rad, x) end
 
-pi = math.pi
-e = math.exp(1)
-eps = 2.220446049250313e-16	-- machine epsilon
-phi = 1.6180339887499				-- golden radio
-T = 'T' -- reserved by mathly, transpose of a matrix, A^T
+function log10(x)	 return map(function(x) return math.log(x) / math.log(10) end, x) end
+function sec(x)		 return map(function(x) return 1 / math.cos(x) end, x) end
+-- assert(..)? for display(..)
+function csc(x)		 return map(function(x) assert(math.abs(x) > 10*eps, "csc(x): x can't be 0"); return 1 / math.sin(x) end, x) end
+function cot(x)		 return map(function(x) assert(math.abs(x) > 10*eps, "cot(x): x can't be 0"); return 1 / math.tan(x) end, x) end
+function acot(x)	 return map(function(x) return math.atan(1 / x) end, x) end
 
 local function _map2(f, a, d)
 	if type(f) == 'string' then f = ff(f) end

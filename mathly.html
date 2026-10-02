@@ -136,8 +136,8 @@ plot(x, y, '-r', x, -3 * x ^ 2 + 2 * x + 3, '--b') --&gt; <a href=img/0-1.png ta
 <h2><a name=math href=#top>Basic mathematical functions and elementwise operations</a></h2>
 <p>&#x2713; &nbsp; Basic mathematical functions</p>
 <p>Basic math functions are each now able to work <em>elementwisely</em> on Lua tables, including Mathly objects.
-They are <code>abs</code>, <code>acos</code>, <code>asin</code>, <code>atan</code>, <code>ceil</code>,
-<code>cos</code>, <code>csc</code>, <code>deg</code>, <code>exp</code>, <code>floor</code>, <code>log</code>, <code>log10</code>,
+They are <code>abs</code>, <code>acos</code>, <code>acot</code>, <code>asin</code>, <code>atan</code>, <code>ceil</code>,
+<code>cos</code>, <code>cot</code>, <code>csc</code>, <code>deg</code>, <code>exp</code>, <code>floor</code>, <code>log</code>, <code>log10</code>,
 <code>rad</code>, <code>random</code>, <code>sec</code>, <code>sin</code>, <code>sqrt</code>, and <code>tan</code>. They evaluate
 a function at every number in a table and keep the structure of the table.</p>
 <pre><code>mathly = require('mathly')
@@ -154,8 +154,8 @@ disp(log10(abs(x)))
 </code></pre>
 
 <p>&#x2713; &nbsp; With each of these functions, should we use, say, <code>sin(x)</code> or <code>math.sin(x)</code>?
-<B>You can always use <code>sin(x)</code>. However, if you know <code>x</code> is a number, you may call
-<code>math.sin(x)</code> to get a little improvement in performance.</p></B>
+<em>You can always use <code>sin(x)</code>. However, if you know <code>x</code> is a number, you may call
+<code>math.sin(x)</code> to get a little improvement in time performance.</p></em>
 
 <p>&#x2713; &nbsp; Elementwise operations through <code>map</code>
 <p>We can do elementwise operations, simple or complicated, through <a href=#map><code>map</code></a>.
@@ -183,16 +183,6 @@ disp(sin{1, 2, {3, {4}, 5}})
 They make Lua code more understandable to people who are new to Lua. They follow the definition: if <code>d &gt; 0</code>, <code>r = mod(a, d)</code> is the remainder of <code>a</code>
 divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d)</code> gives the quotient. For more usage, see <a href=#div><code>div</code> and <code>mod</code></a>.</p>
 
-<p>In addition, Mathly provides four commonly used constants:</p>
-<table><tbody>
-<tr><td><code>pi = 3.1415926535898</code></td><td width=40></td><td>It is simply <code>math.pi</code>.</td></tr>
-<tr><td><code>e = 2.718281828459</code></td><td width=40></td><td>It is <code>math.exp(1)</code>.</td></tr>
-<tr><td><code>eps = 2.220446049250313e-16</code></td><td width=40></td><td>It is the machine epsilon, i.e., the smallest difference between any two numbers.</td></tr>
-<tr><td><code>phi = 1.6180339887499</code></td><td width=40></td><td>It is the golden ratio, <code>(1 + math.sqrt(5)) / 2</code>.</td></tr>
-</tbody>
-</table>
-<p></p>
-<p><u>Note</u>: <code>T</code> is reserved by Mathly for finding the transpose of a matrix, e.g., <code>A^T</code>, where <code>A</code> is a Mathly matrix.</p>
 <p>&#x2713; &nbsp; Like <code>mod, div,</code> and operators <code>+, -, *</code> and <code>/,</code> operator ^ supports elementwise operations. If <code>n</code> is a table, a non-integer or a negative number, or <code>A</code> is a row/column vector, <code>A ^ n</code> is elementwise.</p>
 <pre><code>mathly = require('mathly')
 
@@ -248,6 +238,16 @@ disp(map('@(x, y) x^y', a, b)) -- {1^2, w = 3^0, {4^3, {(-5)^1}}}
 -- {1.0000, {64.0000, {-5.0000}}, w = 1.0000}
 </code></pre>
 
+<p>&#x2713; &nbsp; MathLua provides four commonly used constants:</p>
+<table><tbody>
+<tr><td><code>pi = 3.141592653589793</code></td><td width=10></td><td>It is simply <code>math.pi</code>.</td></tr>
+<tr><td><code>e = 2.718281828459045</code></td><td width=10></td><td>It is <code>math.exp(1)</code>.</td></tr>
+<tr><td><code>eps = 2.220446049250313e-16</code></td><td width=10></td><td>It is the machine epsilon, i.e., the smallest difference between any two numbers.</td></tr>
+<tr><td><code>phi = 1.618033988749895</code></td><td width=10></td><td>It is the golden ratio, <code>(1 + math.sqrt(5)) / 2</code>.</td></tr>
+</tbody>
+</table>
+<p></p>
+<p><u>Note</u>: <code>T</code> is reserved by Mathly for finding the transpose of a matrix, e.g., <code>A^T</code>, where <code>A</code> is a Mathly matrix.</p>
 
 <a href=#top name=m><h2>Table of Functions Provided by MathLua</h2></a>
 <code><p><a href=#horzcat>.. (or horzcat)</a>, <a href=#all>all</a>, <a href=#any>any</a>, <a href=#apply>apply</a>, <a href=#cc>cc</a>, <a href=#clc>clc</a>,
