@@ -64,7 +64,7 @@ LICENSE
 
 require 'browser-setting'
 
-local mathly = {_TYPE='module', _NAME='mathly', _VERSION='06.09.2025.1'}
+local mathly = {_TYPE='module', _NAME='mathlua', _VERSION='09.30.2026.1'}
 
 local mathly_meta = {}
 
@@ -897,7 +897,7 @@ function who(userq) -- R
 	for k,v in pairs(_G) do
 		if type(v) ~= 'function' then
 			if not ismember(k,
-				{'e', 'eps', 'pi', 'phi', 'T', 'mathly', 'm', '_G', 'coroutine', 'utf8',
+				{'e', 'eps', 'pi', 'phi', 'T', 'mathlua', 'mathly', 'mlua', '_G', 'coroutine', 'utf8',
 				 '_VERSION', 'io', 'package', 'os', 'arg', 'debug', 'string', 'table', 'math',
 				 'linux_browser', 'mac_browser', 'win_browser', 'doc_folder', 'plotly_engine',
 				 'tmp_plot_html_file'}) then
@@ -4942,7 +4942,13 @@ end
 -- n is a nonnegative integer
 -- if A is square, A ^ n = A * A * ... * A; if A is row/column vector, A ^ n ~ A .^ n as in MATLAB
 function mathly.pow(A, n)
-	assert(isinteger(n) and n >= 0, "A ^ n: n must be a nonnegative integer.")
+	if type(A) == 'number' and type(n) == 'table' then
+		return _set_matrix_meta(map(function(x) return A^x end, n))
+	elseif type(A) == 'table' and type(n) == 'number' and (n < 2 or math.type(n) ~= 'integer') then
+		return _set_matrix_meta(map(function(x) return x^n end, A))
+	end
+
+	assert(isinteger(n), "A ^ n: n must be a positive integer.")
 	local t = {}
 	if type(A[1]) ~= 'table' then
 		for i = 1, #A do t[i] = A[i] ^ n end
