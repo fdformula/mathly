@@ -3257,8 +3257,8 @@ end
 function help(w)
 	local lua_manual_url = 'file:///' .. doc_folder .. 'manual.html'
 	local mathly_manual_url = 'file:///' .. doc_folder .. 'mathly.html'
-	local mathq = ismember(w, {'abs', 'acos', 'asin', 'atan', 'ceil', 'cos', 'csc', 'deg', 'e', 'eps', 'exp', 'floor',
-		'log', 'log10', 'phi', 'pi', 'rad', 'random', 'sec', 'sin', 'sqrt', 'tan'})
+	local mathq = ismember(w, {'abs', 'acos', 'acot', 'asin', 'atan', 'ceil', 'cos', 'cot', 'csc', 'deg', 'e',
+		'eps', 'exp', 'floor', 'log', 'log10', 'phi', 'pi', 'rad', 'random', 'sec', 'sin', 'sqrt', 'tan'})
 	local basics = {'_G', '_VERSION', 'assert', 'collectgarbage', 'dofile', 'error', 'getmetatable', 'ipairs',
 		'load', 'loadfile', 'next', 'pairs', 'pcall', 'print', 'rawequal', 'rawget', 'rawlen', 'rawset', 'require',
 		'select', 'setmetatable', 'tonumber', 'tostring', 'type', 'warn', 'xpcall', -- at beginning of the Index in lua5_5.html
