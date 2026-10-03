@@ -92,9 +92,8 @@ function rad(x)		 return map(math.rad, x) end
 
 function log10(x)	 return map(function(x) return math.log(x) / math.log(10) end, x) end
 function sec(x)		 return map(function(x) return 1 / math.cos(x) end, x) end
--- assert(..)? for display(..)
-function csc(x)		 return map(function(x) assert(math.abs(x) > 10*eps, "csc(x): x can't be 0"); return 1 / math.sin(x) end, x) end
-function cot(x)		 return map(function(x) assert(math.abs(x) > 10*eps, "cot(x): x can't be 0"); return 1 / math.tan(x) end, x) end
+function csc(x)		 return map(function(x) return 1 / math.sin(x) end, x) end
+function cot(x)		 return map(function(x) return 1 / math.tan(x) end, x) end
 function acot(x)	 return map(function(x) return math.atan(1 / x) end, x) end
 
 local function _map2(f, a, d)
@@ -927,10 +926,10 @@ end
 local function _disp(t, ind, col, strq, niceq) -- strq: return a string version? niceq: pretty print?
 	if col == -1 or not niceq then col = -1; _str_fmt = '%s' end
 	local keys, n, newlined, str = {}, col, false, ''
-	local function process(s) if strq then str = str .. s else io.write(s) end end
-	local align = function() if niceq then process(string.rep(" ", ind + 2)) end end
+	local function proc(s) if strq then str = str .. s else io.write(s) end end
+	local align = function() if niceq then proc(string.rep(" ", ind + 2)) end end
 	local newline = function()
-		if niceq and not newlined then process('\n'); newlined = true; align() end
+		if niceq and not newlined then proc('\n'); newlined = true; align() end
 		n = col
 	end
 
@@ -940,7 +939,7 @@ local function _disp(t, ind, col, strq, niceq) -- strq: return a string version?
 		return tostring(a) < tostring(b)
 	end)
 
-	process("{"); if niceq then process("\n") end
+	proc("{"); if niceq then proc("\n") end
 	for _, k in ipairs(keys) do
 		local v, tq, fieldq = t[k], false, type(k) == 'string'
 		if n == 0 then newline() end
@@ -948,22 +947,30 @@ local function _disp(t, ind, col, strq, niceq) -- strq: return a string version?
 			if not newlined then
 				if k ~= keys[1] then newline() else align() end
 			end
-			process(k .. " = ")
+			proc(k .. " = ")
 		end
 		if type(v) == "table" then
 			if not fieldq then
 				if k ~= keys[1] then newline() end
 				if not newlined then align() end
 			end
-			process(_disp(v, ind + 2, col, strq, niceq))
+			proc(_disp(v, ind + 2, col, strq, niceq))
 			tq = true
 		else
 			if not fieldq and k == keys[1] and not newlined then align() end
 			local s = _tostring(v)
-			if type(v) == 'number' and (col < 0 or fieldq) then s = string.match(s, "[%d%.%+%-]+") end
-			process(s)
+			if type(v) == 'number' then
+				if v == math.huge then
+					s = sprintf(_str_fmt, 'inf')
+				elseif v == -math.huge then
+					s = sprintf(_str_fmt, '-inf')
+				elseif col < 0 or fieldq then
+					s = string.match(s, "[%d%.%+%-]+")
+				end
+			end
+			proc(s)
 		end
-		if k ~= keys[#keys] then process(", ") end
+		if k ~= keys[#keys] then proc(", ") end
 		newlined = false
 		n = n - 1
 		if tq or fieldq then
@@ -971,7 +978,7 @@ local function _disp(t, ind, col, strq, niceq) -- strq: return a string version?
 			n = col
 		end
 	end
-	if niceq then process("\n" .. string.rep(" ", ind) .. "}") else process("}") end
+	if niceq then proc("\n" .. string.rep(" ", ind) .. "}") else proc("}") end
 	return qq(strq, str, "")
 end -- _disp
 
