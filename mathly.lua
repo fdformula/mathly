@@ -90,11 +90,11 @@ function atan(x)	 return map(math.atan, x) end
 function deg(x)		 return map(math.deg, x) end
 function rad(x)		 return map(math.rad, x) end
 
-function log10(x)	 return map(function(x) return math.log(x) / math.log(10) end, x) end
-function sec(x)		 return map(function(x) return 1 / math.cos(x) end, x) end
-function csc(x)		 return map(function(x) return 1 / math.sin(x) end, x) end
-function cot(x)		 return map(function(x) return 1 / math.tan(x) end, x) end
-function acot(x)	 return map(function(x) return math.atan(1 / x) end, x) end
+function log10(x)	 return map(function(x) return math.log(x)/math.log(10) end, x) end
+function sec(x)		 return map(function(x) return 1/math.cos(x) end, x) end
+function csc(x)		 return map(function(x) return 1/math.sin(x) end, x) end
+function cot(x)		 return map(function(x) return 1/math.tan(x) end, x) end
+function acot(x)	 return map(function(x) return math.atan(1/x) end, x) end
 
 local function _map2(f, a, d)
 	if type(f) == 'string' then f = ff(f) end
@@ -923,6 +923,8 @@ local function _trim_2tail_spaces(x)
 	return string.match(_tostring(x), "^%s*(.+)%s*$")
 end
 
+local _save_dat = nil
+
 local function _disp(t, ind, col, strq, niceq) -- strq: return a string version? niceq: pretty print?
 	if col == -1 or not niceq then col = -1; _str_fmt = '%s' end
 	local keys, n, newlined, str = {}, col, false, ''
@@ -960,10 +962,10 @@ local function _disp(t, ind, col, strq, niceq) -- strq: return a string version?
 			if not fieldq and k == keys[1] and not newlined then align() end
 			local s = _tostring(v)
 			if type(v) == 'number' then
-				if v == math.huge then
-					s = sprintf(_str_fmt, 'inf')
-				elseif v == -math.huge then
-					s = sprintf(_str_fmt, '-inf')
+				if v == math.huge or v == -math.huge then
+					local w = qq(v == math.huge, '', '-')
+					if _save_dat then w = w .. qq(_save_dat == ".m", "Inf", "math.huge") else w = w .. "inf" end
+					s = sprintf(_str_fmt, w)
 				elseif col < 0 or fieldq then
 					s = string.match(s, "[%d%.%+%-]+")
 				end
@@ -1070,17 +1072,12 @@ local function _vartostring_matlab(x)
 	x = load('return ' .. x)()
 	if getmetatable(x) == mathly_meta or ismatrix(x) then -- save matrices
 		s = string.gsub(s, "}, {", ";\n")
-		s = string.gsub(s, "{{", "[")
-		s = string.gsub(s, "}}", "]")
-	elseif type(x) == 'table' then -- flatten a table. matlab: [1,2,[5,6,[7,[8]]]] --> [1, 2, 5, 6, 7, 8]
-		s = string.gsub(s, "}+", "}")
-		s = string.gsub(s, "{+", "{")
-		s = string.gsub(s, "}, {", ", ")
-		s = string.gsub(s, ", {", ", ")
-		s = string.gsub(s, "}, ", ", ")
-		s = string.gsub(s, "{", "[")
-		s = string.gsub(s, "}", "]")
+	elseif type(x) == 'table' then -- flatten a table. matlab: {1, {{5}, {7, 8}}} --> [1, 5, 7, 8]
+		s = string.gsub(s, "}+, ", ", ")
+		s = string.gsub(s, ", {+", ", ")
 	end
+	s = string.gsub(s, "}+", "]")
+	s = string.gsub(s, "{+", "[")
 	_disp_col, _disp_flat = col, flat
 	return s
 end
@@ -1100,12 +1097,13 @@ function save(fname, ...)
 	local matlabq = string.lower(string.sub(fname, #fname - 1)) == '.m'
 	local file = io.open(fname, "w")
 	if file ~= nil then
-		local stamp = ' mathly saved on ' .. os.date() .. '\n\n'
+		local stamp = ' MathLua saved on ' .. os.date() .. '\n\n'
 		if not matlabq then
 			file:write('--' .. stamp .. "mathly = require('mathly')\n\n")
 		else
 			file:write('%' .. stamp)
 		end
+		_save_dat = qq(matlabq, ".m", ".lua")
 		for i = 1, #vars do
 			local x = load('return ' .. vars[i])()
 			if x == nil then
@@ -1121,6 +1119,7 @@ function save(fname, ...)
 				end
 			end
 		end
+		_save_dat = nil
 		file:close()
 	else
 		error(string.format("Failed to create %s. The device might not be writable.", fname))
