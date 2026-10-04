@@ -837,21 +837,22 @@ function powermod(b, n, m)
 	return x
 end
 
--- find largest width of integers/strings and if all are integers
-local function _largest_width_dplaces(t) -- works with strings, numbers, and table of tables
+-- find largest width of integers/strings and if all are integer
+local function _largest_width_dplaces(t)
 	if type(t) ~= 'table' then t = {t} end
-	local allintq, width, fwidth, slen, sign, w, fw, s, tmp, sgn = true, 0, 0, 0, 0, 0, 0, 0
+	local allintq, width, fwidth, slen, sign, w, fw, s, tmp, sgn, x = true, 0, 0, 0, 0, 0, 0, 0
 	for _, v in pairs(t) do
 		if type(v) == 'table' then
 			w, fw, tmp, s, sgn = _largest_width_dplaces(v)
 			if allintq then allintq = tmp end
 			if sgn == 1 then sign = 1 end
 		elseif type(v) == 'string' then
-			s = #v + 2
+			s, x = string.gsub(v, '"', '\\"')
+			s = #v + 2 + x
 		elseif type(v) == 'boolean' then
 			s = qq(v, 4, 5)
 		else
-			local x = v
+			x = v
 			if x < 0 then sign = 1; x = -x end
 			if math.type(x) == 'integer' then
 				w = #tostring(x)
@@ -925,8 +926,7 @@ local function _trim_2tail_spaces(x)
 	return string.match(_tostring(x), "^%s*(.+)%s*$")
 end
 
-local _save_dat = nil
-local function _disp(t, ind, col, strq, niceq) -- strq: return a string version? niceq: pretty print?
+local function _disp(t, ind, col, strq, niceq, sav) -- strq: return a string version? niceq: pretty print?
 	if col == -1 or not niceq then col = -1; _str_fmt = '%s' end
 	local keys, n, newlined, str = {}, col, false, ''
 	local function proc(s) if strq then str = str .. s else io.write(s) end end
@@ -965,7 +965,7 @@ local function _disp(t, ind, col, strq, niceq) -- strq: return a string version?
 			if type(v) == 'number' then
 				if v == math.huge or v == -math.huge then
 					local w = qq(v == math.huge, '', '-')
-					if _save_dat then w = w .. qq(_save_dat == ".m", "Inf", "math.huge") else w = w .. "inf" end
+					if sav then w = w .. qq(sav == ".m", "Inf", "math.huge") else w = w .. "inf" end
 					s = sprintf(_str_fmt, w)
 				elseif col < 0 or fieldq then
 					s = string.match(s, "[%d%.%+%-]+")
@@ -987,7 +987,7 @@ end -- _disp
 
 -- print a table with its structure while disp(x) prints a matrix
 local _disp_col, _disp_flat = -1, nil
-function display(t, col, flat, strq) -- strq: return a string version? not for users
+function display(t, col, flat, strq, sav) -- strq: return a string version? not for users
 	if col and type(col) ~= 'number' then flat = col; col = -1 end
 	if strq then
 		col, flat = _disp_col, _disp_flat
@@ -1002,7 +1002,7 @@ function display(t, col, flat, strq) -- strq: return a string version? not for u
 		_set_disp_format(t)
 		if flat or (col and type(col) ~= 'number') then flat = true end
 		if type(t) == 'table' then
-			s = _disp(t, 0, col or -1, strq, flat == nil)
+			s = _disp(t, 0, col or -1, strq, flat == nil, sav)
 		elseif type(t) == 'string' then
 			s = _disp_str(t)
 		elseif type(t) == 'number' then
@@ -1027,8 +1027,8 @@ function disp(A, flat)
 end
 
 -- return string version of a variable x starting with 'x = '
-local function _vartostring_lua(x)
-	return x .. ' = ' .. display(eval(x), _disp_col, _disp_flat, true) .. '\n\n'
+local function _vartostring_lua(x, sav)
+	return x .. ' = ' .. display(eval(x), _disp_col, _disp_flat, true, sav) .. '\n\n'
 end
 
 -- return true if x is a row/column vector of two or more numbers
@@ -1066,10 +1066,10 @@ function ismatrix(x)
 end
 
 -- generate the string version of MATLAB variable y starting with 'y ='
-local function _vartostring_matlab(x)
+local function _vartostring_matlab(x, sav)
 	local col, flat = _disp_col, _disp_flat
 	_disp_col, _disp_flat = -1, true
-	local s = _vartostring_lua(x)
+	local s = _vartostring_lua(x, sav)
 	x = load('return ' .. x)()
 	if getmetatable(x) == mathly_meta or ismatrix(x) then -- save matrices
 		s = string.gsub(s, "}, {", ";\n")
@@ -1104,23 +1104,22 @@ function save(fname, ...)
 		else
 			file:write('%' .. stamp)
 		end
-		_save_dat = qq(matlabq, ".m", ".lua")
+		local sav = qq(matlabq, ".m", ".lua")
 		for i = 1, #vars do
 			local x = load('return ' .. vars[i])()
 			if x == nil then
 				print(vars[i] .. ' is undefined.')
 			else
 				if matlabq then
-					file:write(_vartostring_matlab(vars[i]))
+					file:write(_vartostring_matlab(vars[i], sav))
 				else
-					file:write(_vartostring_lua(vars[i]))
+					file:write(_vartostring_lua(vars[i], sav))
 					if getmetatable(x) == mathly_meta then
 						file:write(vars[i] .. ' = mathly(' .. vars[i] .. ')\n\n')
 					end
 				end
 			end
 		end
-		_save_dat = nil
 		file:close()
 	else
 		error(string.format("Failed to create %s. The device might not be writable.", fname))
