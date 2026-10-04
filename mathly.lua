@@ -880,11 +880,13 @@ local function _set_disp_format(t)
 	_int_fmt1 = '%d'
 end
 
+local function _disp_str(s) return '\"' .. string.gsub(s, '"', '\\"') .. '\"' end
+
 local function _tostring(x)
 	if isinteger(x) then
 		return string.format(_int_fmt, x)
 	elseif type(x) == 'string' then
-		return string.format(_str_fmt, "\"" .. x .. "\"")
+		return string.format(_str_fmt, _disp_str(x))
 	elseif type(x) == 'number' then
 		return string.format(_float_fmt, x)
 	else
@@ -924,7 +926,6 @@ local function _trim_2tail_spaces(x)
 end
 
 local _save_dat = nil
-
 local function _disp(t, ind, col, strq, niceq) -- strq: return a string version? niceq: pretty print?
 	if col == -1 or not niceq then col = -1; _str_fmt = '%s' end
 	local keys, n, newlined, str = {}, col, false, ''
@@ -1003,7 +1004,7 @@ function display(t, col, flat, strq) -- strq: return a string version? not for u
 		if type(t) == 'table' then
 			s = _disp(t, 0, col or -1, strq, flat == nil)
 		elseif type(t) == 'string' then
-			s = t
+			s = _disp_str(t)
 		elseif type(t) == 'number' then
 			s = _trim_2tail_spaces(t)
 		else
@@ -1204,7 +1205,7 @@ function ls(path, re, printq)
 		end
 	end
 	if printq then
-		for i = 1, #files do print('   ' ..  files[i]) end
+		for i = 1, #files do print('   ' .. files[i]) end
 	end
 	return files, path, folders
 end
@@ -4294,7 +4295,7 @@ function sort(t, compf)
 	return t
 end
 
--- Make A a lower (opt = 'LT'), upper (opt = 'UT'), or a symmetric (opt = 'SYM') matrix by replacing entries with 0's or so
+-- Make A a lower (opt = 'LT'), upper ('UT'), or symmetric ('SYM') matrix by replacing entries with 0's or so
 function remake(A, opt)
 	_mathly_matrix(A, 'remake(A, ...)')
 	local B
@@ -4332,7 +4333,7 @@ function remake(A, opt)
 	elseif opt == 'DIAG' then
 		B = diag(diag(A))
 	elseif type(opt) == 'table' and type(opt[1]) == 'number' then
-		local opts = unique(flatten(opt)) -- that allows input {-1,0,2, seq(5,10)}
+		local opts = unique(flatten(opt))
 		B = zeros(m, n)
 		if m == 1 then B = rr(B) end
 		local I, J
@@ -4423,7 +4424,7 @@ function diag(A, m, n)
 		if not v then setmetatable(A, mathly_meta) end
 		local rows, columns = size(A)
 		if rows == 1 or columns == 1 then -- row/column vector
-			v = flatten(A) -- continue after last if .. then .. else ..
+			v = flatten(A)
 		else -- a matrix
 			m = m or 0
 			local x = {}
@@ -4435,7 +4436,7 @@ function diag(A, m, n)
 					xi = xi + 1
 				end
 			end
-			return mathly(x) -- can't setmetatable(x, mathly_meta); otherwise, mathly data are not uniformly mxn matrices
+			return mathly(x)
 		end
 	elseif type(A) ~= 'table' then
 		v = {A}
@@ -4452,7 +4453,7 @@ function diag(A, m, n)
 		for i = 1, siz do
 			z[i][i] = v[i]
 		end
-	else -- return a matrix with with v as its diagonal |m| rows above/below the main diagonal
+	else -- return a matrix with v as its diagonal |m| rows above/below the main diagonal
 		siz = #v + math.abs(m)
 		z = zeros(siz, siz)
 		if m >= 0 then
@@ -4469,6 +4470,7 @@ function diag(A, m, n)
 	end
 	return setmetatable(z, mathly_meta)
 end -- diag
+
 --[[
 --// function eigs(A)
 -- Return eigenvalues of a square matrix A.
@@ -4542,8 +4544,8 @@ function subtable(A, irange, B, irange1)
 	return _set_matrix_meta(a)
 end
 
--- Return L and U in LU factorization A = L * U, where L and U are lower and upper traingular matrices, respectively.
-function lu(A) -- by Crout's method
+-- Return L and U in LU factorization of A by Crout's method
+function lu(A)
 	_mathly_matrix(A, 'lu(A)')
 	local s, n = size(A)
 	assert(n == s and n > 1, "lu(A): A is not square.\n")
