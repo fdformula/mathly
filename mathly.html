@@ -154,8 +154,8 @@ disp(log10(abs(x)))
 </code></pre>
 
 <p>&#x2713; &nbsp; With each of these functions, should we use, say, <code>sin(x)</code> or <code>math.sin(x)</code>?
-<em>You can always use <code>sin(x)</code>. However, if you know <code>x</code> is a number, you may call
-<code>math.sin(x)</code> to get a little improvement in time performance.</p></em>
+<em>You can always use <code>sin(x)</code>.</em> However, if you know <code>x</code> is a number, you may call
+<code>math.sin(x)</code> to get a little improvement in time performance.</p>
 
 <p>&#x2713; &nbsp; Elementwise operations through <code>map</code>
 <p>We can do elementwise operations, simple or complicated, through <a href=#map><code>map</code></a>.
@@ -183,7 +183,7 @@ disp(sin{1, 2, {3, {4}, 5}})
 They make Lua code more understandable to people who are new to Lua. They follow the definition: if <code>d &gt; 0</code>, <code>r = mod(a, d)</code> is the remainder of <code>a</code>
 divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d)</code> gives the quotient. For more usage, see <a href=#div><code>div</code> and <code>mod</code></a>.</p>
 
-<p>&#x2713; &nbsp; Like <code>mod, div,</code> and operators <code>+, -, *</code> and <code>/,</code> operator ^ supports elementwise operations. If <code>n</code> is a table, a non-integer or a negative number, or <code>A</code> is a row/column vector, <code>A ^ n</code> is elementwise.</p>
+<p>&#x2713; &nbsp; Like <code>mod, div,</code> and operators <code>+, -, *</code> and <code>/,</code> operator ^ supports elementwise operations. If <code>n</code> is a table, a non-integer or a negative number, or <code>A</code> is a row/column vector (<em>simply, undefined mathematically</em>), <code>A ^ n</code> is elementwise.</p>
 <pre><code>mathly = require('mathly')
 
 x = 2 ^ tt{1, 3, 5} -- {2^1, 2^3, 2^5}
