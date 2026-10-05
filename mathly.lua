@@ -1073,7 +1073,7 @@ local function _vartostring_matlab(x, sav)
 	_disp_col, _disp_flat = -1, true
 	local s = _vartostring_lua(x, sav)
 	x = load('return ' .. x)()
-	if getmetatable(x) == mathly_meta or ismatrix(x) then -- save matrices
+	if getmetatable(x) == mathly_meta or ismatrix(x) then
 		s = string.gsub(s, "}, {", ";\n")
 	end
 	s = string.gsub(s, "}+", "]")
