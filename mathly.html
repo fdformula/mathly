@@ -3484,7 +3484,7 @@ disp((b^T)[3]) -- solution for Ax = b<sub>3</sub>
 <p>&#x2713; &nbsp; If the name of <code>datafile</code> ends in <code>.m</code>, the data is saved in the format of MATLAB
 scripts. Note: Data like <code>x = {1, true, 'abc', c = {2, {3}, d = 'bcd'}}</code> are undefined in MATLAB.</p>
 <p>&#x2713; &nbsp; <b>If no path is specified, the data file will be saved in the present working directory.</b></p>
-<p>&#x2713; &nbsp; The most recent call of <a href=#disp><code>display(...)</code></a> determines the output format in the saved Lua data file.</p>
+<p>&#x2713; &nbsp; The most recent call of <a href=#disp><code>display(...)</code></a> and <a href=#format><code>format(...)</code></a> determines the output format in the saved Lua data file.</p>
 <pre><code>mathly = require('mathly')
 
 a = rand(5, 12)

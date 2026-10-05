@@ -1028,7 +1028,9 @@ end
 
 -- return string version of a variable x starting with 'x = '
 local function _vartostring_lua(x, sav)
-	return x .. ' = ' .. display(eval(x), _disp_col, _disp_flat, true, sav) .. '\n\n'
+	local v = eval(x)
+	if sav == '.m' and type(v) == 'table' and not (type(v) == mathly_meta or ismatrix(v)) then v = flatten(v) end
+	return x .. ' = ' .. display(v, _disp_col, _disp_flat, true, sav) .. '\n\n'
 end
 
 -- return true if x is a row/column vector of two or more numbers
@@ -1073,9 +1075,6 @@ local function _vartostring_matlab(x, sav)
 	x = load('return ' .. x)()
 	if getmetatable(x) == mathly_meta or ismatrix(x) then -- save matrices
 		s = string.gsub(s, "}, {", ";\n")
-	elseif type(x) == 'table' then -- flatten a table. matlab: {1, {{5}, {7, 8}}} --> [1, 5, 7, 8]
-		s = string.gsub(s, "}+, ", ", ")
-		s = string.gsub(s, ", {+", ", ")
 	end
 	s = string.gsub(s, "}+", "]")
 	s = string.gsub(s, "{+", "[")
@@ -1093,7 +1092,7 @@ function save(fname, ...)
 			vars[#vars + 1] = v
 		end
 	end
-	if #vars == 0 then vars = who(false) end
+	if #vars == 0 then vars = sort(who(false)) end
 
 	local matlabq = string.lower(string.sub(fname, #fname - 1)) == '.m'
 	local file = io.open(fname, "w")
