@@ -747,7 +747,7 @@ data = {{-1.0, -2.0}, {0, -3}, {3, 10}, {7, 6}, {10, -2}}
 xs = linspace(data[1][1], data[#data][1], 100)
 ys = newtonpoly(data, xs)
 plot(scatter(data), xs, ys, "-") --&gt; <a href=img/plot4.png target=_blank>View</a>
-
+<a name=fillrgn></a>
 axissquare()
 plot(
   polygon({{1, 2}, {2, 3}, {5, -1}}),
@@ -764,6 +764,21 @@ x = linspace(-2.337, 0.779, 100)
 X = linspace(-5, 5, 200)
 plot(X, cos(X), X, sin(X), '-rff') -- shade regions between two curves  --&gt; <a href=img/plot7.png target=_blank>View</a>
 plot(x, cos(x), x, sin(x), '-rff', X, cos(X), X, sin(X)) -- shade part of  ...  --&gt; <a href=img/plot8.png target=_blank>View</a>
+
+f = ff('@(x) sqrt(1 - x^2)')
+g = ff('@(x) 6 - (x - 2)^2')
+k = ff('@(x) x')
+a = fzero('@(x) f(x) - g(x)', 0)
+b = fzero('@(x) f(x) - k(x)', 1)
+c = fzero('@(x) g(x) - k(x)', 3)
+axissquare()
+xfg = linspace(a, b, 300)
+xkg = linspace(b, c, 200)
+plot(
+  f, 'k', g, 'k', polarcurve(1, {0, 2*pi}, '-k'), {xrange = {-1.1, 4.5}, yrange = {-1.1, 6.1}},
+  xfg, f(xfg), 'k', xfg, g(xfg), '-lkff',
+  xkg, k(xkg), 'k', xkg, g(xkg), '-lkff'
+) --&gt; <a href=img/plot8a.png target=_blank>View</a>
 
 axissquare()
 plot(polarcurve('@(t) 2 - 2*sin(t) + sin(t)*sqrt(abs(cos(t))) / (sin(t) + 1.8)', {0, 2*pi}, 'rfs'))  --&gt; <a href=img/plot9.png target=_blank>View</a>
@@ -2926,7 +2941,7 @@ pentagon, square, square-open, star, triangle-left, triangle-right, triangle-up,
 <tr><td><code>w</code></td><td> &nbsp; <td>white</td></tr>
 </tbody></table>
 <p></p>
-<p>As per filling regions, see <a href=#gobjspecs><code>arc, circle, line, parametriccurve2d, point, polygon, wedge</code></a>.</p>
+<p>&#x2713; &nbsp; Filling specific regions? See <a href=#fillrgn><code>examples</code></a>.</p>
 <p>&#x2713; &nbsp; See also: <a href=#easyf>Shortcut for defining an anonymous function</a>; <a href=#layout>Plotly JavaScript Figure Reference: <code>layout</code></a>.</p>
 <p></p>
 <p><b>Some examples</b></p>
