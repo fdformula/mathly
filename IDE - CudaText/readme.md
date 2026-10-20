@@ -23,8 +23,8 @@ Other hotkeys? See `cudatext/cudatext-hotkeys-for-mathlua.txt`.
 
 Only one interpreter is allowed at a time. To change an interpreter, you may enter the interpreter terminal, and press ctrl-c or execute commands like `os.exit()`, `exit`, `quit`, `exit()`, etc., to exit the present interpreter. Then, go to the very file in the editor and press F2 to start the associated interpreter.
 
-&rArr; Microsoft Windows users may download on this very page the file, `cudatext-for-mathlua-win-*.zip`. It includes the text editor, CudaText, with Lua 5.5.0 and
-MathLua included and integrated. Unzip it to C:\ (the root directory of the C drive). <em>Do not change the name of the folder,
+&rArr; Microsoft Windows users may download on this very page the file, `cudatext-for-mathlua-win-*.7z`. It includes the text editor, CudaText, with Lua 5.5.1 and
+MathLua included and integrated. Use [7zip](https://www.7-zip.org/) to unzip it to C:\ (the root directory of the C drive). <em>Do not change the name of the folder,
 `C:\mathlua`</em>.
 
 &rArr; Linux users may download the file, [cudatext-for-mathlua-linux.tar.gz](https://github.com/fdformula/mathly/blob/main/IDE%20-%20CudaText/cudatext-for-mathlua-linux.tar.gz).
