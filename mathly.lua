@@ -3253,6 +3253,11 @@ local function _open_url(url)
 end
 -- ^^^^^^^^^^^ from dkjson 2.8 (at the end of this source file) ^^^^^^^^^^^ --
 
+local function _open_plt_anmt_url()
+	print("The output is " .. tmp_plot_html_file .. ' if you need it.')
+	_open_url(tmp_plot_html_file)
+end
+
 function help(w)
 	local lua_manual_url = 'file:///' .. doc_folder .. 'manual.html'
 	local mathly_manual_url = 'file:///' .. doc_folder .. 'mathly.html'
@@ -3285,21 +3290,15 @@ function help(w)
 end
 
 -- manipulate/animate interactively the graph of f(x) with 'controls' and enhancements
-function manipulate(f, opts) -- Mathematica
-	_anmt_animateq, _anmt_act = false, 'manipulate'
+local function _anmt_mnplt(f, opts, anmtq)
+	_anmt_animateq, _anmt_act = anmtq, qq(anmtq, 'animate', 'manipulate')
 	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(f, opts)
 	_write_manipulate_html(tmp_plot_html_file, cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode, opts)
-	_open_url(tmp_plot_html_file)
-	print("The graph is in " .. tmp_plot_html_file .. ' if you need it.')
+	_open_plt_anmt_url()
 end
 
-function animate(f, opts) -- Mathematica
-	_anmt_animateq, _anmt_act = true, 'animate'
-	local cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode = _anmt_parse_args(f, opts)
-	_write_manipulate_html(tmp_plot_html_file, cs, rs, xr, yr, tr, title, xexpr, yexpr, jxexpr, jyexpr, enhancements, jscode, opts)
-	_open_url(tmp_plot_html_file)
-	print("The graph is in " .. tmp_plot_html_file .. ' if you need it.')
-end
+function animate(f, opts) _anmt_mnplt(f, opts, true) end
+function manipulate(f, opts) _anmt_mnplt(f, opts, false) end
 
 -- scan a string and replace each appearance of a ctrl with its val
 function _tables_replace(str, cs, vs) -- must be GLOBAL
@@ -5226,10 +5225,7 @@ end
 ---Opens/shows the plot in the browser
 function figure.show(self)
 	self:tofile(tmp_plot_html_file)
-	if not _writehtml_failedq then
-		_open_url(tmp_plot_html_file) -- keep the file
-		print("The graph is in " .. tmp_plot_html_file .. ' if you need it.')
-	end
+	if not _writehtml_failedq then _open_plt_anmt_url() end
 end
 
 function plotly.figure()
