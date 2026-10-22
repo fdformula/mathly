@@ -94,14 +94,26 @@ function create_gauss_quadrature_table(k) -- create a table for n = 1, 3, ..., k
 end
 
 n = 10
-gqt = create_gauss_quadrature_table(10)
+gqt = create_gauss_quadrature_table(n)
 format 'long'
 display(gqt, 4)
 -- print in another format to get rid of huge table in source code
+gqtablestr = 'gqtable = {\n  '
 for i = 1, n do
-  printf('\ngqtable[%d] = ', i)
-  display({ nodes = gqt[i].nodes, weights = gqt[i].weights}, 4)
+  local x = { nodes = gqt[i].nodes, weights = gqt[i].weights}
+  local s = sprintf('gq_%d_points', i)
+  printf('%s = ', s)
+  display(x, 4)
+  printf('\n\n')
+  if i > 1 then
+    gqtablestr = gqtablestr .. ', '
+    if i < 10 then gqtablestr = gqtablestr .. ' ' end
+    if (i - 1) % 5 == 0 then gqtablestr = gqtablestr .. '\n  ' end
+  end
+  gqtablestr = gqtablestr .. s
 end
+gqtablestr = gqtablestr .. '\n}'
+print(gqtablestr)
 
 function find_and_activate_gauss_quadrature(n, printq)
   printq = printq == nil
