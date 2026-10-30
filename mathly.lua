@@ -382,12 +382,10 @@ function ff(s, mapq) -- mapq? by default, automatically apply a function to elem
 	s = string.gsub(s, '%s+', ' ')
 	local head, body = string.match(s, '^%s*@%s*(%(%s*[%w,%s]*%))%s*(.+)%s*$')
 	if head ~= nil then
-		local v1 = string.match(head, '^%((.-),')
-		if v1 == nil then v1 = head end
 		local vars = string.match(head, '^%((.*)%)')
 		assert(vars ~= '' and vars ~= ' ', '@(...) needs at least 1 argument')
 		if mapq then
-			body = 'function' .. head .. ' local function _f' .. head .. ' return ' .. body .. ' end; if type(' .. v1 .. ') == \'table\' then return map(_f,' .. vars .. ') else return _f' .. head .. ' end end'
+			body = 'function' .. head .. ' local function _f' .. head .. ' return ' .. body .. ' end; return map(_f,' .. vars .. ') end'
 		else
 			body = 'function' .. head .. ' return ' .. body .. ' end'
 		end
@@ -398,33 +396,31 @@ function ff(s, mapq) -- mapq? by default, automatically apply a function to elem
 end
 fstr2f = ff -- deprecated
 
--- apply a function to each group of atomic entries in tables, and the result keeps the structure of the tables
+-- apply a function to each group of atomic entries in tables, and the result keeps the structure of the 1st table
 local function _map(f, ...)
-	local args = {}
+	local V, args = nil, {}
 	for _, v in pairs{...} do
 		args[#args + 1] = v
+		if not V and type(v) == 'table' then V = v end
 	end
-	if type(args[1]) ~= 'table' then
-		return f(table.unpack(args))
-	else
-		local y = {}
-		for k, v in pairs(args[1]) do
-			local arg = {}
-			for j = 1,#args do
-				if type(args[j]) ~= 'table' then
-					arg[#arg + 1] = args[j] -- 6/5/25
-				else
-					arg[#arg + 1] = args[j][k]
-				end
-			end
-			if type(v) ~= 'table' then
-				y[k] = f(table.unpack(arg))
+	if not V then return f(table.unpack(args)) end
+	local y = {}
+	for k, v in pairs(V) do
+		local arg = {}
+		for j = 1, #args do
+			if type(args[j]) ~= 'table' then
+				arg[#arg + 1] = args[j]
 			else
-				y[k] = _map(f, table.unpack(arg))
+				arg[#arg + 1] = args[j][k]
 			end
 		end
-		return y
+		if type(v) ~= 'table' then
+			y[k] = f(table.unpack(arg))
+		else
+			y[k] = _map(f, table.unpack(arg))
+		end
 	end
+	return y
 end
 
 function map(f, ...) -- recursive, x of f(x) is an atomic element of a table
