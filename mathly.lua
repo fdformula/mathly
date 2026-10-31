@@ -396,7 +396,7 @@ function ff(s, mapq) -- mapq? by default, automatically apply a function to elem
 end
 fstr2f = ff -- deprecated
 
--- apply a function to each group of atomic entries in tables, and the result keeps the structure of the 1st table
+-- apply f to each group of corresponding atomic entries in tables
 local function _map(f, ...)
 	local V, args = nil, {}
 	for _, v in pairs{...} do
@@ -414,7 +414,7 @@ local function _map(f, ...)
 				arg[#arg + 1] = args[j][k]
 			end
 		end
-		if type(v) ~= 'table' then
+		if type(v) ~= 'table' then -- the 1st table arg matters!
 			y[k] = f(table.unpack(arg))
 		else
 			y[k] = _map(f, table.unpack(arg))

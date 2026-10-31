@@ -1806,6 +1806,14 @@ disp(k({1, {2}, 3}, 2, {3, {4}, 5}))
 -- {6, {10}, 14}
 disp(k(1, 2, {3, 4, 5}) + 100)
 -- 106 109 112
+
+disp(ff('@(x, y) x + y')({1, 2, a = 3}, {2, 3, a = 5}))
+-- {3, 5, a = 8}
+disp(ff('@(x, y) x .. " & " .. y')({'1', '2', x = '3'}, {'2', '3', x = '5'}))
+-- {"1 & 2", "2 & 3", x = "3 & 5"}
+
+disp(ff('@(x, y) x + y')({1, 2, {3, 4, {5}}}, {2, 3, 6}))  -- 6 functions here like {6, 6, {6}}
+-- {3, 5, {9, 10, {11}}}
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=fzero></a><a name=findroot href=#m><code>findroot(f, interval, accuracy), fzero(f, interval, accuracy)</code></a></h4>
