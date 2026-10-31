@@ -184,7 +184,7 @@ disp(E)
 disp(sin{1, 2, {3, {4}, 5}})
 </code></pre>
 
-<p>&#x2713; &nbsp; <a name=eps></a>Functions <code>div</code> and <code>mod</code> can simply be the names of <a href=manual.html#3.4.1>Lua operators <code>//</code> and <code>%</code></a>, respectively.
+<p>&#x2713; &nbsp; Functions <code>div</code> and <code>mod</code> can simply be the names of <a href=manual.html#3.4.1>Lua operators <code>//</code> and <code>%</code></a>, respectively.
 They make Lua code more understandable to people who are new to Lua. They follow the definition: if <code>d &gt; 0</code>, <code>r = mod(a, d)</code> is the remainder of <code>a</code>
 divided by <code>d</code> with <code>0 &le; r &lt; d</code> while <code>div(a, d)</code> gives the quotient. For more usage, see <a href=#div><code>div</code> and <code>mod</code></a>.</p>
 
@@ -243,6 +243,7 @@ disp(map('@(x, y) x^y', a, b)) -- {1^2, w = 3^0, {4^3, {(-5)^1}}}
 -- {1.0000, {64.0000, {-5.0000}}, w = 1.0000}
 </code></pre>
 
+<a name=pi></a><a name=e></a><a name=eps></a><a name=phi></a>
 <p>&#x2713; &nbsp; MathLua provides four commonly used constants:</p>
 <table><tbody>
 <tr><td><code>pi</code></td><td><code>= 3.141592653589793</code></td><td width=10></td><td>It is simply <code>math.pi</code>.</td></tr>
@@ -1790,6 +1791,14 @@ g{1, 2, 3} -- elementwise
 -- 1, 4, 9
 disp(g{1, 2, {3, {4}}})
 -- {1, 4, {9, {16}}}
+
+x = linspace(-4, 4, 200)
+f = ff('@(x) 1/sqrt(2*pi) * exp(-0.5*x^2)')
+plot(x, f(x))
+
+f = ff('@(x) 5*x - 3*cos(x) + 1')
+A = rand(5, 6)
+f(A) * 5 - 2
 
 h = ff('@(x, y) x + 2*y')
 disp(h({1, 2, 3, {4, {5}}}, {1, 0, 2, {-1, {1}}})) -- automatically map a function to each pair of corresponding atomic elements
