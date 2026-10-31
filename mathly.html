@@ -1777,7 +1777,7 @@ disp(expand(a, 2))
 <p>&#x2713; &nbsp; With <code>ff</code>-defined functions of multiple variables, if there is <em>at least one argument
 that is a table</em>, it triggers elementwise operations. The first such argument, <code>X</code>, from left to right
 determines the structure of the final result. Other arguments can each be a "scalar" (i.e. atomic element) or a table
-of the "same" structure of <code>X</code>. If an argument is a scalar, we may imagine that it is virtually a table of
+of the "same" structure of <code>X</code>. If an argument is a "scalar", we may imagine that it is virtually a table of
 the same structure of <code>X</code> with the "scalar" as each of its atomic elements.</p>
 <pre><code>require('mathly')
 clear()
@@ -2481,8 +2481,8 @@ manipulate(fstr, opts) --&gt; <a href="animations/y=a(x-h)^2+k.html" target=_bla
 <h4>&bull; &nbsp; <a name=map href=#m><code>map(f, tbl1, tbl2, ...)</code></a></h4>
 <p>Apply recursively function <code>f</code> to each group of corresponding <em>atomic</em> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</p>
 <p>&#x2713; &nbsp; <code>tbl1, tbl2, ...</code> do not have to be tables. If at least one is a table, it triggers elimentwise operations. The first such table from left
-to right, <code>X</code>, determines the structure of the final result. If, say, <code>tbl1</code> is not a table, it is treated as a table of the same structure of
-<code>X</code> with each entry being <code>tbl1</code>.</p>
+to right, <code>X</code>, determines the structure of the final result. If an argument, say, <code>tbl1</code>, is not a table, it is treated as a table of the same
+structure of <code>X</code> with each atomic entry being <code>tbl1</code>.</p>
 <p>See also: <a href=#ff>ff</a>, <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
 <pre><code>mathly = require('mathly')
 
