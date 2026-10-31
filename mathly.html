@@ -1774,11 +1774,11 @@ disp(expand(a, 2))
 <p>Convert a MATLAB-style anonymous function in a string to a Lua function.</p>
 <p>See also: <a href=#map><code>map</code></a>, <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
 <p>&#x2713; &nbsp; A function defined through <code>ff</code> is elementwise.</p>
-<p>&#x2713; &nbsp; For <code>ff</code>-defined functions of multiple variables, to trigger elementwise operations, <em>at least one argument
-must be a table</em>. The first such argument, <code>X</code>, from left to right determines the structure of the
-final result. Other arguments can each be a scalar or a table of the same structure of <code>X</code>. If an
-argument is a scalar, we may imagine that it is virtually a table of the same structure of <code>X</code> with the
-scalar as each of its atomic elements.</p>
+<p>&#x2713; &nbsp; With <code>ff</code>-defined functions of multiple variables, if there is <em>at least one argument
+that is a table</em>, it triggers elementwise operations. The first such argument, <code>X</code>, from left to right
+determines the structure of the final result. Other arguments can each be a "scalar" (i.e. atomic element) or a table
+of the "same" structure of <code>X</code>. If an argument is a scalar, we may imagine that it is virtually a table of
+the same structure of <code>X</code> with the "scalar" as each of its atomic elements.</p>
 <pre><code>require('mathly')
 clear()
 f = ff('@(x) x*x - 2*x + 1')
@@ -1800,29 +1800,44 @@ f = ff('@(x) 5*x - 3*cos(x) + 1')
 A = rand(5, 6)
 f(A) * 5 - 2
 
-h = ff('@(x, y) x + 2*y')
-disp(h({1, 2, 3, {4, {5}}}, {1, 0, 2, {-1, {1}}})) -- automatically map a function to each pair of corresponding atomic elements
--- {3, 2, 7, {2, {7}}}
-disp(h({1, 2, {3, {4, 5}}}, 3)) -- as if y = {3, 3, {3, {3, 3}}}
--- {7, 8, {9, {10, 11}}}
-disp(h(5, {1, {2, {3}}, 4, 5})) -- as if x = {5, {5, {5}}, 5, 5}
--- {7, {9, {11}}, 13, 15}
-
-k = ff('@(x, y, z) x - 2*y + 3*z')
-disp(k({1, 2, 3}, {2, 3, 4}, {3, 4, 5}) * 2)
--- 12 16 20
-disp(k({1, {2}, 3}, 2, {3, {4}, 5}))
--- {6, {10}, 14}
-disp(k(1, 2, {3, 4, 5}) + 100)
--- 106 109 112
+f = ff('@(x, y, z) x + y + z')
+f(1, 2, 3)
+-- 6
+disp(f({1, 2, 3}, {2, 3, 4}, {3, 4, 5})) -- map f to each group of corresponding atomic elements
+-- 6  9 12
+disp(f(7, {1, 2, {3, 4, {5}}}, {2, 3, 6}))
+-- {10, 12, {16, 17, {18}}}
+-- 7 functions here like {7, 7, {7, 7, {7}}}, and 6 like {6, 6, {6}}
 
 disp(ff('@(x, y) x + y')({1, 2, a = 3}, {2, 3, a = 5}))
 -- {3, 5, a = 8}
 disp(ff('@(x, y) x .. " & " .. y')({'1', '2', x = '3'}, {'2', '3', x = '5'}))
 -- {"1 & 2", "2 & 3", x = "3 & 5"}
+</code></pre>
 
-disp(ff('@(x, y) x + y')({1, 2, {3, 4, {5}}}, {2, 3, 6}))  -- 6 functions here like {6, 6, {6}}
--- {3, 5, {9, 10, {11}}}
+<p>&#x2713; &nbsp; Functions defined through <code>ff</code> are elementwise.</p>
+<p>&#x2713; &nbsp; Functions defined through <code>function</code> are not elementwise.</p>
+<pre><code>require('mathly')
+
+clear()
+A = mathly{{1, 2, 3}, {3, 4, 5}, {-1, 2, 0}}
+
+f = ff('@(x) x * x')
+g = function(x) return x * x end
+
+-- elementwise
+map(f, A) -- no difference here between f and g because of map(...)
+map(g, A)
+f(A)      -- it is actually map(f, A)
+-- 1  4  9
+-- 9 16 25
+-- 1  4  0
+
+-- not elementwise
+g(A) -- it is simply A * A
+--  4 16 13
+-- 10 32 29
+--  5  6  7
 </code></pre>
 
 <h4>&bull; &nbsp; <a name=fzero></a><a name=findroot href=#m><code>findroot(f, interval, accuracy), fzero(f, interval, accuracy)</code></a></h4>
@@ -2464,28 +2479,29 @@ manipulate(fstr, opts) --&gt; <a href="animations/y=a(x-h)^2+k.html" target=_bla
 <p>For more examples, visit <a href=animations/index.html target=_blank>Gallery of Math Animations</a>.</p>
 
 <h4>&bull; &nbsp; <a name=map href=#m><code>map(f, tbl1, tbl2, ...)</code></a></h4>
-<p>Apply recursively function <code>f</code> to each group of corresponding <u>atomic</u> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</p>
-<p>&#x2713; &nbsp; <code>tbl1</code> must be a table; <code>tbl2, ...</code> must be tables of the same structure of <code>tbl1</code> or a number or a string.
-If, say, <code>tbl2</code> is not a table, it is treated as a table of the same structure of <code>tbl1</code> with each entry equaling to <code>tbl2</code>.</p>
-<p>See also: <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
+<p>Apply recursively function <code>f</code> to each group of corresponding <em>atomic</em> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</p>
+<p>&#x2713; &nbsp; <code>tbl1, tbl2, ...</code> do not have to be tables. If at least one is a table, it triggers elimentwise operations. The first such table from left
+to right, <code>X</code>, determines the structure of the final result. If, say, <code>tbl1</code> is not a table, it is treated as a table of the same structure of
+<code>X</code> with each entry being <code>tbl1</code>.</p>
+<p>See also: <a href=#ff>ff</a>, <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
 <pre><code>mathly = require('mathly')
 
 a = range(1, 10) -- seq(1, 10) or seq(10)
 -- {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-function f(x) return x * x end  -- or b = a * a
-b = map(f, a)                   --
+function f(x) return x * x end
+b = map(f, a)
 disp(b, '')
 -- {1, 4, 9, 16, 25, 36, 49, 64, 81, 100}
 
-disp(map('@(x, y) x + y', a, b), '') -- or a + b; x and y are taken from a and b, respectively
+disp(map('@(x, y) x + y', a, b), '') -- or a + b
 -- {2, 6, 12, 20, 30, 42, 56, 72, 90, 110}
 
-x = {1, 2, {3, 4, {5, 6, {7}}}}
-disp(map(f, x), '')
+disp(map(f, {1, 2, {3, 4, {5, 6, {7}}}}), '')
 -- {1, 4, {9, 16, {25, 36, {49}}}}
 
 A = mathly{{1, 2, 3}, {3, 4, 5}, {-1, 2, 0}}
-map(f, A) -- A is a MathLua matrix, the result of map(f, A) is a MathLua matrix, too.
+map(f, A)
+ff('@(x) x*x')(A)
 -- 1   4   9
 -- 9  16  25
 -- 1   4   0
@@ -2509,10 +2525,10 @@ disp(x2)
 disp(map('@(x, y) x + y', x1, x2))
 -- {2, 6, 12, 20, 42, {0, 2, 6, B = 12}, A = 30}
 
-disp(map('@(x, y) x + y', {1, 2, 3}, 10)) -- 10 is treated as {10, 10, 10}
+disp(map('@(x, y) x + y', 10, {1, 2, 3})) -- 10 is treated as {10, 10, 10}
 -- 11  12  13
 
-disp(map('@(x, y, z) x + y + z', {1, 2, 3}, 10, 100)) -- 10 is treated as {10, 10, 10}, and 100 as {100, 100, 100}
+disp(map('@(x, y, z) x + y + z', 10, {1, 2, 3}, 100)) -- 10 is treated like {10, 10, 10}, and 100 like {100, 100, 100}
 -- 111  112  113
 
 disp(map('@(x, y, z) x + y + z', {1, 2, 3}, 10, {100, 200, 300}))
