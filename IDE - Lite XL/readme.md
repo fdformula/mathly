@@ -53,4 +53,5 @@ cp -R ~/.config/lite-xl/plugins/terminal/* /Applications/Lite\ XL.app/Contents/R
 cp lite-xl-2.1.8-for-mathlua-macos_intel/Applications/Lite\ XL.app/Contents/Resources/terminal/init.lua /Applications/Lite\ XL.app/Contents/Resources/terminal/
 rm -fr ~/.config/lite-xl/
 ```
-`Note`: [CudaText](https://github.com/fdformula/mathly/tree/main/IDE%20-%20CudaText) is another very good "IDE" for MathLua.
+`Note 1`: [CudaText](https://github.com/fdformula/mathly/tree/main/IDE%20-%20CudaText) is another very good "IDE" for MathLua.
+`Note 2`: You may download [the newest release of Lite XL](https://github.com/lite-xl/lite-xl/releases), but you need to change 3 in `-- mod-version:3` to 4 on the first line of files, `language_lua.lua` and `language_lua_mathlua.lua`, found in `lite-xl-2.1.8-for-*.tar.gz` described above.
