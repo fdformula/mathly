@@ -183,8 +183,6 @@ code were both correct. We had to wonder if there were bugs in the module. In ma
 cases, it is easier to start a small project from scratch than using and debugging others' code. In
 addition, matrix.lua addresses a column vector like a[i][1] and a row vector a[1][i], rather than a[i]
 in both cases, which is quite ugly and unnatural. Furthermore, no basic graphics capabilities are provided in
-matrix.lua. Therefore, this Mathly module was developed. But anyway, we appreciate the work in matrix.lua.
-Actually, you may find some similarities in the code of matrix.lua and mathly.lua, e.g., m1, m2 are used
-to name arguments of some functions.
+matrix.lua. Therefore, MathLua was developed. But anyway, we appreciate the work in matrix.lua.
 
 &nbsp; &nbsp; &nbsp; &nbsp;December 25, 2024 - Present
