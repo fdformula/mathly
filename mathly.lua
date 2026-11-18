@@ -3255,34 +3255,50 @@ local function _open_plt_anmt_url()
 end
 
 function help(w)
-	local lua_manual_url = 'file:///' .. doc_folder .. 'manual.html'
-	local mathly_manual_url = 'file:///' .. doc_folder .. 'mathly.html'
+	local h = 'file:///' .. doc_folder
+	local H, L, M = h .. 'img/', h .. 'manual.html', h .. 'mathly.html'
 	local mathq = ismember(w, {'abs', 'acos', 'acot', 'asin', 'atan', 'ceil', 'cos', 'cot', 'csc', 'deg',
 		'exp', 'floor', 'log', 'log10', 'rad', 'random', 'sec', 'sin', 'sqrt', 'tan'})
-	local basics = {'_G', '_VERSION', 'assert', 'collectgarbage', 'dofile', 'error', 'getmetatable', 'ipairs',
+	local basic = {'_G', '_VERSION', 'assert', 'collectgarbage', 'dofile', 'error', 'getmetatable', 'ipairs',
 		'load', 'loadfile', 'next', 'pairs', 'pcall', 'print', 'rawequal', 'rawget', 'rawlen', 'rawset', 'require',
 		'select', 'setmetatable', 'tonumber', 'tostring', 'type', 'warn', 'xpcall', -- at beginning of the Index in lua5_5.html
 
 		'do', 'else', 'end', 'f', 'file', 'function', 'goto', 'if', 'io', 'math', 'os', 're', 'regex',
 		'repeat', 'string', 'table', 'then', 'until', 'while'} -- extra anchors added in manual.html
-	local url
-	if mathq then
-			url = mathly_manual_url .. '#math'
-	else
+	local u = M .. '#math'
+	if not mathq then
 		if ismember(w:sub(1, 4), {'lua_', 'luaL'}) then
-			url = lua_manual_url .. '#' .. w
+			u = L .. '#' .. w
 		else
 			local f = w:match('[:|%.](.+)')
 			if f then
-				url = lua_manual_url .. '#pdf-' .. f
-			elseif ismember(w, basics) then
-				url = lua_manual_url .. '#pdf-' .. w
+				u = L .. '#pdf-' .. f
+			elseif ismember(w, basic) then
+				u = L .. '#pdf-' .. w
+			elseif ismember(w, {'fill', 'filling', 'plot'}) then
+				u = H .. 'plot.html'
+			elseif ismember(w, {'animate', 'manipulate'}) then
+				u = H .. 'anim.html' .. w
+			elseif ismember(w, {'columns', 'grid', 'gridaxes', 'height', 'layout', 'rows', 'width', 'title'}) then
+				u = H .. 'grid.html'
+			elseif ismember(w, {'plot3d', 'plotparametriccurve3d', 'plotsphericalsurface'}) then
+				u = H .. '3d.html'
+			elseif ismember(w, {'arc', 'circle', 'line', 'parametriccurve2d', 'point', 'polarcurve', 'polygon', 'scatter', 'text', 'wedge'}) then
+				u = H .. 'gobjs.html'
+			elseif ismember(w, {'plotparametriccurve2d', 'plotpolarcurve'}) then
+				u = H .. 'gobjs.html#' .. w
+			elseif ismember(w, {'boxplot', 'dotplot', 'freqpolygon', 'hist', 'hist1', 'histfreqpolygon', 'pareto', 'pie'}) then
+				u = H .. 'stats.html#' .. w
+			elseif ismember(w, {'lagrangepoly', 'newtonpoly', 'polyfit', 'polynomial', 'polyval'}) then
+				u = H .. 'polyn.html#' .. w
+			elseif ismember(w, {'contourplot', 'directionfield', 'slopefield', 'vectorfield2d'}) then
+				u = H .. 'misc.html#' .. w
 			else
-				url = mathly_manual_url .. '#' .. w
+				u = M .. '#' .. w
 			end
 		end
 	end
-	_open_url(url)
+	_open_url(u)
 end
 
 -- manipulate/animate interactively the graph of f(x) with 'controls' and enhancements

@@ -8,7 +8,7 @@
 <body>
 <div>
 <h2><a name=top href=#m>MathLua is a Tiny, Portable, Free but Powerful MATLAB and More</a></h2>
-<h4>&nbsp; &nbsp; &rArr; <a href=lua5_5.html>Lua 5.5 Manual</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &rArr; <a href=https://www.lua.org/docs.html target="_blank">Official Lua Doc</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &rArr; <a href=https://mathlua.github.io target="_blank">MathLua.github.io</a></h4>
+<h3>&nbsp; &nbsp; &rArr; <a href=lua5_5.html>Lua 5.5 Manual</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &rArr; <a href=https://www.lua.org/docs.html target="_blank">Official Lua Doc</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &rArr; <a href=https://mathlua.github.io target="_blank">MathLua.github.io</a></h3>
 <ol>
 <li><a href=#intro>Introduction</a></li>
 <li><a href=#version>Which version of Lua is needed?</a></li>
@@ -443,7 +443,7 @@ disp(map('@(x, y) x^y', a, b)) -- {1^2, w = 3^0, {4^3, {(-5)^1}}}
 </tbody>
 </table>
 
-<h4>&bull; &nbsp; <a name=any></a><a name=all href=#m><code>all(x, f)</code>, <code>any(x, f)</code></a></h4>
+<h3>&bull; &nbsp; <a name=any></a><a name=all href=#m><code>all(x, f)</code>, <code>any(x, f)</code></a></h3>
 <ol>
 <li><code>all(x, f)</code>: Test if <code>f(x)</code> is true for every number in <code>x</code>.
 <p>If <code>x</code> is a table or a row/column vector, returns 1 if all elements of the table make <code>f(x)</code> true.</p>
@@ -473,16 +473,16 @@ all(x, '@(x) x % 2 == 0')
 -- 0
 </pre>
 
-<h4>&bull; &nbsp; <a name=apply href=#m><code>apply(f, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=apply href=#m><code>apply(f, ...)</code></a></h3>
 <p>As with some other programming languages like <i>Mathematica</i>, it evaluates function <code>f</code> with provided arguments.</p>
 <pre>require('mathly')
 apply('@(x, y, z) x + y + z', {1, 2, 3})
 </pre>
 
-<h4>&bull; &nbsp; <a name=showlegend></a><a name=shownotlegend></a><a name=shownotyaxis></a><a name=showyaxis></a>
+<h3>&bull; &nbsp; <a name=showlegend></a><a name=shownotlegend></a><a name=shownotyaxis></a><a name=showyaxis></a>
 <a name=shownotxaxis></a><a name=showxaxis></a><a name=axissquare></a><a name=axisnotsquare></a><a name=showaxes></a>
 <a name=shownotaxes></a><a name=showgridlines></a><a name=shownotgridlines></a>
-<a href=#m><code>axissquare, axisnotsquare; showaxes, shownotaxes ...</code></a></h4>
+<a href=#m><code>axissquare, axisnotsquare; showaxes, shownotaxes ...</code></a></h3>
 <table><tbody>
 <tr><td width=270><code>axissquare(),    axisnotsquare()</code></td><td>Force or stop a square axis aspect ratio (default: not square)</td></tr>
 <tr><td><code>showaxes(), shownotaxes()</code></td><td>Show/hide axes (all default: show)</td></tr>
@@ -494,10 +494,10 @@ apply('@(x, y, z) x + y + z', {1, 2, 3})
 <p>&#x2713; &nbsp; These functions are not valid for 3D graphs. Except <code>showlegend</code> and <code>shownotlegend</code>,
 they are not valid for any grid of subplots either. If you need more control, see <a href=img/grid.html>Plotly JavaScript Figure Reference: <code>layout</code> and <code>grid</code></a>.</p>
 
-<h4>&bull; &nbsp; <a name=bin2dec></a><a name=bin2hex></a><a name=bin2oct></a><a name=dec2bin></a>
+<h3>&bull; &nbsp; <a name=bin2dec></a><a name=bin2hex></a><a name=bin2oct></a><a name=dec2bin></a>
 <a name=dec2hex></a><a name=dec2oct></a><a name=hex2bin></a><a name=hex2dec></a>
 <a name=hex2oct></a><a name=oct2bin></a><a name=oct2dec></a>
-<a name=oct2hex href=#m><code>bin2dec, bin2hex, bin2oct; dec2bin, dec2hex, dec2oct; hex2bin, hex2dec, hex2oct; oct2bin, oct2dec, oct2hex</code></a></h4>
+<a name=oct2hex href=#m><code>bin2dec, bin2hex, bin2oct; dec2bin, dec2hex, dec2oct; hex2bin, hex2dec, hex2oct; oct2bin, oct2dec, oct2hex</code></a></h3>
 <table><tbody>
 <tr><td width=270><code>dec2bin(x), hex2bin(x), oct2bin(x)</code></td><td>Convert decimal/hexadecimal/octal integer <code>x</code> to binary</td></tr>
 <tr><td><code>bin2dec(x), hex2dec(x), oct2dec(x)</code></td><td>Convert binary/hexadecimal/octal integer <code>x</code> to decimal</td></tr>
@@ -529,11 +529,11 @@ disp(dec2hex(a), '')
 -- {{"4b", "1c"}, {"5a", "6"}}
 </pre>
 
-<h4>&bull; &nbsp; <a name=cat><code>cat(filename)</code></a></h4>
+<h3>&bull; &nbsp; <a name=cat><code>cat(filename)</code></a></h3>
 <p>Print the content of text file <code>filename</code> in Lua REPL. If no path is specified, the file must be in present working directory.</p>
 <p>See also: <a href=#pwd><code>pwd</code></a>.</p>
 
-<h4>&bull; &nbsp; <a name=cc></a><a name=rr></a><a name=tt href=#m><code>cc, rr, tt</code></a></h4>
+<h3>&bull; &nbsp; <a name=cc></a><a name=rr></a><a name=tt href=#m><code>cc, rr, tt</code></a></h3>
 <p>A matrix operation may be applied to an ordinary table. It takes the table as a row or column vector according to the very context.
 If you want full control, you can use <code>cc</code> or <code>rr</code> to tell MathLua whether the table is a column or row vector.</p>
 <p>Each function has an argument, <code>irange</code>, a range of index values. See <a href=#copy><code>copy</code></a>.</p>
@@ -674,7 +674,7 @@ disp(tt(x, {2, -1}), '')
 </pre>
 <p>More examples: See <a href=examples/chinese_remainder_theorem.lua>The Chinese remainder theorem</a>.</p>
 
-<h4>&bull; &nbsp; <a name=copy href=#m><code>copy(A, rowrange, columnrange, B, rowrange1, columnrange1)</code></a></h4>
+<h3>&bull; &nbsp; <a name=copy href=#m><code>copy(A, rowrange, columnrange, B, rowrange1, columnrange1)</code></a></h3>
 <table><tbody>
 <tr><td width=20></td><td>Make a deep copy of matrix <code>A</code></td><td width=10> - </td><td><code>copy(A, rowrange,
 columnrange)</code></td></tr>
@@ -934,7 +934,7 @@ MATLAB:  A(1:2:end) = B(1:3:end)
 MathLua: copy(A, {1, -1, 2}, B, {1, -1, 3})
 </pre>
 
-<h4>&bull; &nbsp; <a name=corr href=#m><code>corr({x1, x2, ...}, {y1, y2, ...}, n, xx), corr({{x1, y1}, {x2, y2}, ...}, n, xx), corr(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=corr href=#m><code>corr({x1, x2, ...}, {y1, y2, ...}, n, xx), corr({{x1, y1}, {x2, y2}, ...}, n, xx), corr(A)</code></a></h3>
 <ol>
 <li>Return Pearson's linear correlation coefficient for the given data, defined by <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>.</li>
 <li>If <code>A</code> is a <code>mxn</code> matrix with <code>n > 2</code> and <code>B = corr(A)</code>, <code>B</code> is a <code>nxn</code> symmetric
@@ -964,7 +964,7 @@ A = randi({-100, 100}, 200, 6)
 corr(A)
 </pre>
 
-<h4>&bull; &nbsp; <a name=cross href=#m><code>cross(a, b)</code></a></h4>
+<h3>&bull; &nbsp; <a name=cross href=#m><code>cross(a, b)</code></a></h3>
 <P>Return the cross/vector product of <code>a = {a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>}</code>
 and <code>b = {b<sub>1</sub>, b<sub>2</sub>, b<sub>3</sub>}</code>.</P>
 <pre>require('mathly')
@@ -972,7 +972,7 @@ disp(cross({1, 2, 3}, {3, 4, 5}), '')
 -- {-2, 4, -2}
 </pre>
 
-<h4>&bull; &nbsp; <a name=demathlua></a><a name=demathly href=#m><code>demathlua(x), demathly(x)</code></a></h4>
+<h3>&bull; &nbsp; <a name=demathlua></a><a name=demathly href=#m><code>demathlua(x), demathly(x)</code></a></h3>
 <p>Force <code>x</code> to be an ordinary Lua table. It is not a MathLua matrix now.</p>
 <p>It is provided for special purposes. If no matrix operations are needed/allowed or the structure of a
 matrix is damaged (on purpose), you had better call it.</p>
@@ -989,7 +989,7 @@ disp(map('@(x) 2*x', A)) -- map is still a great tool; or
 disp(ff('@(x) 2*x')(A))
 </pre>
 
-<h4>&bull; &nbsp; <a name=diff1></a><a name=diff2></a><a name=diff href=#m><code>diff</code> (or <code>diff1</code>), <code>diff2</code></a></h4>
+<h3>&bull; &nbsp; <a name=diff1></a><a name=diff2></a><a name=diff href=#m><code>diff</code> (or <code>diff1</code>), <code>diff2</code></a></h3>
 <p>Calculate numerically the first (<code>diff</code> or <code>diff1</code>) and the second (<code>diff2</code>) derivatives of <code>f(x)</code>
 at a point.</p>
 <p>MathLua doesn't have any plan for symbolic computing. These commands are provided simply for certain convenience. 12-point and 13-point central
@@ -1011,7 +1011,7 @@ plot(f, '@(x) f(x0) + diff(f, x0)*(x - x0)')
 </pre>
 
 
-<h4>&bull; &nbsp; <a name=eq></a><a name=ge></a><a name=gt></a><a name=le></a><a name=lt></a><a name=plus></a><a name=minus></a><a name=times></a><a name=divide></a><a name=mod></a><a name=div href=#m><code>div(a, d), mod, plus, minus, times, divide; eq, ge, gt, le, lt</code></a></h4>
+<h3>&bull; &nbsp; <a name=eq></a><a name=ge></a><a name=gt></a><a name=le></a><a name=lt></a><a name=plus></a><a name=minus></a><a name=times></a><a name=divide></a><a name=mod></a><a name=div href=#m><code>div(a, d), mod, plus, minus, times, divide; eq, ge, gt, le, lt</code></a></h3>
 <p>These functions have the same usage. Each can be treated as the name of a corresponding operation/operator as follows.
 <table>
 <tbody>
@@ -1127,7 +1127,7 @@ disp(b)
 -- {{1, {3, 0}}, {0, 0, 6}}
 </pre>
 
-<h4>&bull; &nbsp; <a name=diag href=#m><code>diag(A, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=diag href=#m><code>diag(A, ...)</code></a></h3>
 <ol>
 <li><code>diag( A, k )</code>, where <code>A</code> is a MathLua <code>mxn</code> matrix, <code>m &ne; 1</code> and <code>n &ne; 1</code>.
 <p>Return the table of all entries of the <code>k</code>-th diagonal as a column vector.</p>
@@ -1202,7 +1202,7 @@ diag({2,3,4,5}, 1) + diag({1,2,3,4,5}) + diag({3,4,5,6}, -1) -- See also: <a nam
 -- 0  0  0  6  5
 </pre>
 
-<h4>&bull; &nbsp; <a name=disp></a><a name=display href=#m><code>disp(x, ...), display(x, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=disp></a><a name=display href=#m><code>disp(x, ...), display(x, ...)</code></a></h3>
 <table>
 <tr><td width=132><code>disp(x, ...)</code></td><td> - </td><td>Print a MathLua matrix. If <code>x</code> is not a MathLua matrix, <code>display(x, '')</code> is called
 to print it on a single line.</td></tr>
@@ -1311,7 +1311,7 @@ display(bst)
 -- }
 </pre>
 
-<h4>&bull; &nbsp; <a name=dot href=#m><code>dot(a, b)</code></a></h4>
+<h3>&bull; &nbsp; <a name=dot href=#m><code>dot(a, b)</code></a></h3>
 <P>Return the dot/inner product of <code>a = {a<sub>1</sub>, a<sub>2</sub>, ...}</code>
 and <code>b = {b<sub>1</sub>, b<sub>2</sub>, ...}</code>.</P>
 <pre>require('mathly')
@@ -1321,7 +1321,7 @@ dot({1, 2}, {3, 4})
 -- 11
 </pre>
 
-<h4>&bull; &nbsp; <a name=eval href=#m><code>eval(str)</code></a></h4>
+<h3>&bull; &nbsp; <a name=eval href=#m><code>eval(str)</code></a></h3>
 <p>Evaluate the expression in <code>str</code> and return the result.</p>
 <pre>require('mathly')
 
@@ -1338,7 +1338,7 @@ disp(x)
 -- 1.00  0.87  0.71  0.50  0.00 -1.00
 </pre>
 
-<h4>&bull; &nbsp; <a name=expand href=#m><code>expand(A, m, n, v)</code></a></h4>
+<h3>&bull; &nbsp; <a name=expand href=#m><code>expand(A, m, n, v)</code></a></h3>
 <p>Return an expanded/shrunk MathLua matrix with value <code>v</code>'s added or entries dropped.</p>
 <p>The default value of <code>v</code> is 0, and the default value of <code>n</code> is <code>m</code>.</p>
 <p>See also: <a href=#diag><code>diag</code></a>, <a href=#flipud><code>flipud</code></a>,
@@ -1365,7 +1365,7 @@ disp(expand(a, 2))
 -- 82  15
 </pre>
 
-<h4>&bull; &nbsp; <a name=fstr2f></a><a name=ff href=#m><code>ff(str)</code></a></h4>
+<h3>&bull; &nbsp; <a name=fstr2f></a><a name=ff href=#m><code>ff(str)</code></a></h3>
 <p>Convert a MATLAB-style anonymous function in a string to a Lua function.</p>
 <p>See also: <a href=#map><code>map</code></a>, <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
 <p>&#x2713; &nbsp; A function defined through <code>ff</code> is elementwise.</p>
@@ -1451,7 +1451,7 @@ end
 map(f, {6, 8, 1, 3, 16, 3})
 </pre>
 
-<h4>&bull; &nbsp; <a name=fzero></a><a name=findroot href=#m><code>findroot(f, interval, accuracy), fzero(f, interval, accuracy)</code></a></h4>
+<h3>&bull; &nbsp; <a name=fzero></a><a name=findroot href=#m><code>findroot(f, interval, accuracy), fzero(f, interval, accuracy)</code></a></h3>
 <p>Find and return the zero of function <code>f</code> on the specified interval.</p>
 <p>If <code>interval</code> is a single number, say, 1.5, it is set to be the interval, 1.5 &plusmn; 1, i.e., [0.5, 2.5].</p>
 <p>If <code>accuracy</code> is not provided, it defaults to <a href=#eps><code>eps</code></a>.</p>
@@ -1468,7 +1468,7 @@ print(fzero('@(x) x^2 -2*x + 1', {-1, 1}, 0.01)) -- accurate to 2 decimal places
 -- 0.9921875
 </pre>
 
-<h4>&bull; &nbsp; <a name=flatten href=#m><code>flatten(x)</code></a></h4>
+<h3>&bull; &nbsp; <a name=flatten href=#m><code>flatten(x)</code></a></h3>
 <p>Remove the structure of table <code>x</code> and return a table of all atomic elements in <code>x</code> in order.</p>
 <p>If <code>x</code> is a MathLua matrix, it does rowwisely. For columnwise flattening, see <a href=#tt><code>tt</code></a>.</p>
 <pre>mathly = require('mathly')
@@ -1490,7 +1490,7 @@ display(b, '')
 -- {1, 4, 7, 2, 5, 8, 3, 6, 9} -- column wise
 </pre>
 
-<h4>&bull; &nbsp; <a name=fliplr></a><a name=flipud href=#m><code>flipud(A), fliplr(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=fliplr></a><a name=flipud href=#m><code>flipud(A), fliplr(A)</code></a></h3>
 <table>
 <tr><td><code>flipud(A)</code></td><td> - </td><td>Return a matrix with rows of matrix <code>A</code> reversed. (ud: upside down)</td></tr>
 <tr><td><code>fliplr(A)</code></td><td> - </td><td>Return a matrix with columns of matrix <code>A</code> reversed. (lr: from left to right)</td></tr>
@@ -1512,7 +1512,7 @@ disp(fliplr(a))
 -- 4  3  2
 </pre>
 
-<h4>&bull; &nbsp; <a name=format href=#m><code>format(fmt)</code></a></h4>
+<h3>&bull; &nbsp; <a name=format href=#m><code>format(fmt)</code></a></h3>
 <p>Reset or specify the format of the output of <code>disp(...)</code> and <code>display(...)</code>. <code>fmt</code> can be any of the following options.</p>
 <table><tbody>
 <tr><td width=20></td><td><code>'bank'</code></td><td> </td><td width=10> </td><td>2 decimal places</td></tr>
@@ -1531,7 +1531,7 @@ disp(pi)
 disp(rand(3, 4))
 </pre>
 
-<h4>&bull; &nbsp; <a name=help></a><a href=#m><code>help(word)</code></a></h4>
+<h3>&bull; &nbsp; <a name=help></a><a href=#m><code>help(word)</code></a></h3>
 <p>Open help on <code>word</code> in a web browser, where <code>word</code> is a string, i.e., the name of a function, a keyword, or so.</p>
 <pre>require('mathly')
 help('file')
@@ -1540,7 +1540,7 @@ help 'while'
 help 're' -- 'regex'
 </pre>
 
-<h4>&bull; &nbsp; <a name=gcd href=#m><code>gcd(x, y)</code></a></h4>
+<h3>&bull; &nbsp; <a name=gcd href=#m><code>gcd(x, y)</code></a></h3>
 <p>Return the greatest common divisor of <code>x</code> and <code>y</code> which can be nonnegative integers of tables of nonnegative integers with the same structure.</p>
 <pre>require('mathly')
 gcd(126, 12)
@@ -1548,7 +1548,7 @@ disp(gcd({126, 35}, {12, 5}))
 disp(gcd({126, {35, 12}}, {12, {5, 36}}))
 </pre>
 
-<h4>&bull; &nbsp; <a name=hasindex href=#m><code>hasindex(tbl, idx)</code></a></h4>
+<h3>&bull; &nbsp; <a name=hasindex href=#m><code>hasindex(tbl, idx)</code></a></h3>
 <p>Check if table <code>tbl</code> contains index <code>idx</code>.</p>
 <pre>require('mathly')
 
@@ -1561,7 +1561,7 @@ print(hasindex(opt, 'color'))
 -- false
 </pre>
 
-<h4>&bull; &nbsp; <a name=horzcat href=#m><code>horzcat(A, B, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=horzcat href=#m><code>horzcat(A, B, ...)</code></a></h3>
 <P>Concatenate matrices A, B, ... in order horizontally. Matrices must have the same number of rows.</P>
 <p><em>Operator <code>..</code> can be used to replace <code>horzcat</code>.</em></p>
 <p>See also: <a href=#vertcat><code>vertcat</code></a>; <a href=#diag><code>diag</code></a>,
@@ -1595,7 +1595,7 @@ disp(A .. cc(b)) -- augmented coefficient matrix for Ax = b
 -- 3  4  6
 </pre>
 
-<h4>&bull; &nbsp; <a href=#m name=input><code>input(prompt, s)</code></a></h4>
+<h3>&bull; &nbsp; <a href=#m name=input><code>input(prompt, s)</code></a></h3>
 <p>Take user's input from keyboard and return a string if <code>s = 's'</code>; otherwise, evaluate the input expression and return the result.</p>
 <p><code>prompt</code> is the text displayed to user. <code>s</code> defaults to <code>nil</code>.</p>
 <pre>require('mathly')
@@ -1615,7 +1615,7 @@ x = input('Expression to evaluate: ') -- you may enter sin(pi/2), {1, {2, {3}}},
 print(x)
 </pre>
 
-<h4>&bull; &nbsp; <a name=integral href=#m><code>integral(f(x), {a, b})</code> or <code>integral(f(x), a, b)</code></a></h4>
+<h3>&bull; &nbsp; <a name=integral href=#m><code>integral(f(x), {a, b})</code> or <code>integral(f(x), a, b)</code></a></h3>
 <p>Apply 12-point <a href=examples/gauss_quadrature_by_legendre_polynomial.lua target="_blank">Gauss quadrature</a>
 (see <a href=examples/gauss_quadrature_table.lua>Table of Gaussian Quadrature Nodes and Weights</a>)
 to numerically evaluate the definite integral of <code>f(x)</code> on <code>[a,b]</code>. A
@@ -1642,7 +1642,7 @@ disp(integral('@(x) exp(-x^2)', {-10000, 10000})) -- theoretically, it should be
 -- 1.7724538509022
 </pre>
 
-<h4>&bull; &nbsp; <a name=integral2 href=#m><code>integral2(f, {g<sub>1</sub>, g<sub>2</sub>}, {a, b})</code></a></h4>
+<h3>&bull; &nbsp; <a name=integral2 href=#m><code>integral2(f, {g<sub>1</sub>, g<sub>2</sub>}, {a, b})</code></a></h3>
 <p>Apply 12-point <a href=examples/gauss_quadrature_by_legendre_polynomial.lua target="_blank">Gauss quadrature</a>
 to numerically evaluate the double integral, <code>∫∫f(x,y)dydx</code>
 over a region <code>{(x,y) | y&in;[g<sub>1</sub>(x),g<sub>2</sub>(x)], x&in;[a,b]}</code>.</p>
@@ -1675,7 +1675,7 @@ disp(integral2('@(theta, r) r^3', {0, '@(theta) 2*cos(theta)'}, {-pi/2, pi/2}))
 -- 4.7123889803847 (exact: 3*pi/2 = 4.7123889803847)
 </pre>
 
-<h4>&bull; &nbsp; <a name=integral3 href=#m><code>integral3(f, {g1, g2}, {h1, h2}, {a, b})</code></a></h4>
+<h3>&bull; &nbsp; <a name=integral3 href=#m><code>integral3(f, {g1, g2}, {h1, h2}, {a, b})</code></a></h3>
 <p>Apply 12-point <a href=examples/gauss_quadrature_by_legendre_polynomial.lua target="_blank">Gauss quadrature</a>
 to numerically evaluate the triple integral, <code>∫∫∫f(x,y,z)dzdydx</code> over a region
 <code>{(x,y,z) | z&in;[g<sub>1</sub>(x,y), g<sub>2</sub>(x,y)], y&in;[h<sub>1</sub>(x),h<sub>2</sub>(x)],
@@ -1706,7 +1706,7 @@ disp(integral3('@(theta, phi, rho) rho^2 * sin(phi)', {0, '@(theta, phi) cos(phi
 -- 0.3926990816987 (exact: pi/8 = 0.39269908169872)
 </pre>
 
-<h4>&bull; &nbsp; <a name=inv href=#m><code>inv(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=inv href=#m><code>inv(A)</code></a></h3>
 <p>Return the inverse of square MathLua matrix <code>A</code>.</p>
 <pre>mathly = require('mathly')
 
@@ -1721,7 +1721,7 @@ inv{{1, 2, 3}, {3, 4, 5}, {-1, 2, 0}} * {2, 0, 1}
 --  1.8000000000000
 </pre>
 
-<h4>&bull; &nbsp; <a name=ismember href=#m><code>ismember(x, table)</code></a></h4>
+<h3>&bull; &nbsp; <a name=ismember href=#m><code>ismember(x, table)</code></a></h3>
 <p>Check if <code>x</code> is a member of <code>table</code>.</p>
 <pre>require('mathly')
 
@@ -1733,10 +1733,10 @@ print(ismember(4, x))
 </pre>
 
 
-<h4>&bull; &nbsp; <a name=iswindows href=#m><code>iswindows()</code></a></h4>
+<h3>&bull; &nbsp; <a name=iswindows href=#m><code>iswindows()</code></a></h3>
 <p>Return true if the operating system is Microsoft Windows.</p>
 
-<h4>&bull; &nbsp; <a name=linsolve href=#m><code>linsolve(A, b, opt)</code></a></h4>
+<h3>&bull; &nbsp; <a name=linsolve href=#m><code>linsolve(A, b, opt)</code></a></h3>
 <p>Solve a linear system <code>Ax = b</code> and return the solution.</p>
 <p>If <code>b</code> is a matrix with multiple columns, <code>b = [b<sub>1</sub> | b<sub>2</sub> | ... | b<sub>m</sub>]</code>, it returns a solution matrix <code>[x<sub>1</sub> | x<sub>2</sub> | ... | x<sub>m</sub>]</code>, where <code>Ax<sub>i</sub> = b<sub>i</sub>, i = 1, 2, ..., m</code>.</p>
 <p>The argument <code>opt</code> is optional:</p>
@@ -1769,7 +1769,7 @@ disp(x)
 --  2.6955   0.6655
 </pre>
 
-<h4>&bull; &nbsp; <a name=linspace href=#m><code>linspace(x, y, n)</code></a></h4>
+<h3>&bull; &nbsp; <a name=linspace href=#m><code>linspace(x, y, n)</code></a></h3>
 <p>Return a table of <code>n</code> evenly spaced numbers starting at <code>x</code> and ending at <code>y</code>.</p>
 <p>See also: <a href=#range><code>range</code></a> (or <a href=#seq><code>seq</code></a>), <a href=#table1><code>table1</code></a>.</p>
 <pre>require('mathly')
@@ -1779,7 +1779,7 @@ y = x * cos(x^2)
 plot(x, y, '-r')
 </pre>
 
-<h4>&bull; &nbsp; <a name=dir></a><a name=ls href=#m><code>ls(path, printq)</code> or <code>dir(path, printq)</code></a></h4>
+<h3>&bull; &nbsp; <a name=dir></a><a name=ls href=#m><code>ls(path, printq)</code> or <code>dir(path, printq)</code></a></h3>
 <p>Return a list of files and subfolders in the folder <code>path</code> (the current directory by default).
 If <code>printq = true</code> (default), it prints the list in Lua REPL.</p>
 <p>Characters ? and * are allowed in a file name, where ? matches any single character, and * zero or more consecutive characters.</p>
@@ -1802,7 +1802,7 @@ path
 disp(subfolders)
 </pre>
 
-<h4>&bull; &nbsp; <a name=lu href=#m><code>lu(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=lu href=#m><code>lu(A)</code></a></h3>
 <p>Return <code>L</code> and <code>U</code> of LU factorization <code>A = LU</code>, where <code>L</code> and <code>U</code> are lower and upper triangular matrices, respectively.</p>
 <pre>mathly = require('mathly')
 
@@ -1823,7 +1823,7 @@ disp(L * U - A)
 -- 0.0000  0.0000  0.0000
 </pre>
 
-<h4>&bull; &nbsp; <a name=map href=#m><code>map(f, tbl1, tbl2, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=map href=#m><code>map(f, tbl1, tbl2, ...)</code></a></h3>
 <p>Apply recursively function <code>f</code> to each group of corresponding <em>atomic</em> elements in tables, <code>tbl1, tbl2, ...</code>, and return the result.</p>
 <p>&#x2713; &nbsp; <code>tbl1, tbl2, ...</code> do not have to be tables. If at least one is a table, it triggers elimentwise operations. The first such table from left
 to right, <code>X</code>, determines the structure of the final result. If an argument, say, <code>tbl1</code>, is not a table, it is treated as a table of the same
@@ -1886,7 +1886,7 @@ disp(map('@(x, y) 2 * x * y + 1', {1, {2, {3, {4}}}}, 10)) -- 10 is treated as {
 -- {21, {41, {61, {81}}}}
 </pre>
 
-<h4>&bull; &nbsp; <a name=map1 href=#m><code>map1(f, tbl1, tbl2, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=map1 href=#m><code>map1(f, tbl1, tbl2, ...)</code></a></h3>
 <p>Apply function <code>f</code> to each group of corresponding elements in tables, <code>tbl1, tbl2, ...</code>. It is non-recursive and good for processing tables of same-type elements, atomic or non-atomic.</p>
 <p>See also: <a href=#easyf>Shortcut for defining an anonymous function.</a></p>
 <pre>require('mathly')
@@ -1922,7 +1922,7 @@ disp(a)
 map1('@(x) sum(x)', a) -- sum(a^T)
 </pre>
 
-<h4>&bull; &nbsp; <a name=match href=#m><code>match(tbl, f)</code></a></h4>
+<h3>&bull; &nbsp; <a name=match href=#m><code>match(tbl, f)</code></a></h3>
 <p>Return elements of table <code>tbl</code> that satisfy specified conditions. (<code>f</code> defaults to <code>tbl</code>.)</p>
 <p>If <code>f</code> is a boolean function, return 1) a table of elements of <code>tbl</code> (row wise) that satisfy <code>f(x)</code>
 and 2) a table of elements of <code>tbl</code> with those elements replaced by 0 when they fail to satisfy <code>f(x)</code>.</p>
@@ -1994,7 +1994,7 @@ disp(b)
 -- 0  0  9
 </pre>
 
-<h4>&bull; &nbsp; <a name=mlua></a><a name=mathlua></a><a name=mathly href=#m><code>mathlua, mlua, mathly(...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=mlua></a><a name=mathlua></a><a name=mathly href=#m><code>mathlua, mlua, mathly(...)</code></a></h3>
 <p>They are axactly one function, i.e., the constructor of MathLua matrices if you run MathLua script from inside CudaText or Lite XL that
 starts Lua interpreter with arguments: <code>-i -e 'mlua = require("mathly"); mathlua = mlua; mathly = mlua'</code>.</p>
 <p>&#x2713; &nbsp; If a system is not configured for MathLua, the command, <code>mlua = require("mathly"); mathlua = mlua; mathly = mlua</code>, must be executed first.</p>
@@ -2034,7 +2034,7 @@ mathly(a, 3, 4)
 -- 2  0  0  0
 </pre>
 
-<h4>&bull; &nbsp; <a name=max></a><a name=min href=#m><code>max(x)</code>, <code>min(x))</code></a></h4>
+<h3>&bull; &nbsp; <a name=max></a><a name=min href=#m><code>max(x)</code>, <code>min(x))</code></a></h3>
 <p>If <code>x</code> is an array or row/column vector, return the largest/smallest of all elements in it; if it is a matrix, return a table consisting of the largest/smallest of each column of <code>x</code>.</p>
 <table><tbody>
 <pre>mathly = require('mathly')
@@ -2056,7 +2056,7 @@ sum(max(a))
 -- 127
 </pre>
 
-<h4>&bull; &nbsp; <a name=mean href=#m><code>mean(x)</code></a></h4>
+<h3>&bull; &nbsp; <a name=mean href=#m><code>mean(x)</code></a></h3>
 <ol>
 <li>If <code>x</code> is a table or MathLua row/column vector, return the mean value of its elements.</li>
 <li>If <code>x</code> is a <code>mxn</code> matrix, return a row vector of which the <code>i</code>-th element is the mean value of
@@ -2079,7 +2079,7 @@ print(mean({'abc', 'de'})) --> strcat first: 'abcde' --> mean('abcde')
 -- 99.0
 </pre>
 
-<h4>&bull; &nbsp; <a name=merge href=#m><code>merge(t1, t2)</code></a></h4>
+<h3>&bull; &nbsp; <a name=merge href=#m><code>merge(t1, t2)</code></a></h3>
 <p>This is a general tool. It merges two tables, <code>t1</code> and <code>t2</code>, of any structure into <code>t1</code>.</p>
 <p>If <code>t1</code> and <code>t2</code> are flatten tables, it functions like finding the union of two sets.</p>
 <p>&#x2713; &nbsp; If two same "named" items are not both tables, the one in the second table overwrites the one in the first table.</p>
@@ -2124,7 +2124,7 @@ merge(A, B) -- like vertcat, but A's structure is here damaged!
 demathly(A)
 </pre>
 
-<h4>&bull; &nbsp; <a name=namedargs href=#m><code>namedargs(data, opts)</code></a></h4>
+<h3>&bull; &nbsp; <a name=namedargs href=#m><code>namedargs(data, opts)</code></a></h3>
 <p>It provides support for named arguments. If you want your function to accept named arguments, it helps.</p>
 <pre>require('mathly')
 
@@ -2149,7 +2149,7 @@ f(1, {z = 100}) -- same as f(1, nil, 100)
 f({z = 100})    -- same as f(nil, nil, 100)
 </pre>
 
-<h4>&bull; &nbsp; <a name=npk></a><a name=nck></a><a name=nchoosek href=#m><code>nchoosek(n, k, permq), nck(n, k), npk(n, k)</code></a></h4>
+<h3>&bull; &nbsp; <a name=npk></a><a name=nck></a><a name=nchoosek href=#m><code>nchoosek(n, k, permq), nck(n, k), npk(n, k)</code></a></h3>
 <p>Return the number of combinations, if <code>permq</code> is <code>nil</code> (not provided), or otherwise permutations of <code>n</code> items taken <code>k</code> at a time.</p>
 <p><code>nck(n, k)</code> and <code>npk(n, k)</code> return the number of combinations and permutations of <code>n</code> items taken <code>k</code> at a time, respectively.</p>
 <pre>require('mathly')
@@ -2160,7 +2160,7 @@ nck(n, n - k)
 npk(n, k) -- or: nchoosek(n, k, true)
 </pre>
 
-<h4>&bull; &nbsp; <a name=norm href=#m><code>norm(x)</code></a></h4>
+<h3>&bull; &nbsp; <a name=norm href=#m><code>norm(x)</code></a></h3>
 <p>Return the Euclidean/Frobenius norm of a vector/matrix.</p>
 <p>Note: With MATLAB, if <code>x</code> is a mxn matrix with <code>m, n ≥ 2</code>, call <code>norm(x, "fro")</code>.</p>
 <pre>require('mathly')
@@ -2175,7 +2175,7 @@ norm(A * inv(A) - eye(7)) < 10*eps -- check if two vectors/matrices are equal
 norm({1, 2, {3, {4, 5}}, 6}) -- flattened first; same as norm({1, 2, 3, 4, 5, 6})
 </pre>
 
-<h4>&bull; &nbsp; <a name=zeros></a><a name=rand></a><a name=randi></a><a name=randn></a><a name=ones href=#m><code>ones</code>, <code>zeros</code>, <code>rand</code>, <code>randi</code>, <code>randn</code></a></h4>
+<h3>&bull; &nbsp; <a name=zeros></a><a name=rand></a><a name=randi></a><a name=randn></a><a name=ones href=#m><code>ones</code>, <code>zeros</code>, <code>rand</code>, <code>randi</code>, <code>randn</code></a></h3>
 <p>The usage of these functions is the same except randi that can take more arguments.</p>
 <table><tbody>
 <tr><td width=20></td><td><code>ones(m, n)</code></td><td> </td><td width=10> </td><td>Return a <code>mxn</code> MathLua matrix of which each element is 1.</td></tr>
@@ -2243,14 +2243,14 @@ randi() -- or randi({1, 100})
 </pre>
 <p>&#x2713; &nbsp; Special usage: <code>rand()</code> returns a random number on [0, 1).</p>
 
-<h4>&bull; &nbsp; <a name=powermod href=#m><code>powermod(b, n, m)</code></a></h4>
+<h3>&bull; &nbsp; <a name=powermod href=#m><code>powermod(b, n, m)</code></a></h3>
 <p>Return the modular exponentiation <code>b<sup>n</sup> mod m</code>, i.e., the remainder of <code>b<sup>n</sup></code> divided by <code>m</code>.</p>
 <p>Note: <code>b, n</code>, and <code>m</code> are nonnegative integers with <code>m &gt; 0</code>.</p>
 <pre>require('mathly')
 powermod(211, 410, 19) -- 6
 </pre></code>
 
-<h4>&bull; &nbsp; <a name=sprintf></a><a name=printf href=#m><code>printf(...)</code>, <code>sprintf(...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=sprintf></a><a name=printf href=#m><code>printf(...)</code>, <code>sprintf(...)</code></a></h3>
 <p>This kind of functions is a commonly used tool for printing or preparing a formatted string in many programming languages like C/C++ and MATLAB. They print or prepare a formatted string.</p>
 <p>These two functions depend on <a href="manual.html#pdf-string.format"><code>string.format</code></a>.</p>
 <table><tbody>
@@ -2258,7 +2258,7 @@ powermod(211, 410, 19) -- 6
 <tr><td width=20></td><td><code>sprintf</code></td><td> </td><td width=10> </td><td>Prepare a formatted string.</td></tr>
 </tbody></table>
 
-<h4>&bull; &nbsp; <a name=sum></a><a name=prod href=#m><code>prod(A)</code>, <code>sum(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=sum></a><a name=prod href=#m><code>prod(A)</code>, <code>sum(A)</code></a></h3>
 <ol>
 <li>If <code>A</code> is a table or MathLua row/column vector, return the product/sum of its elements;</li>
 <li>If <code>A</code> is a <code>mxn</code> matrix, return a row vector of which the <code>i</code>-th element is the product/sum of
@@ -2286,7 +2286,7 @@ disp(prod(a))
 </pre>
 
 
-<h4>&bull; &nbsp; <a name=qq href=#m><code>qq(c, t, f)</code></a></h4>
+<h3>&bull; &nbsp; <a name=qq href=#m><code>qq(c, t, f)</code></a></h3>
 <p>It is like the ternary operator in C/C++: <code>c? t : f</code>. If <code>c</code> is true, return <code>t</code>; otherwise, return <code>f</code>.</p>
 <p>Its existence is first for implementing complicated logic in the <a href=#easyf>shortcut for defining an anonymous function</a>.</p>
 <p>Note: <code>x = qq(c, expr1, expr2)</code> might be a worse choice than <code>if c then x = expr1 else x = expr2 end</code> when the evaluation of <code>expr1</code>
@@ -2303,7 +2303,7 @@ end
 y = qq(isodd(x), 'odd', 'even')
 </pre>
 
-<h4>&bull; &nbsp; <a name=qr href=#m><code>qr(A)</code></a></h4>
+<h3>&bull; &nbsp; <a name=qr href=#m><code>qr(A)</code></a></h3>
 <p>Return <code>Q</code> and <code>R</code> of QR factorization <code>A = QR</code>, where <code>A</code> is a <code>mxn</code> matrix, <code>Q</code> is a <code>mxn</code> matrix with orthonormal
 column vectors, and <code>R</code> is an invertible upper triangular <code>nxn</code> matrix.</p>
 <p>&#x2713; &nbsp; MathLua applies the Gram-Schmidt process and requires that <code>m &ge; n</code>.
@@ -2325,7 +2325,7 @@ disp(Q * R - A)
 -- -0.0000  -0.0000  -0.0000
 </pre>
 
-<h4>&bull; &nbsp; <a name=seq></a><a name=range href=#m><code>range(x, y, s), seq(x, y, s)</code></a></h4>
+<h3>&bull; &nbsp; <a name=seq></a><a name=range href=#m><code>range(x, y, s), seq(x, y, s)</code></a></h3>
 <p>They are the same and return a sequence of numbers starting at <code>x</code>, on <code>[x, y]</code>, and incrementing by <code>s</code> (<code>1</code> by default if <code>x</code> &lt; <code>y</code>; <code>-1</code>, otherwise).</p>
 <p>See also: <a href=#linspace><code>linspace</code></a>, <a href=#table1><code>table1</code></a>.</p>
 <pre>require('mathly')
@@ -2350,7 +2350,7 @@ disp(range(0, 5, 0.6))
 -- 0  0.60  1.20  1.80  2.40  3.00  3.60  4.20  4.80
 </pre>
 
-<h4>&bull; &nbsp; <a name=remake href=#m><code>remake(A, opt)</code></a></h4>
+<h3>&bull; &nbsp; <a name=remake href=#m><code>remake(A, opt)</code></a></h3>
 <p>Generate a lower (opt = 'LT'), upper (opt = 'UT'), diagonal (opt = 'DIAG'), or symmetrical (opt = 'SYM') matrix from matrix <code>A</code>.</p>
 <p>If, say, <code>opt = {k<sub>1</sub>, k<sub>2</sub>, ..., k<sub>m</sub>}</code>, generate from matrix <code>A</code> a matrix which keeps the
 diagonal entries <code>k<sub>i</sub></code> rows above (<code>k<sub>i</sub> > 0</code>) or <code>-k<sub>i</sub></code> rows below (<code>k<sub>i</sub>
@@ -2395,7 +2395,7 @@ remake(A, {-1, seq(1,3)})
 remake(randi({-100, 100}, 6), 'LT') -- generate randomly a lower triangular matrix
 </pre>
 
-<h4>&bull; &nbsp; <a name=repmat href=#m><code>repmat(A, m, n)</code></a></h4>
+<h3>&bull; &nbsp; <a name=repmat href=#m><code>repmat(A, m, n)</code></a></h3>
 <p>Return a <code>mxn</code> block matrix with each entry a copy of matrix <code>A</code>. The default value of <code>n</code> is <code>m</code>.</p>
 <p>See also: <a href=#diag><code>diag</code></a>, <a href=#expand><code>expand</code></a>, <a href=#flipud><code>flipud</code></a>,
 <a href=#fliplr><code>fliplr</code></a>, <a href=#remake><code>remake</code></a>, <a href=#reshape><code>reshape</code></a>,
@@ -2422,7 +2422,7 @@ disp(repmat(5, 2, 3)) -- same as mathly(2, 3, 5)
 -- 5  5  5
 </pre>
 
-<h4>&bull; &nbsp; <a name=reshape href=#m><code>reshape(A, m, n)</code></a></h4>
+<h3>&bull; &nbsp; <a name=reshape href=#m><code>reshape(A, m, n)</code></a></h3>
 <p>Rearrange columnwisely existing elements in a table or MathLua matrix <code>A</code> and return a new <code>mxn</code> MathLua matrix.</p>
 <p>See also: <a href=#diag><code>diag</code></a>, <a href=#expand><code>expand</code></a>, <a href=#flipud><code>flipud</code></a>,
 <a href=#fliplr><code>fliplr</code></a>, <a href=#remake><code>remake</code></a>, <a href=#repmat><code>repmat</code></a>,
@@ -2455,7 +2455,7 @@ disp(c)
 -- -1  2  7 -3  0  0  0
 </pre>
 
-<h4>&bull; &nbsp; <a name=reverse href=#m><code>reverse(tbl)</code></a></h4>
+<h3>&bull; &nbsp; <a name=reverse href=#m><code>reverse(tbl)</code></a></h3>
 <p>Return a table with order of elements in table <code>tbl</code> reversed.</p>
 <p>&#x2713; &nbsp; If <code>tbl</code> is a matrix, it is flattened columnwisely first to a table and then reversed.</p>
 <pre>require('mathly')
@@ -2467,7 +2467,7 @@ disp(reverse(a)) -- or tt(a, {-1, 1})
 -- 10   9   8   7   6   5   4   3   2   1
 </pre>
 
-<h4>&bull; &nbsp; <a name=round href=#m><code>round(x, n)</code></a></h4>
+<h3>&bull; &nbsp; <a name=round href=#m><code>round(x, n)</code></a></h3>
 <p>Round <code>x</code> to <code>n</code> decimal places (default: 0).</p>
 <pre>mathly = require('mathly')
 
@@ -2484,7 +2484,7 @@ round(pi, 4)
 -- 3.1416
 </pre>
 
-<h4>&bull; &nbsp; <a name=rref href=#m><code>rref(A, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=rref href=#m><code>rref(A, ...)</code></a></h3>
 <p>If there is one more argument, i.e., <code>rref(A, B)</code>, <code>A</code> and <code>B</code> will be merged horizontally into A.
 <p><code>A</code> and <code>B</code> must be MathLua matrices with the same row number.</p>
 <p>Return the reduced row-echelon form of a MathLua matrix <code>A</code>.</p>
@@ -2525,7 +2525,7 @@ disp((b^T)[3]) -- solution for Ax = b<sub>3</sub>
 -- 7.2500  -3.5000  -0.7500
 </pre>
 
-<h4>&bull; &nbsp; <a name=save href=#m><code>save(datafile, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=save href=#m><code>save(datafile, ...)</code></a></h3>
 <p>Save specified or all user-defined variables and their values to Lua or MATLAB script file, <code>datafile</code>.</p>
 <p>&#x2713; &nbsp; If the name of <code>datafile</code> ends in <code>.m</code>, the data is saved in the format of MATLAB
 scripts. Note: Data like <code>x = {1, true, 'abc', c = {2, {3}, d = 'bcd'}}</code> are undefined in MATLAB.</p>
@@ -2559,7 +2559,7 @@ disp(b)
 print(c) -- nil
 </pre>
 
-<h4>&bull; &nbsp; <a name=sleep href=#m><code>sleep(n)</code></a></h4>
+<h3>&bull; &nbsp; <a name=sleep href=#m><code>sleep(n)</code></a></h3>
 <p>Pause program execution for <code>n</code> seconds. <b>Note</b>: It consumes CPU cycles unnecessarily and is not recommended for long pauses.</p>
 <p>See also: <a href=img/anim.html#sleep>Example</a></p>
 <pre>require('mathly')
@@ -2576,7 +2576,7 @@ may not be needed.</p>
 with MathLua plots and animations, you may start the browser before running MathLua plotting
 commands. This shall work with Firefox, Pale Moon, etc., by default.</p>
 
-<h4>&bull; &nbsp; <a name=sort href=#m><code>sort(tbl, compf)</code></a></h4>
+<h3>&bull; &nbsp; <a name=sort href=#m><code>sort(tbl, compf)</code></a></h3>
 <p>Sort table <code>tbl</code> and return the resulted table.</p>
 <p>Provided for convenience, it is almost exactly the same as <a href="manual.html#pdf-table.sort"><code>table.sort(tbl, compf)</code></a>.</p>
 <p>For <code>table.sort(tbl)</code>, <code>tbl</code> must be a variable rather than a specific table. Otherwise, say, <code>table.sort({2, 0, 2, 4})</code> does nothing.</p>
@@ -2595,7 +2595,7 @@ disp(sort({2, 0, 2, 4}))
 -- 0  2  2  4
 </pre>
 
-<h4>&bull; &nbsp; <a name=var></a><a name=std href=#m><code>std(x, opt)</code>, <code>var(x, opt)</code></a></h4>
+<h3>&bull; &nbsp; <a name=var></a><a name=std href=#m><code>std(x, opt)</code>, <code>var(x, opt)</code></a></h3>
 <ol>
 <li>If <code>x</code> is a table or MathLua row/column vector, return the standard deviation of its elements;</li>
 <li>If <code>x</code> is a <code>mxn</code> matrix, return a row vector of which the <code>i</code>-th element is the standard deviation of
@@ -2621,7 +2621,7 @@ disp(var(A, 1))
 -- 1.5556  4.6667  6.8889
 </pre>
 
-<h4>&bull; &nbsp; <a name=strcat href=#m><code>strcat(...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=strcat href=#m><code>strcat(...)</code></a></h3>
 <p>Concatenate strings and return the resulted string.</p>
 <p>See also: <a href=#tblcat><code>tblcat</code></a></p>
 <pre>require('mathly')
@@ -2634,10 +2634,10 @@ print(strcat(34,'Hello, ', {'the ', 'world', '!'}, 34)) -- 34? ascii code for "
 -- "Hello, the world!"
 </pre>
 
-<h4>&bull; &nbsp; <a name=submatrix href=#m><code>submatrix(A, rowrange, columnrange, B, rowrange1, columnrange1)</code></a></h4>
+<h3>&bull; &nbsp; <a name=submatrix href=#m><code>submatrix(A, rowrange, columnrange, B, rowrange1, columnrange1)</code></a></h3>
 <p>It is an alias of <a href=#copy>copy</a> when <code>A</code> is a MathLua matrix.</p>
 
-<h4>&bull; &nbsp; <a name=subtable href=#m><code>subtable(A, irange, B, irange1)</code></a></h4>
+<h3>&bull; &nbsp; <a name=subtable href=#m><code>subtable(A, irange, B, irange1)</code></a></h3>
 <p>It is an alias of <a href=#copy>copy</a> when <code>A</code> is a table but not a mxn matrix.</p>
 <pre>require('mathly')
 
@@ -2656,7 +2656,7 @@ h/3 * (f(a) + 4*sum(f(subtable(x, {2, n, 2}))) + 2*sum(f(subtable(x, {3, n - 1, 
 -- 18.877641573244986
 </pre>
 
-<h4>&bull; &nbsp; <a name=tables></a><a name=table1 href=#m><code>table1(expr, opts)</code></a></h4>
+<h3>&bull; &nbsp; <a name=tables></a><a name=table1 href=#m><code>table1(expr, opts)</code></a></h3>
 <p>It generates a table or a table of tables like the powerful <i>Mathematica</i> tool, <code>Table</code>.
 It must be the most frequently used <i>Mathematica</i> command.</p>
 <p>The concept, controls, is used here. It is borrowed from <a href=img/anim.html#animate><code>animate</code></a> and <a href=img/anim.html#manipulate><code>manipulate</code></a>
@@ -2756,7 +2756,7 @@ display(fs, 3)
 plot({xrange = {-6, 6}}, table.unpack(flatten(fs)))
 </pre>
 
-<h4>&bull; &nbsp; <a name=tblcat href=#m><code>tblcat(t<sub>1</sub>, t<sub>2</sub>, ...)</code></code></a></h4>
+<h3>&bull; &nbsp; <a name=tblcat href=#m><code>tblcat(t<sub>1</sub>, t<sub>2</sub>, ...)</code></code></a></h3>
 <p>Flatten and concatenate tables <code>t<sub>1</sub></code>, <code>t<sub>2</sub></code>, ... and return the resulted table. The tables here may just be numbers, boolean values, or strings.</p>
 <p>See also: <a href=#strcat><code>strcat</code></a></p>
 <pre>mathly = require('mathly')
@@ -2774,7 +2774,7 @@ disp(tblcat(1, {c = 2, a = {3, 4}}, true, {ab = {5, 6, 'OK'}, aa = 7}))
 -- {1, 3, 4, 2, true, 7, 5, 6, "OK"}
 </pre>
 
-<h4>&bull; &nbsp; <a name=toc></a><a name=tic href=#m><code>tic()</code>, <code>toc()</code></a></h4>
+<h3>&bull; &nbsp; <a name=toc></a><a name=tic href=#m><code>tic()</code>, <code>toc()</code></a></h3>
 <table><tbody>
 <tr><td width=20></td><td><code>tic()</code></td><td> </td><td width=10> </td><td>Start a wall-clock timer.</td></tr>
 <tr><td width=20></td><td><code>toc()</code></td><td> </td><td width=10> </td><td>Print or return elapsed time on a wall-clock timer. Note: The measurement on Linux can't be in milliseconds.</td></tr>
@@ -2790,14 +2790,14 @@ x = toc()
 printf("The loop took %.2f seconds.", x)
 </pre>
 
-<h4>&bull; &nbsp; <a name=unique href=#m><code>unique(tbl)</code></a></h4>
+<h3>&bull; &nbsp; <a name=unique href=#m><code>unique(tbl)</code></a></h3>
 <p>Return the same data as in table <code>tbl</code> but with no repetitions. Data is sorted.</p>
 <pre>mathly = require('mathly')
 disp(unique({4,5,2,1,-2,2,4,2,7,6,19}), '')
 -- {-2, 1, 2, 4, 5, 6, 7, 19}
 </pre>
 
-<h4>&bull; &nbsp; <a name=vectorangle href=#m><code>vectorangle(a, b)</code></a></h4>
+<h3>&bull; &nbsp; <a name=vectorangle href=#m><code>vectorangle(a, b)</code></a></h3>
 <p>Return the angle in radians between two vectors.</p>
 <pre>require('mathly')
 
@@ -2812,7 +2812,7 @@ vectorangle({1, 0, 1}, {0, 1, 1})
 -- 1.0471975511965979 (60.000000000000007 degree)
 </pre>
 
-<h4>&bull; &nbsp; <a name=vertcat href=#m><code>vertcat(A, B, ...)</code></a></h4>
+<h3>&bull; &nbsp; <a name=vertcat href=#m><code>vertcat(A, B, ...)</code></a></h3>
 <P>Concatenate matrices <code>A</code>, <code>B</code>, ... in order vertically. Matrices must have the same number of columns.</P>
 <p>See also: <a href=#horzcat><code>..</code> (or <code>horzcat</code>)</a>; <a href=#diag><code>diag</code></a>,
 <a href=#expand><code>expand</code></a>, <a href=#flipud><code>flipud</code></a>, <a href=#fliplr><code>fliplr</code></a>,
