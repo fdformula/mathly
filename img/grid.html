@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<LINK REL="stylesheet" TYPE="text/css" HREF="mathlua.css">
+<script src="copycode.js" defer></script>
+<title>MathLua: plot(...)</title>
+</head>
+<body>
+<div>
+<h2><a href=../mathly.html#m>Plotly JavaScript Figure Reference: <code>layout</code> and <code>grid</code></a></h2>
+<p></p>
+<P>You can find the basic usage of the attribute, <code>layout</code>, in examples of this documentation. For more information
+about the option and more control of your figure, you may refer to the official website of Plotly Javascript Figure Reference
+at <a href=https://plotly.com/javascript/reference/layout/ target="_blank">https://plotly.com/javascript/reference/layout/</a>.</p>
+<p>For simplicity and the small size of MathLua, we just cover a small subset of the features provided by Plotly JavaScript
+graphing library. However, it doesn't set limitations for you to experiment with various attributes supported by Plotly.</p>
+<p>By the way, <em>if you want more control over a graph/figure, you can always let MathLua plot it first and then start working on its
+output, the HTML file <code>_tmp-mathly_plot-6_4.html</code></em>.</p>
+<p>A summary of <code>plot</code> together with attributes seen in our examples is as follows:</p>
+<pre>-- axissquare()    -- axisnotsquare()    -- invalid when layout.grid is choosen
+-- showaxes()      -- shownotaxes()      --
+-- showxaxis()     -- shownotxaxis()     --
+-- showyaxis()     -- shownotyaxis()     --
+-- showgridlines() -- shownotgridlines() --
+-- showlegend()    -- shownotlegend()
+options = {
+  -- xrange = {-5, 5},
+  -- yrange = {-5, 5},
+  -- names = {'name_of_first_graph', ...}, -- run first: showlegend()
+  -- layout = {
+    -- width = 600, height = 450, -- default setting
+    -- title = "Example",
+    -- xaxis = {title = "Your x label"}, yaxis = {title = "Your y label"},
+    -- grid = {
+    --   rows = 2, columns = 3,
+    --   xranges = {{-5, 5}, nil,     {0, 5}, ...},
+    --   yranges = {{0, 10}, {-1, 2}, nil,    ...}
+    -- },
+    -- gridaxes = {
+    --   xaxis  = {title = "x label 1"}, yaxis  = {title = "y label 1"},
+    --   xaxis2 = {title = "x label 2"}, yaxis2 = {title = "y label 2"},
+    --   -- xaxis3, yaxis3 ...
+    -- },
+    -- margin = {l = 10, r = 40, t = 40, b = 40, pad = 10},
+    -- autosize = false
+  -- }
+}
+plot(data_functions_and_styles, options)
+</pre>
+<p>You may use it as a template, remove some attributes, and fine-tune some others for your needs.</p>
+<p>&#x2713; &nbsp; To insert such a template, press Ctrl-P P in <a href=#cudatext>CudaText</a>, and press Ctrl-T in <a href=#cudatext>Lite XL</a>.</p>
+<p>For example,</p>
+<pre>axissquare()
+shownotlegend()
+options = {layout = {
+  width = 500, height = 200,
+  xaxis = {title = "<i>x</i>"}, yaxis = {title = "sin <i>x</i>"},
+  margin = {l = 70, r = 40, t = 40, b = 40, pad = 5},
+  autosize = false
+}}
+plot(sin, '-r', options)
+--<img src=sin1.png width=320>
+
+</pre>
+<p>Attributes <code>gridaxes</code> and <code>gridaxisnames</code> can specify axis labels of subplots.</p>
+<pre>require('mathly')
+
+plot(
+  sin, cos, '@(x) x', '@(x) x^2',
+  {layout = {
+     width = 800, height = 500, title = "Example",
+     grid = {rows = 2, columns = 2, xranges = {{-pi, pi}, {-2*pi, pi}, {-5, 5}, {-20, 20}}},
+     gridaxes = {
+       xaxis  = {title = "x label 1"}, yaxis  = {title = "y label 1"},
+
+       xaxis2 = {title = "x label 2"}, yaxis2 = {title = "y label 2"},
+
+       yaxis3 = {title = "y label 3"},
+       xaxis3 = {title = "x label 3", domain = {0, 0.3}, scaleanchor = 'y3', scaleratio = 1}, -- square aspect ratio
+
+       xaxis4 = {title = "x label 4", domain = {0.4, 1}}, yaxis4 = {title = "y label 4"}
+     },
+     margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+     autosize = false
+    }
+  }
+)
+--<img src=grid1.png width=400>
+</pre>
+<p>Here, the <em>domain</em> attribute is used to define the positioning and the size of a subplot
+within the overall figure area, specified in normalized coordinates from 0 to 1. By default,
+space is evenly assigned to each subplot. Adjusting the range of the attribute, we can
+position subplots as we want.</p>
+<pre>clear()
+x = linspace(0, pi, 100)
+y1 = x^2
+y2 = sin(x)
+y3 = x^2 * sin(x)
+showlegend()
+
+-- without 'domain', the arrangement of subplots is a 2x2 grid, with one subplot blank
+plot(x, y1, {name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4},
+     x, y2, {color='blue', name='sin <i>x</i>'},
+     x, y3, {name = 'x<sup>2</sup> sin <i>x</i>'},
+     {layout = {
+        width =600, height = 600,
+        title='Example',
+        grid = {rows = 2, columns = 2},
+        gridaxes = {
+          xaxis  = {title = "x label 1"}, yaxis  = {title = "y label 1"},
+          xaxis2 = {title = "x label 2"}, yaxis2 = {title = "y label 2"},
+          xaxis3 = {title = "x label 3"},
+          yaxis3 = {title = "y label 3"}
+        },
+        margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+        autosize = false
+      }})
+--<img src=grid2.png width=400>
+
+-- a subplot occupies the entire row of a 2x2 grid
+plot(x, y1, {name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4},
+     sin,   {color='blue', name='sin <i>x</i>'},
+     x, y3, {name = 'x<sup>2</sup> sin <i>x</i>'},
+     {layout = {
+        width =600, height = 600,
+        title='Example',
+        grid = {rows = 2, columns = 2, xranges = {nil, {-pi, pi}, nil}},
+        gridaxes = {
+          xaxis  = {title = "x label 1"}, yaxis  = {title = "y label 1"},
+          xaxis2 = {title = "x label 2"}, yaxis2 = {title = "y label 2"},
+          xaxis3 = {title = "x label 3", domain = {0, 1}},
+          yaxis3 = {title = "y label 3"}
+        },
+        margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+        autosize = false
+      }})
+--<img src=grid3.png width=400>
+
+-- a subplot occupies the entire column of a 2x2 grid
+plot(x, y1, {name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4},
+     sin,   {color='blue', name='sin <i>x</i>'},
+     x, y3, {name = 'x<sup>2</sup> sin <i>x</i>'},
+     {layout = {
+        width =600, height = 400,
+        title='Example',
+        grid = {rows = 2, columns = 2, xranges = {nil, {-pi, pi}, nil}},
+        gridaxes = {
+          xaxis  = {title = "x label 1"}, yaxis  = {title = "y label 1"},
+          xaxis2 = {title = "x label 2"}, yaxis2 = {title = "y label 2", domain = {0, 1}},
+          xaxis3 = {title = "x label 3"},
+          yaxis3 = {title = "y label 3"}
+        },
+        margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+        autosize = false
+      }})
+--<img src=grid4.png width=400>
+
+-- a subplot occupies the entire column of a 2x2 grid with the width of each subplot specified
+plot(x, y1, {name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4},
+     sin,   {color='blue', name='sin <i>x</i>'},
+     x, y3, {name = 'x<sup>2</sup> sin <i>x</i>'},
+     {layout = {
+        width =600, height = 400,
+        title='Example',
+        grid = {rows = 2, columns = 2, xranges = {nil, {-pi, pi}, nil}},
+        gridaxes = {
+          xaxis  = {title = "x label 1", domain = {0, 0.3}}, yaxis  = {title = "y label 1"},
+          xaxis2 = {title = "x label 2", domain = {0.45, 1}}, yaxis2 = {title = "y label 2", domain = {0, 1}},
+          xaxis3 = {title = "x label 3", domain = {0, 0.3}},
+          yaxis3 = {title = "y label 3"}
+        },
+        margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+        autosize = false
+      }})
+--<img src=grid5.png width=400>
+</pre>
+<p>An example on <a href=https://plotly.com/javascript/axes/#fixedratio-axes target = "_blank">Plotly.com</a>:</p>
+<pre>
+x1 = {0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3}; y1 = {0, 0, 1, 1, 3, 3, 2, 2, 3, 3, 1, 1, 0, 0}
+x2 = {0, 1, 2, 3}; y2 = {1, 2, 4, 8}
+x3 = {1, 10, 100, 10, 1}; y3 = {0, 1, 2, 3, 4}
+x4 = {1, 100, 30, 80, 1}; y4 = {1, 1.5, 2, 2.5, 3}
+
+plot(
+  x1, y1, '-o', x2, y2, '-o', x3, y3, '-o', x4, y4, '-o',
+  {layout = {
+     width = 650, height = 500,
+     title = "fixed-ratio axes",
+     grid = {rows = 2, columns = 2},
+     gridaxisnames = {
+       -- xaxis  = "x", yaxis  = "y", -- default values
+       yaxis2 = "y2",
+       xaxis3 = "x2",
+       yaxis3 = "y3",
+       xaxis4 = "x2",
+       yaxis4 = "y4"
+     },
+     gridaxes = {
+       xaxis  = {nticks = 10, domain = {0, 0.45}, title = "shared X axis"},
+       yaxis  = {scaleanchor = "x", domain = {0, 0.45}, title = "1:1"},
+       yaxis2 = {scaleanchor = "x", scaleratio = 0.2, domain = {0.55, 1}, title = "1:5"},
+       xaxis2 = {type = "log", domain = {0.55, 1}, anchor = "y3", title = "unconstrained log X"},
+       yaxis3 = {domain = {0, 0.45}, anchor = "x2", title = "Scale matches ->"},
+       yaxis4 = {scaleanchor = "y3", domain = {0.55, 1}, anchor = "x2", title = "Scale matches <-"}
+     },
+     margin = {l = 58, r = 50, t = 40, b = 45, pad = 10},
+     autosize = false
+    }
+  }
+)
+--<img src=grid6.png width=400>
+</pre>
+<p>&#x2713; &nbsp; If the x and y ranges of subplots vary, the attributes <code>xranges</code> and <code>yranges</code>
+can be useful. They take the same format, e.g., <code>layout.grid.xranges = {{start, stop, step}, {start, stop, step}, ....}</code>,
+where <code>xranges[i]</code> is for the ith function/graph appearing in <code>plot(...)</code> from left to right, and
+<code>step</code> is optional, used to generate the x values of the ith subplot on <code>[start, stop]</code> if needed.
+If no such a range is needed, <code>nil</code> should be at the very position in the list. For example,</p>
+<pre>
+x = linspace(0, 10, 300)
+axisnotsquare()
+plot(sin, '-r', x, cos(x^2), {color='blue'}, exp, '@(x) exp(2*x)',
+  {layout = {
+      grid = {rows = 2, columns = 2,
+              xranges = {{0, pi}, {0, 2*pi}, {0, 5},   {0, 7}},
+              yranges = {{-1, 1}, {0, 1},    {0, 100}, {0, 1000000}}
+             },
+      autosize = false
+    }
+  }
+)
+--<img src=grid7.png width=400>
+
+plot(sin, '-r', x, cos(x^2), {color='blue'}, exp, '@(x) exp(2*x)',
+  {layout = {
+      grid = {rows = 2, columns = 2,
+              xranges = {nil,     {0, 2*pi}, {0, 5},   nil}, -- last nil can be dropped
+              yranges = {{-1, 1}, nil,       {0, 100}, nil}
+             },
+      autosize = false
+    }
+  }
+)
+--<img src=grid8.png width=400>
+</pre>
+</div>
+</body>
+</html>

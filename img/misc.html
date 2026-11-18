@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<LINK REL="stylesheet" TYPE="text/css" HREF="mathlua.css">
+<script src="copycode.js" defer></script>
+<title>MathLua: contourplot, slopefield, vectorfield2d</title>
+</head>
+<body>
+<div>
+<h2><a href=../mathly.html#m>MathLua: <code>contourplot, slopefield, vectorfield2d</code></a></h2>
+<p></p>
+<h4>&bull; &nbsp; <a name=directionfield></a><a name=slopefield href=../mathly.html#m><code>slopefield(f, xrange, yrange, scale), directionfield(f, xrange, yrange, scale)</code></a></h4>
+<p>They are the same function. Return a graphics object for <code><a href=plot.html>plot</a></code> to plot the slope field of <code>dy/dx = f(x, y)</code>.</p>
+<p><code>scale</code> (default to 1) controls the length of the dash line segments in a slope field.</p>
+<p><code>xrange</code> and <code>yrange</code> (default to <code>xrange</code>) take the format of <code>{initial value, terminal value, step (default: 1)}</code>.</p>
+<pre>require('mathly')
+
+clear()
+axissquare()
+plot(slopefield(function(x, y) return x + y end, {-3, 3, 0.2}),
+     {layout={width=600, height=600}})
+--<img src=slopef1.png width=320>
+
+plot(directionfield('@(x, y) x^2 - y', {-3.5, 3.5, 0.5}, {-3.5, 3.5, 0.5}, 2),
+     {layout={width=600, height=600}})
+--<img src=slopef2.png width=320>
+
+x = linspace(-3, 2.7, 100)
+y1 = x^2 - 2*x + 2 - exp(-x)
+y2 = x^2 - 2*x + 2 - 2*exp(-x -1)
+y3 = x^2 - 2*x + 2 - 8*exp(-x -2)
+xa = linspace(-2.77, 2.7, 90)
+ya = xa^2 - 2*xa + 2 - 1.2607*exp(-xa)
+axissquare()
+plot(slopefield('@(x, y) x^2 - y', {-3, 2.8, 0.5}, {-5, 4.5, 0.5}, 2),
+     x, y1, '-r', point(0, 1, {symbol='x', size=7, color='red'}),
+     x, y2, '-b', point(-1, 3, {symbol='circle', size=7, color='blue'}),
+     x, y3, '-g', point(-2, 2, {symbol='square', size=7, color='green'}),
+     xa, ya, '-n', point(-1.5, 1.6, {symbol='circle', size=7, color='purple'}),
+     {layout={width=400, height=600, title="y' = x<sup>2</sup> - y"}})
+--<img src=slopef3.png width=320>
+</pre>
+<h4>&bull; &nbsp; <a name=contourplot href=../mathly.html#m><code>contourplot(f, xdata, ydata, style)</code></a></h4>
+<P>Prepare a graphics object for <code>plot</code> to plot the contour map of function <code>f(x, y)</code>.</P>
+<p><code>xdata</code> and <code>ydata</code> can be either ranges or tables of numbers. <code>ydata</code>
+defaults to <code>xdata</code>. A range here takes the format of <code>{x1, x2, x3}</code> where x3 (default: 100)
+specifies how many numbers in the range from <code>x1</code> to <code>x2</code> will be generated evenly and used.
+Larger <code>x3</code> means better smoothness of the level/contour curves.</p>
+<pre>require('mathly')
+clear()
+function f(x, y) return x^2 - y^2 end
+plot(contourplot(f, {-5, 5}, {-8, 8}), {layout={width=500, height=600}})
+--<img src=ct1.png width=320>
+
+axissquare()
+plot(contourplot('@(x, y) x^2 + y^2', {-5, 5, 50}))
+--<img src=ct2.png width=320>
+
+plot(contourplot('@(x, y) x^2 + y^2', {-5, 5, 50}, {style = {}})) -- remove default style
+--<img src=ct3.png width=320>
+
+plot(contourplot('@(x, y) -3*x / (x^2 + y^2 + 1)', {-5, 5, 500}))
+--<img src=ct4.png width=320>
+
+plot(contourplot('@(x, y) -x*y * exp(-x^2 - y^2)', linspace(-1.7, 1.7, 500)))
+--<img src=ct5.png width=320>
+
+style = { contours = {
+  coloring = 'heatmap', -- values of coloring: 'lines', 'heatmap', 'fill'
+  -- colorscale = 'reds', -- 'Viridis', -- 'Jet', 'Electric', 'reds'
+  -- dx = 10, x0 = 5, dy = 20, y0 = 10
+  showscale = true, showlabels = true,
+  labelfont = { family = 'Raleway', size = 12, color = 'blue'}
+}}
+plot(contourplot('@(x, y) x^2 + y^2', {-5, 5, 50}, {style = style}))
+--<img src=ct6.png width=320>
+
+axissquare()
+style = {colorscale = 'Viridis', contours = { coloring = 'lines'}, showscale = false}
+x = linspace(-5, 1.2, 100)
+y = 1.3*(x + 1.73) + 1.4
+plot(contourplot('@(x, y) x^2 + y^2', {-5, 5, 50}, {style = style}), x, y)
+--<img src=ct7.png width=320>
+</pre>
+<h4>&bull; &nbsp; <a href=../mathly.html#m name=vectorfield2d><code>vectorfield2d(f, xrange, yrange, scale)</code></a></h4>
+<p>Return a graphics object for <code><a href=plot.html>plot</a></code> to plot the vector field of vector function <code>f(x, y)</code>.</p>
+<p><code>scale</code> (default to 1) controls the length of the arrows in the vector field.</p>
+<p><code>xrange</code> and <code>yrange</code> (default to <code>xrange</code>) take the format of <code>{initial value, terminal value, step (default: 1)}</code>.</p>
+<p>&#x2713; &nbsp; Note: How to know the vector at a point in a generated vector field? The point is the <em>head</em> of an arrow, and the arrow denotes the vector at that point.</p>
+
+<pre>require('mathly')
+
+clear()
+axissquare()
+plot(vectorfield2d('@(x,y) {sin(y), sin(x)}', {-pi, pi, pi/8}, {-pi, pi, pi/8}, 20))
+--<img src=vf1.png width=320>
+
+plot(vectorfield2d('@(x,y) {x, y}'))
+--<img src=vf2.png width=320>
+
+plot(vectorfield2d('@(x,y) {-x, -y}'))
+--<img src=vf4.png width=320>
+
+plot(vectorfield2d('@(x,y) {-x, y}')) --&gt; <a href=vf4.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {-y, x}')) --&gt; <a href=vf5.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {-y^2, 2*x^2}', {-5, 5, 0.5}, {-5, 5, 0.5}, 0.8)) --&gt; <a href=vf6.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {y, -x}')) --&gt; <a href=vf7.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {y, x}')) --&gt; <a href=vf8.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {-y, -x}', {scale=10}),
+     {layout={width=800, height=600, title='<b>F</b>(x, y) = {-y, -x}'}}) --&gt; <a href=vf9.png target=_blank>View</a>
+
+plot(vectorfield2d('@(x,y) {y, sin(x)}', {xrange={-2*pi, 2*pi, pi/8}, scale=7})) --&gt; <a href=vf10.png target=_blank>View</a>
+plot(vectorfield2d('@(x,y) {3*cos(3*x), 2*cos(2*y)}', {-1, 1, 1/10}, {-1.5, 1.5, 1/10}, 15),
+                   {layout={width=600, height=700}}) --&gt; <a href=vf11.png target=_blank>View</a>
+
+k, scale = 6, 1.8
+axissquare()
+plot(vectorfield2d('@(x, y) {x - y, x + y}', {-k, k}, {-k, k}, scale))
+--<img src=vf12.png width=320>
+
+plot(vectorfield2d('@(x, y) {-(x - y), -(x + y)}', {-k, k}, {-k, k}, scale)) --&gt; <a href=vf13.png target=_blank>View</a>
+plot(vectorfield2d('@(x, y) {x + y, x - y}', {-k, k}, {-k, k}, scale)) --&gt; <a href=vf14.png target=_blank>View</a>
+plot(vectorfield2d('@(x, y) {x - y, x - y}', {-k, k}, {-k, k}, scale)) --&gt; <a href=vf15.png target=_blank>View</a>
+plot(vectorfield2d('@(x, y) {x + y, x + y}', {-k, k}, {-k, k}, scale)) --&gt; <a href=vf16.png target=_blank>View</a>
+
+plot(vectorfield2d('@(x, y) {2*x*y, x^2-3*y^2}', {-3, 3}, {-3, 3}, 0.75),
+     contourplot('@(x, y) x^2*y - y^3', {-3, 3}))
+</pre><img src=vf17.png width=320>
+</div>
+</body>
+</html>

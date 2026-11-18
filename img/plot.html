@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<LINK REL="stylesheet" TYPE="text/css" HREF="mathlua.css">
+<script src="copycode.js" defer></script>
+<title>MathLua: plot(...)</title>
+</head>
+<body>
+<div>
+<h2><a href=../mathly.html#m>MathLua: <code>plot(...)</code></a></h2>
+<p></p>
+<p>Plot the graph(s) of functions defined by data points, using specifications/options.</p>
+<p>Some specifications:</p>
+<ol>
+<li>of a line, i.e., the graph of a function:<p><code>width</code> = 5</p><p><code>style</code> = <code>'-'</code> [solid, <code>':'</code> (dot), or <code>'--'</code> (dash)]</p>
+<p><code>mode</code> = <code>'lines+markers'</code>, <code>'lines'</code>, or <code>'markers'</code></p></li><p></p>
+<li>of a marker:<p><code>size</code> = 10</p><p><code>symbol</code> = <code>'circle'</code></p>
+Some possible symbols are <code>bowtie, circle, circle-open, circle-open-dot, cross, diamond, hexagram, hourglass,
+pentagon, square, square-open, star, triangle-left, triangle-right, triangle-up, triangle-down, x,</code> etc.</li><p></p>
+<li>of a plot:
+<p><a href=grid.html target=_blank><code>layout</code> = {<code>width</code> = 500, <code>height</code> = 400, <code>grid</code> = {<code>rows</code> = 2, <code>columns</code> = 2}, <code>title</code> = 'Demo'}</a></p></li>
+</ol>
+<p><a name=plotspecs></a>Shortcuts for specifications like <code>'--ro'</code>:</p>
+<table><tbody>
+<thead><tr><td>shortcut</td><td> &nbsp; <td>symbol</td></tr></thead>
+<tr><td><code>o</code></td><td> &nbsp; <td>circle</td></tr>
+<tr><td><code>*</code></td><td> &nbsp; <td>star</td></tr>
+<tr><td><code>x</code></td><td> &nbsp; <td>cross</td></tr>
+<tr><td><code>^</code></td><td> &nbsp; <td>triangle-up</td></tr>
+<tr><td><code>v</code></td><td> &nbsp; <td>triangle-down</td></tr>
+<tr><td><code>></code></td><td> &nbsp; <td>triagle-right</td></tr>
+<tr><td><code><</code></td><td> &nbsp; <td>triagle-left</td></tr>
+</tbody></table>
+<p></p>
+<table><tbody>
+<thead><tr><td>shortcut</td><td> &nbsp; <td>color</td></tr></thead>
+<tr><td><code>r</code></td><td> &nbsp; <td>red</td></tr>
+<tr><td><code>b</code></td><td> &nbsp; <td>blue</td></tr>
+<tr><td><code>g</code></td><td> &nbsp; <td>green</td></tr>
+<tr><td><code>c</code></td><td> &nbsp; <td>cyan</td></tr>
+<tr><td><code>m</code></td><td> &nbsp; <td>magenta</td></tr>
+<tr><td><code>y</code></td><td> &nbsp; <td>yellow</td></tr>
+<tr><td><code>k</code></td><td> &nbsp; <td>black</td></tr>
+<tr><td><code>w</code></td><td> &nbsp; <td>white</td></tr>
+</tbody></table>
+<p></p>
+<p>&#x2713; &nbsp; Filling specific regions? See <a href=../mathly.html#ff><code>examples</code></a>.</p>
+<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining an anonymous function</a>; <a href=#layout>Plotly JavaScript Figure Reference: <code>layout</code></a>.</p>
+<p></p>
+<p><b>Some examples</b></p>
+<pre>require('mathly')
+
+clear()
+x = linspace(0, pi, 100)
+y1 = sin(x)
+y2 = cos(x)
+y3 = x^2 * sin(x)
+
+specs1 = {layout={width=600, height=600, grid={rows=2, columns=2}, title='Example'}}
+specs2 = {color='blue', name='cos <i>x</i>', layout={width=500, height=500, grid={rows=4, columns=1}, title='Demo'}}
+specs3 = {width=3, name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4}
+
+plot(sin)
+--<img src=p1.png width=320>
+
+plot('@(x) x^2', {xrange={-6, 6}})
+--<img src=p2.png width=320>
+
+plot(sin, '-r',
+     '@(x) x^2', {color='blue'},
+     {xrange = {-0.5, 1}},
+     {layout = {title = 'Demo', xaxis = {title = 'x'}, yaxis = {title = 'y'},
+                margin = {l = 40, r = 40, t = 40, b = 40, pad = 40}}})
+--<img src=p3.png width=320>
+
+shownotlegend()
+plot(x, y1, '--xr',
+     x, y2, ':g',
+     text(0.79, 0.71 - 0.08, 'A'),
+     point(0.79, 0.71, {symbol='circle', size=10, color='blue'}))
+--<img src=p4.png width=320>
+
+plot(x, y1, x, y2, specs1, sin, '--r')
+--<img src=p5.png width=400>
+
+showlegend()
+plot(x, y1, specs3,
+     x, y2, specs2,
+     sin, {name = 'sin <i>x</i>'},
+     x, y3, {name = 'x<sup>2</sup> sin <i>x</i>'},
+     specs1) -- multiple layouts are merged into one with the last one overwriting others
+--<img src=p6.png width=320>
+
+axisnotsquare()
+A = rand(125, 4) -- each column of A defines a function with x changing from 0 to # of rows
+plot(A, specs1, {names={'f1', 'f2', 'f3', 'g'}})
+--<img src=p7.png width=450>
+
+plot(rand(100,5), {layout = {grid = {rows=3, columns=3}}}, rand(100,3))
+--<img src=p8.png width=500>
+</pre>
+<p>&#x2713; &nbsp; <a name=xrange></a><a name=yrange></a>The options <code>xrange</code> and <code>yrange</code> of <code><a href=#plot>plot</a></code> can be used to specify the ranges of x and y for all graphs on a single figure.
+They take the same format, e.g., <code>xrange = {start, stop, step}</code>, where <code>step</code> is optional, used to generate x values
+on <code>[start, stop]</code> if needed. For example,</p>
+<pre>require('mathly')
+x = linspace(0, 10, 300)
+axisnotsquare()
+plot(x, x^4*sin(x), '-r', x, x*cos(x^2), '-b', exp, {xrange={0, 5}, yrange={-5,30}})
+--<img src=p9.png width=320>
+
+fs = table1('!@(x) cos(i * x) * sin(i - x)', {i = {1, 4}, controls = 'i'})
+display(fs, 2)
+plot({xrange = {-6, 6}}, table.unpack(fs))
+--<img src=p10.png width=320>
+
+plot({xrange = {-6, 6, 0.01}}, table.unpack(fs)) -- smoother
+--<img src=p11.png width=320>
+</pre>
+
+<a name=specs></a><p>&#x2713; &nbsp; <a name=ff>We may use the following specifications to shade specific regions.</a></p>
+<table><tbody>
+<tr><td width=35><code>'fa'</code></td><td width=15> - </td><td>Fill to the x-Axis</td></tr>
+<tr><td><code>'ff'</code></td><td> - </td><td>Fill to to the previous Function</td></tr>
+<tr><td><code>'fn'</code></td><td> - </td><td>No filling</td></tr>
+<tr><td><code>'fs'</code></td><td> - </td><td>Fill to Self</td></tr>
+</tbody></table>
+<pre>require 'mathly'
+
+axisnotsquare()
+plot(sin, '-rfa')
+--<img src=plot6.png width=320>
+
+x = linspace(-2.337, 0.779, 100)
+X = linspace(-5, 5, 200)
+plot(X, cos(X), X, sin(X), '-rff') -- shade regions between two curves
+--<img src=plot7.png width=320>
+
+plot(x, cos(x), x, sin(x), '-rff', X, cos(X), X, sin(X))
+--<img src=plot8.png width=320>
+
+f = ff('@(x) sqrt(1 - x^2)')
+g = ff('@(x) 6 - (x - 2)^2')
+k = ff('@(x) x')
+a = fzero('@(x) f(x) - g(x)', 0)
+b = fzero('@(x) f(x) - k(x)', 1)
+c = fzero('@(x) g(x) - k(x)', 3)
+axissquare()
+xfg = linspace(a, b, 300)
+xkg = linspace(b, c, 200)
+plot(
+  -- draw graphs first
+  f, 'k', g, 'k', polarcurve(1, {0, 2*pi}, '-k'),
+  {xrange = {-1.1, 4.5}, yrange = {-1.1, 6.1}},
+
+  -- shade specific region(s)
+  xfg, f(xfg), 'k', xfg, g(xfg), '-lkff', -- like partitioning a region into y-simple
+  xkg, k(xkg), 'k', xkg, g(xkg), '-lkff'  -- subregions when evaluating a double integral
+)
+--<img src=plot8a.png width=320>
+</pre>
+<p>See: <a href=grid.html>More complicated examples of grids and subplots</a>.</p>
+<p>&#x2713; &nbsp; In <a href=../mathly.html#cudatext>CudaText</a>, press Ctrl-P P to insert a <code>plot</code> template.
+<p>&#x2713; &nbsp; In <a href=../mathly.html#litexl>Lite XL</a>, press Ctrl-T to insert a <code>plot</code> template.
+</div>
+</body>
+</html>

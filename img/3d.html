@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<LINK REL="stylesheet" TYPE="text/css" HREF="mathlua.css">
+<script src="copycode.js" defer></script>
+<title>MathLua: plot3d, plotparametriccurve3d, plotsphericalsurface</title>
+</head>
+<body>
+<div>
+<h2><a href=../mathly.html#m>MathLua: <code>plot3d, plotparametriccurve3d, plotsphericalsurface</code></a></h2>
+<p></p>
+<h4>&bull; &nbsp; <a name=plot3d href=../mathly.html#m><code>plot3d(f, xrange, yrange, title, resolution)</code></a></h4>
+<p>Plot a surface defined by <code>z = f(x, y)</code>. It is not designed as complicated as <code>plot(...)</code> for 2D graphs. It can only plot one surface at a time.</p>
+<p>If <code>f</code> is a function, <code>xrange = {xstart, xstop}</code> and <code>y = {ystart, ystop}</code> define the ranges
+for <code>x</code> and <code>y</code> (each default: <code>{-5, 5}</code>), respectively; otherwise, the first 3 arguments are tables of <code>x, y</code>, and <code>z</code> values,
+which allows users to set up data and use this function to display a graph. Given that <code>x = {x1, x2, ..., xn}</code> and
+<code>y = {y1, y2, ..., yn}</code>, the data passed to <code>plot3(X, Y, Z, title)</code> are as follows:</p>
+<code><pre style="color:black">
+X = {{x1, x1, ..., x1}, {x2, x2, ..., x2}, ..., {xn, xn, ..., xn}}
+Y = {{y1, y2, ..., yn}, {y1, y2, ..., yn}, ..., {y1, y2, ..., yn}}
+Z = {{z11,  ...,  z1n}, {z21,  ...,  z2n}, ..., {zn1,  ...,  zn2}}
+</pre></code>
+<p>where <code>zij = f(xi, yj)</code>, if a surface is defined by <code>z = f(x, y)</code>.</p>
+<p><code>resolution</code>? See <a href=../mathly.html#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
+<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
+<pre>mathly = require('mathly')
+
+clear()
+format 'short'
+plot3d('@(x, y) x^2 - y^2') -- click the graph to view a saddle point
+--<a href=3d1.html target=_blank><img src=3d1.png width=320></a>
+
+function f(x, y) local t = sqrt(x^2 + y^2); return sin(t) / t end
+plot3d(f, {-12, 12}, {-12, 12})
+--<img src=plot3d.png width=320>
+
+-- prepare data for plot3d
+n = 100
+x = linspace(-12, 12, n)
+y = x
+X, Y = {}, {}
+for i = 1, n do
+  X[i] = mathly(1, n, x[i])
+  Y[i] = y
+end
+Z = map(f, X, Y)
+plot3d(X, Y, Z)
+</pre>
+
+<h4>&bull; &nbsp; <a name=plotparametriccurve3d href=../mathly.html#m><code>plotparametriccurve3d({x(t), y(t), z(t)}, trange, title, resolution, orientationq)</code></a></h4>
+<p>Plot a space curve defined by <code>{x(t), y(t), z(t)}</code>.</p>
+<p><code>resolution</code> and <code>orientationq</code>? See <a href=gobjs.html><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
+<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
+<pre>require('mathly')
+plotparametriccurve3d({cos, sin, '@(t) t'}, {0,6*pi}, "Helix")
+--<img src=pc3d1.png width=320>
+
+plotparametriccurve3d({'@(t) t*cos(t)', '@(t) t*sin(t)', '@(t) t'}, {0, 8*pi})
+--<img src=pc3d2.png width=320>
+</pre>
+
+<h4>&bull; &nbsp; <a name=plotparametricsurface href=../mathly.html#m><code>plotparametricsurface({x(u, v), y(u, v), z(u,v)}, urange, vrange, title, resolution, orientationq)</a></code></h4>
+<p>Plot a surface defined by <code>x = x(u, v), y = y(u, v), z = z(u,v)</code>.</p>
+<p><code>resolution</code> and <code>orientationq</code>? See <a href=../mathly.html#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
+<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
+<pre>require('mathly')
+
+plotparametricsurface({'@(u,v) u', '@(u,v) v', '@(u,v) sqrt(u^2 + v^2)'}, {-3, 3}, {-3, 3})
+--<img src=ps1.png width=320>
+
+-- cylindrical coordinates: x = r cos(t), y = r sin(t), z = z
+r = 2
+plotparametricsurface({'@(t, z) r * cos(t)', '@(t, z) r * sin(t)', '@(t, z) z'}, {0, 2*pi}, {-3, 3}, 'Circular Cylinder')
+
+--<a href=ps1a.html target=_blank><img src=ps1a.png width=320></a>
+
+-- cylindrical coordinates: x = x, y = r cos(t), z = r sin(t)
+r = 2
+plotparametricsurface({'@(t, x) x', '@(t, x) r * cos(t)', '@(t, z) r * sin(t)'}, {0, 2*pi}, {-3, 3})
+
+--<img src=ps1b.png width=320>
+
+R = 5
+r = 2
+plotparametricsurface({ -- torus
+  '@(s,t) (R + r * cos(t)) * cos(s)',
+  '@(s,t) (R + r * cos(t)) * sin(s)',
+  '@(s,t) r * sin(t)'})
+--<img src=ps2.png width=320>
+
+do -- https://plotly.com/python/3d-surface-plots/
+  local a, b, d = 1.32, 1, 0.8
+  local c = a^2 - b^2
+  local function x(u, v) return (d * (c - a * cos(u) * cos(v)) + b^2 * cos(u)) / (a - c * cos(u) * cos(v)) end
+  local function y(u, v) return b * sin(u) * (a - d*cos(v)) / (a - c * cos(u) * cos(v)) end
+  local function z(u, v) return b * sin(v) * (c*cos(u) - d) / (a - c * cos(u) * cos(v)) end
+  plotparametricsurface({x, y, z}, {0, 2*pi}, {0, 2*pi})
+end
+--<img src=ps3.png width=320>
+</pre>
+
+<h4>&bull; &nbsp; <a name=plotsphericalsurface href=../mathly.html#m><code>plotsphericalsurface(ρ(θ,φ), θrange, φrange, title, resolution)</code></a></h4>
+<p>Plot spherical function <code>ρ(θ, φ)</code>, where <code>θ</code> is in the range <code>θrange = {θ1, θ2}</code> (default: <code>{0, 2*pi}</code>)
+and <code>φ</code> in the range <code>φrange = {φ1, φ2}</code> (default: <code>{0, pi}</code>). If <code>ρ(θ, φ)</code> is a number, the radius of a sphere centered at the origin, plot the sphere.</p>
+<p><code>resolution</code>? See <a href=../mathly.html#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
+<pre>require('mathly')
+plotsphericalsurface(1)
+--<img src=ps4.png width=320>
+
+plotsphericalsurface('@(theta, phi) theta + 2 * phi', {0, 4*pi}, nil, 'Demo')
+--<img src=ps5.png width=320>
+
+plotsphericalsurface(function(t, p) return 2 + sin(5*p + 7*t) end)
+--<img src=ps6.png width=320>
+</pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<LINK REL="stylesheet" TYPE="text/css" HREF="mathlua.css">
+<script src="copycode.js" defer></script>
+<title>MathLua: lagrangepoly, newtonpoly, polyfit, polynomial, polyval</title>
+</head>
+<body>
+<div>
+<h2><a href=../mathly.html#m>MathLua: <code>lagrangepoly, newtonpoly, polyfit, polynomial, polyval</code></a></h2>
+<p></p>
+<h4>&bull; &nbsp; <a name=polyfit href=../mathly.html#m><code>polyfit({x1, x2, ...}, {y1, y2, ...}, n, xx), polynomial({{x1, y1}, {x2, y2}, ...}, n, xx)</code></a></h4>
+<p>Construct a polynomial of degree <code>n</code> that best fits the given data, defined by <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, in a least-squares sense.</p>
+<p>If <code>xx</code> is provided, return the value(s) of the polynomial at (each of) <code>xx</code>;
+otherwise, return the string and the coefficients of the polynomial.</p>
+<p>See also: <code><a href=#lagrangepoly><code>lagrangepoly</code></a>, <a href=#newtonpoly><code>newtonpoly</code></a>, <a href=#polynomial><code>polynomial</code></a>, <a href=#polyval><code>polyval</code></a></code>.</p>
+<pre>require('mathly')
+
+axisnotsquare()
+x = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
+y = {1.94, 3.96, 5, 6.5, 8.07, 6.09, 9.14, 10.97, 11.21, 14.74, 18.28}
+s, coeffs = polyfit(x, y, 1) -- linear least-squares regression
+print(s)
+corr(x, y)
+plot(x, y, 'o', '@(x) ' .. s)
+--<img src=pf1.png width=320>
+
+xx = {10, 15, 22}
+polyval(coeffs, xx)
+polyfit(x, y, 1, xx)
+
+s, coeffs = polyfit(x, y, 8)
+plot(x, y, 'o', '@(x) ' .. s)
+--<img src=pf2.png width=320>
+
+polyfit({{0, 1.94}, {10, 3.96}, {20, 5}, {30, 6.5}, {40, 8.07}, {50, 6.09},
+         {60, 9.14}, {70, 10.97}, {80, 11.21}, {90, 14.74}, {100, 18.28}}, 2)
+</pre>
+<h4>&bull; &nbsp; <a name=lagrangepoly href=../mathly.html#m><code>lagrangepoly({x1, x2, ...}, {y1, y2, ...}, xx), lagrangepoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<p>Return the Lagrange interpolating polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, or the value(s) of the polynomial at <code>xx</code>.</p>
+<p>If <code>xx</code> is provided, return the value(s) of the polynomial at <code>xx</code>;
+otherwise, return the string of the polynomial.</p>
+<p>See also: <a href=#newtonpoly><code>newtonpoly</code></a>, <a href=#polyfit><code>polyfit</code></a>, <a href=#polynomial><code>polynomial</code></a>, <a href=#polyval><code>polyval</code></a>.</p>
+<pre>require 'mathly'
+
+clear()
+format 'short'
+x, y = {0, 1, 2}, {3, 1, 4}
+s = lagrangepoly(x, y) -- or: lagrangepoly({{0, 3}, {1, 1}, {2, 4}})
+disp(s)
+-- '1.5*(x - 1)*(x - 2) - x*(x - 2) + 2.0*x*(x - 1)'
+plot('@(x) ' .. s, x, y, 'ro')
+--<img src=lp1.png width=320>
+
+disp(lagrangepoly(x, y, 5)) -- or: lagrangepoly({{0, 3}, {1, 1}, {2, 4}}, 5)
+-- 43.0000
+disp(lagrangepoly(x, y, {5, -6, 100}))
+-- 43.0000    120.0000  24553.0000
+
+s = lagrangepoly({1, 0, 2}, {-4, -2, -3})
+disp(s)
+-- '4.0*x*(x - 2) - (x - 1)*(x - 2) - 1.5*(x - 1)*x'
+f = ff('@(x) ' .. s) -- or load('function f(x) return ' .. s .. ' end')() -- activate the function
+f(10)
+-- 113.0
+g = ff('@(x) ' .. s) -- a simpler way
+g(10)
+-- 113.0
+
+xs = linspace(-2, 5, 100)
+plot(xs, lagrangepoly(x, y, xs))
+--<img src=lp2.png width=320>
+
+plot(xs, newtonpoly(x, y, xs)) -- same graph
+</pre>
+
+<h4>&bull; &nbsp; <a name=newtonpoly href=../mathly.html#m><code>newtonpoly({x1, x2, ...}, {y1, y2, ...}, xx), newtonpoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<p>Return the Newton interpolating polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, or the value(s) of the polynomial at <code>xx</code>.</p>
+<p>If <code>xx</code> is provided, return the value(s) of the polynomial at <code>xx</code>;
+otherwise, return the string of the polynomial.</p>
+<p>See also: <a href=#lagrangepoly><code>lagrangepoly</code></a>, <a href=#polyfit><code>polyfit</code></a>, <a href=#polynomial><code>polynomial</code></a>, <a href=#polyval><code>polyval</code></a>.</p>
+<pre>require('mathly')
+
+clear()
+x, y = {-1.0, 0, 7, 10}, {1, -1, 6, -2}
+s = newtonpoly(x, y)
+disp(s)
+-- '1 - 2.0*(x + 1.0) + 0.375*(x + 1.0)*x - 0.067424242424242*(x + 1.0)*x*(x - 7)'
+plot('@(x) ' .. s, x, y, 'ro')
+--<img src=np1.png width=320>
+
+xs = linspace(x[1], x[length(x)], 100)
+ys = newtonpoly(x, y, xs)
+axissquare()
+plot(x, y, "*", xs, ys, "-")
+--<img src=np2.png width=320>
+
+axisnotsquare()
+data = {{-1.0, -2.0}, {0, -3}, {3, 10}, {7, 6}, {10, -2}}
+xs = linspace(data[1][1], data[#data][1], 100)
+ys = newtonpoly(data, xs)
+plot(scatter(data), xs, ys, "-", {layout={width=350, height=400}})
+--<img src=np3.png width=320>
+
+x = {1.0, 2, 4, 5, 7, 10, 20, 22, 30}
+y = {52.0, 5, -50, -40, 10, 9, 22, 23, 65}
+str = newtonpoly(x, y)
+f = ff('@(x) ' .. str) -- or load('function f(x) return ' .. str .. ' end')()
+xs = linspace(x[1], x[length(x)], 100)
+ys = f(xs)
+axisnotsquare()
+plot(x, y, "*", xs, ys, "-")
+--<img src=np4.png width=320>
+</pre>
+
+<h4>&bull; &nbsp; <a name=polynomial href=../mathly.html#m><code>polynomial({x1, x2, ...}, {y1, y2, ...}, xx), polynomial({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<p>Construct a polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>.</p>
+<p>If <code>xx</code> is provided, return the value(s) of the polynomial at (each of) <code>xx</code>;
+otherwise, return the string and the coefficients of the polynomial.</p>
+<p>See also: <a href=#lagrangepoly><code>lagrangepoly</code></a>, <a href=#newtonpoly><code>newtonpoly</code></a>, <a href=#polyfit><code>polyfit</code></a>, <a href=#polyval><code>polyval</code></a>.</p>
+<pre>require('mathly')
+
+disp(polynomial({1, 2}, {3, 4}))
+-- 'x + 2.0'
+disp(polynomial({1, 2}, {3, 4}, 5))
+-- 7.0
+disp(polynomial({1, 2}, {3, 4}, {5, -6, 100}), '')
+-- {7.0000, -4.0000, 102.0000}
+
+x, y = {1, 2, 3}, {3, 1, 4}
+s, coefs = polynomial(x, y)
+disp(s)
+-- '2.5*x^2 - 9.5*x + 10.0'
+plot(x, y, 'o', '@(x) ' .. s)
+--<img src=polyn.png width=320>
+
+p = ff('@(x) ' .. s) -- or load('function p(x) return ' .. s .. ' end')() -- activate the function
+p(10)
+-- 165.0
+polyval(coefs, 10)
+-- 165.0
+
+disp(polynomial({1, 2, 3}, {3, 1, 4}, {10, 1, -5}))
+-- 165.0000    3.0000  120.0000
+
+s, coefs = polynomial({{1, 3}, {2, 1}, {3, 4}})
+disp(s)
+disp(polyval(coefs, {10, 1, -5}))
+-- 165.0000    3.0000  120.0000
+disp(polynomial({{1, 3}, {2, 1}, {3, 4}}, {10, 1, -5}))
+-- 165.0000    3.0000  120.0000
+
+-- test of polynomials generated in various ways
+-- note: higher-order polynomials may deviate significantly over small intervals and thus are not reliable
+n = 15 -- n - 1 is the degree of the polynomials to be generated; how about n = 20, 30, 40, ...?
+x = linspace(-10, 10, n)
+y = rand(1, n) * 100 - 50
+xs = linspace(-10, 10, 50)
+ys1 =   polynomial(x, y, xs)
+ys2 = lagrangepoly(x, y, xs)
+ys3 =   newtonpoly(x, y, xs)
+norm(ys1 - ys2)
+norm(ys1 - ys3)
+</pre>
+<h4>&bull; &nbsp; <a name=polyval href=../mathly.html#m><code>polyval(coefs, x)</code></a></h4>
+<p>Evaluate at <code>x</code> the value of a polynomial of which the coefficients are specified
+in a table <code>coefs</code>.</p>
+<p>For a polynomial of <code>p(x) = a<sub>n</sub>x<sup>n</sup> + a<sub>n-1</sub>x<sup>n-1</sup> + ... +
+a<sub>1</sub>x + a<sub>0</sub></code>,
+<code>coefs = {a<sub>n</sub>, a<sub>n-1</sub>, ..., a<sub>0</sub>}</code>.
+For example, <code>p(x) = -2x<sup>4</sup> + 4x<sup>2</sup> - 5x</code>, <code>coef = {-2, 0, 4, -5, 0}.</code></p>
+<p>See also: <a href=#lagrangepoly><code>lagrangepoly</code></a>, <a href=#newtonpoly><code>newtonpoly</code></a>, <a href=#polyfit><code>polyfit</code></a>, <a href=#polynomial><code>polynomial</code></a>.</p>
+<pre>require('mathly')
+polyval({1, 2, 1}, 0) -- evaluate x<sup>2</sup> + 2x + 1 at x = 0
+-- 1.0000
+disp(polyval({1, 2, 1}, {0, 5, 9, 100}), '') -- evaluate at x = 0, 5, 9, 100
+-- {1.0000, 36.0000, 100.0000, 10201.0000}
+</pre>
+</div>
+</body>
+</html>
