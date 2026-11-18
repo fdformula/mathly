@@ -9,8 +9,9 @@
 </head>
 <body>
 <div>
-<h2><a href=../mathly.html#m>MathLua: <code>arc, circle, line, parametriccurve2d, point, polarcurve, polygon, scatter, wedge; plotparametriccurve2d, plotpolarcurve</code></a></h2>
+<h2><a href=../mathly.html#m>MathLua: </a><code><a href=#line>arc, circle, line, parametriccurve2d, point, polarcurve, polygon, scatter, wedge</code></a>; <code><a href=#plotparametriccurve2d>plotparametriccurve2d</a>, <a href=#plotpolarcurve>plotpolarcurve</a></code></h2>
 <p></p>
+<h3>&bull; &nbsp; <a name=circle></a><a name=line></a><a name=parametriccurve2d></a><a name=point></a><a name=polarcurve></a><a name=polygon></a><a name=scatter></a><a name=wedge></a><a name=arc href=../mathly.html#m><code>arc, circle, line, parametriccurve2d, point, polarcurve, polygon, scatter, wedge</code></a></h3>
 <table><tbody>
 <tr><td><code>arc(radius, center, angles, style)</code></td><td> </td><td>Return a graphics object for <code><a href=plot.html>plot</a></code> to plot an arc of a circle, where <code>angles: {angle1, angle2}</code> (default: <code>{0, 2&pi;}</code>).</td></tr>
 <tr><td><code>circle(radius, center, style)</code></td><td> </td><td>Return a graphics object for <code><a href=plot.html>plot</a></code> to plot a circle, where <code>center: {x, y} (default: {0, 0})</code>.</td></tr>
@@ -131,7 +132,7 @@ plot(x, cos(x), text(0, -0.2, 'Demo', {family = 'Sans Serif', size = 28, color =
 --<img src=t2.png width=320>
 </pre>
 
-<h4>&bull; &nbsp; <a name=plotpolarcurve href=../mathly.html#m><code>plotpolarcurve(r, trange, style, resolution, orientationq)</code></a></h4>
+<h3>&bull; &nbsp; <a name=plotpolarcurve href=../mathly.html#m><code>plotpolarcurve(r, trange, style, resolution, orientationq)</code></a></h3>
 <p>Plot a polar curve defined by <code>r(θ)</code>. It is simply <code>plot(plotpolarcurve(r, trange, style, resolution, orientationq))</code>.</p>
 <p>See <a href=gobjs.html><code>polarcurve</code></a>.</p>
 <p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
@@ -176,7 +177,7 @@ plotpolarcurve(
 --<img src=po5.png width=320>
 </pre>
 
-<h4>&bull; &nbsp; <a name=plotparametriccurve2d href=../mathly.html#m><code>plotparametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq)</code></a></h4>
+<h3>&bull; &nbsp; <a name=plotparametriccurve2d href=../mathly.html#m><code>plotparametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq)</code></a></h3>
 <p>Plot a 2D curve defined by <code>{x(t), y(t)}</code>. It is simply <code>plot(parametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq))</code>.</p>
 <p><code>resolution</code> and <code>orientationq</code>? See <a href=../mathly.html#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
 <p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>

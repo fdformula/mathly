@@ -9,9 +9,9 @@
 </head>
 <body>
 <div>
-<h2><a href=../mathly.html#m>MathLua: <code>dotplot, freqpolygon, hist, hist1, histfreqpolygon, pareto, pie</code></a></h2>
+<h2><a href=../mathly.html#m>MathLua: <code><a href=#dotplot>dotplot,</a> <a href=#pie>freqpolygon, hist, hist1, histfreqpolygon, pareto, pie</a></code></h2>
 <p></p>
-<h4>&bull; &nbsp; <a name=dotplot href=../mathly.html#m><code>dotplot(x, y, style)</code></a></h4>
+<h3>&bull; &nbsp; <a name=dotplot href=../mathly.html#m><code>dotplot(x, y, style)</code></a></h3>
 <p>Return a graphics object for <a href=plot.html><code>plot</code></a> to plot a dot plot.</p>
 <p>Here, <code>x = {x<sub>1</sub>, x<sub>2</sub>, ..., x<sub>n</sub>}</code> and
 <code>y = {y<sub>1</sub>, y<sub>2</sub>, ..., y<sub>n</sub>}</code> define the x and
@@ -36,8 +36,8 @@ plot(dotplot(x, y, {size = 3}))
 --<img src=dp3.png width=320>
 </pre>
 
-<h4>&bull; &nbsp; <a name=boxplot></a><a name=pareto></a><a name=freqpolygon></a><a name=histfreqpolygon></a><a name=hist></a><a name=hist1></a>
-<a name=pie href=../mathly.html#m><code>freqpolygon, hist, hist1, histfreqpolygon, pareto, pie</code></a></h4>
+<h3>&bull; &nbsp; <a name=boxplot></a><a name=pareto></a><a name=freqpolygon></a><a name=histfreqpolygon></a><a name=hist></a><a name=hist1></a>
+<a name=pie href=../mathly.html#m><code>freqpolygon, hist, hist1, histfreqpolygon, pareto, pie</code></a></h3>
 <table><tbody>
 <tr><td width=355><code>boxplot(x, names)</code></td><td> </td><td>Return a special graphics object for <code><a href=plot.html>plot</a></code> to plot a box (or box-and-whisker) plot, where <code>x</code> is a table or a matrix of numbers. <code>names = {'name1', 'name2', ...}</code> is optional. If <code>x</code> is a matrix or a table of tables/rows, each row is a data set and thus has a box plot.</td></tr>
 <tr><td><code>freqpolygon(x, nbins, style, xrange)</code></td><td> </td><td>Return a graphics object for <code><a href=plot.html>plot</a></code> to plot a frequency polygon.</td></tr>
@@ -69,23 +69,23 @@ plot(pie(data, 5, {names={'A', 'B', 'C', 'D', 'E'}, style={pull={0, 0.1, 0, 0, 0
 -- insidetextorientation: auto, horizontal, radial, tangential
 -- textposition: auto, inside, outside
 plot(pie({5, 6, 1, 10, 7, 6},
-         {names={'A', 'B', 'C', 'D', 'E', 'F'}, title='Demo',
-          style={textposition='outside',
-          outsidetextfont={
-		    color={'blue', 'red', 'green'},
-			family="Raleway", size={12, 16, 20, 24, 28, 32}}}}))
+{names={'A', 'B', 'C', 'D', 'E', 'F'}, title='Demo',
+style={textposition='outside',
+outsidetextfont={
+color={'blue', 'red', 'green'},
+family="Raleway", size={12, 16, 20, 24, 28, 32}}}}))
 --<img src=pi3.png width=320>
 
 plot(pie({x={5, 6, 1, 10, 7, 6}, names={'A', 'B', 'C', 'D', 'E', 'F'}, title='Demo',
-         style={textposition='inside',
-                insidetextfont={color='white', family = "Droid Serif", size = 16},
-                pull={0.1, 0, 0, 0, 0}, insidetextorientation='radial'}}))
+style={textposition='inside',
+insidetextfont={color='white', family = "Droid Serif", size = 16},
+pull={0.1, 0, 0, 0, 0}, insidetextorientation='radial'}}))
 --<img src=pi4.png width=320>
 
 plot(pie(randi({-100, 100}, 1, 200),
-         {style = {textposition = 'inside',
-                   insidetextfont = {color='white', family="Courier New", size=16},
-				   pull = {0.1, 0, 0, 0, 0}}}))
+{style = {textposition = 'inside',
+insidetextfont = {color='white', family="Courier New", size=16},
+pull = {0.1, 0, 0, 0, 0}}}))
 --<img src=pi5.png width=320>
 </pre>
 
@@ -109,8 +109,8 @@ mu, sigma = 72.11, 13.36
 x = flatten(randn(1, 5000, mu, sigma))
 
 function n(x, mu, sigma)
-  local z = (x - mu) / sigma
-  return exp(-0.5 * z^2) / (sqrt(2 * pi) * sigma)
+local z = (x - mu) / sigma
+return exp(-0.5 * z^2) / (sqrt(2 * pi) * sigma)
 end
 
 X = linspace(mu - 4 * sigma, mu + 4 * sigma, 5000)

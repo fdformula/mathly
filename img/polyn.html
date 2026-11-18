@@ -9,9 +9,9 @@
 </head>
 <body>
 <div>
-<h2><a href=../mathly.html#m>MathLua: <code>lagrangepoly, newtonpoly, polyfit, polynomial, polyval</code></a></h2>
+<h2><a href=../mathly.html#m>MathLua: </a><code><a href=#lagrangepoly>lagrangepoly</a>, <a href=#newtonpoly>newtonpoly</a>, <a href=#polyfit>polyfit</a>, <a href=#polynomial>polynomial</a>, <a href=#polyval>polyval</a></code></h2>
 <p></p>
-<h4>&bull; &nbsp; <a name=polyfit href=../mathly.html#m><code>polyfit({x1, x2, ...}, {y1, y2, ...}, n, xx), polynomial({{x1, y1}, {x2, y2}, ...}, n, xx)</code></a></h4>
+<h3>&bull; &nbsp; <a name=polyfit href=../mathly.html#m><code>polyfit({x1, x2, ...}, {y1, y2, ...}, n, xx), polynomial({{x1, y1}, {x2, y2}, ...}, n, xx)</code></a></h3>
 <p>Construct a polynomial of degree <code>n</code> that best fits the given data, defined by <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, in a least-squares sense.</p>
 <p>If <code>xx</code> is provided, return the value(s) of the polynomial at (each of) <code>xx</code>;
 otherwise, return the string and the coefficients of the polynomial.</p>
@@ -38,7 +38,7 @@ plot(x, y, 'o', '@(x) ' .. s)
 polyfit({{0, 1.94}, {10, 3.96}, {20, 5}, {30, 6.5}, {40, 8.07}, {50, 6.09},
          {60, 9.14}, {70, 10.97}, {80, 11.21}, {90, 14.74}, {100, 18.28}}, 2)
 </pre>
-<h4>&bull; &nbsp; <a name=lagrangepoly href=../mathly.html#m><code>lagrangepoly({x1, x2, ...}, {y1, y2, ...}, xx), lagrangepoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<h3>&bull; &nbsp; <a name=lagrangepoly href=../mathly.html#m><code>lagrangepoly({x1, x2, ...}, {y1, y2, ...}, xx), lagrangepoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h3>
 <p>Return the Lagrange interpolating polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, or the value(s) of the polynomial at <code>xx</code>.</p>
 <p>If <code>xx</code> is provided, return the value(s) of the polynomial at <code>xx</code>;
 otherwise, return the string of the polynomial.</p>
@@ -76,7 +76,7 @@ plot(xs, lagrangepoly(x, y, xs))
 plot(xs, newtonpoly(x, y, xs)) -- same graph
 </pre>
 
-<h4>&bull; &nbsp; <a name=newtonpoly href=../mathly.html#m><code>newtonpoly({x1, x2, ...}, {y1, y2, ...}, xx), newtonpoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<h3>&bull; &nbsp; <a name=newtonpoly href=../mathly.html#m><code>newtonpoly({x1, x2, ...}, {y1, y2, ...}, xx), newtonpoly({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h3>
 <p>Return the Newton interpolating polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>, or the value(s) of the polynomial at <code>xx</code>.</p>
 <p>If <code>xx</code> is provided, return the value(s) of the polynomial at <code>xx</code>;
 otherwise, return the string of the polynomial.</p>
@@ -115,7 +115,7 @@ plot(x, y, "*", xs, ys, "-")
 --<img src=np4.png width=320>
 </pre>
 
-<h4>&bull; &nbsp; <a name=polynomial href=../mathly.html#m><code>polynomial({x1, x2, ...}, {y1, y2, ...}, xx), polynomial({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h4>
+<h3>&bull; &nbsp; <a name=polynomial href=../mathly.html#m><code>polynomial({x1, x2, ...}, {y1, y2, ...}, xx), polynomial({{x1, y1}, {x2, y2}, ...}, xx)</code></a></h3>
 <p>Construct a polynomial, defined by data <code>x = {x1, x2, ...}</code> and <code>y = {y1, y2, ...}</code>.</p>
 <p>If <code>xx</code> is provided, return the value(s) of the polynomial at (each of) <code>xx</code>;
 otherwise, return the string and the coefficients of the polynomial.</p>
@@ -164,7 +164,7 @@ ys3 =   newtonpoly(x, y, xs)
 norm(ys1 - ys2)
 norm(ys1 - ys3)
 </pre>
-<h4>&bull; &nbsp; <a name=polyval href=../mathly.html#m><code>polyval(coefs, x)</code></a></h4>
+<h3>&bull; &nbsp; <a name=polyval href=../mathly.html#m><code>polyval(coefs, x)</code></a></h3>
 <p>Evaluate at <code>x</code> the value of a polynomial of which the coefficients are specified
 in a table <code>coefs</code>.</p>
 <p>For a polynomial of <code>p(x) = a<sub>n</sub>x<sup>n</sup> + a<sub>n-1</sub>x<sup>n-1</sup> + ... +
