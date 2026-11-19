@@ -78,8 +78,10 @@ plot(polarcurve('@(t) 2 - 2*sin(t) + sin(t)*sqrt(abs(cos(t))) / (sin(t) + 1.8)',
 plot(
   polarcurve(1.5),
   polarcurve('@(t) sqrt(t) * cos(t)', {0, 4*pi}, '-b'),
+  '@(x) sqrt(abs(x))*cos(x^2)',
   polarcurve('@(t) cos(4*t)', {0, 2*pi}, '-rfs'),
-  parametriccurve2d({cos, sin}, {3/4*pi, 5/4*pi}, '-gfs')
+  parametriccurve2d({cos, sin}, {3/4*pi, 5/4*pi}, '-gfs'),
+  {xrange={-3, 3}, yrange={-2, 2}}
 )
 --<img src=plot10.png width=320>
 
@@ -147,7 +149,7 @@ plotpolarcurve(function(t) return sin(cos(tan(t))) end, {0, 2*pi}, 'rfs')
 plotpolarcurve('@(t) exp(cos(t)) - 2*cos(4*t) + sin(t/4)^3', {0, 10*pi})
 --<img src=po3.png width=320>
 </pre>
-<p>To plot multiple polar curves in a single figure, use <a href=plot.html><code>plot</code></a>. See <a href=#pc><code>polarcurve</code></a>.
+<p>To plot multiple polar curves in a single figure, use <a href=plot.html><code>plot</code></a> together with <a href=#pc><code>polarcurve</code></a>.
 Below can be a different version of <code>plotpolarcurve</code>.</p>
 <pre>require('mathly')
 
@@ -179,8 +181,8 @@ plotpolarcurve(
 
 <h3>&bull; &nbsp; <a name=plotparametriccurve2d href=../mathly.html#m><code>plotparametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq)</code></a></h3>
 <p>Plot a single 2D curve defined by <code>{x(t), y(t)}</code>. It is simply <code>plot(parametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq))</code>.</p>
-<p><code>resolution</code> and <code>orientationq</code>? See <a href=../mathly.html#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
-<p>&#x2713; &nbsp; To plot multiple (parametric) curves on a single figure or a parametric curve with more configurations, please use <a href=gobjs.html><code>parametriccurve2d</code></a> together with <a href=plot.html><code>plot</code></a>.</p>
+<p><code>resolution</code> and <code>orientationq</code>? See <a href=#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
+<p>&#x2713; &nbsp; To plot multiple (parametric) curves on a single figure or a parametric curve with more configurations, please use <a href=gobjs.html><code>parametriccurve2d</code></a> together with <a href=plot.html><code>plot</code></a> See: <a href=#pc>example</code>.</p>
 <p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
 <pre>require('mathly')
 axissquare()
