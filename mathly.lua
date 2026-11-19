@@ -3278,14 +3278,12 @@ function help(w)
 			elseif ismember(w, {'fill', 'filling', 'plot'}) then
 				u = H .. 'plot.html'
 			elseif ismember(w, {'animate', 'manipulate'}) then
-				u = H .. 'anim.html' .. w
+				u = H .. 'anim.html#' .. w
 			elseif ismember(w, {'columns', 'grid', 'gridaxes', 'height', 'layout', 'rows', 'width', 'title'}) then
 				u = H .. 'grid.html'
 			elseif ismember(w, {'plot3d', 'plotparametriccurve3d', 'plotsphericalsurface'}) then
-				u = H .. '3d.html'
-			elseif ismember(w, {'arc', 'circle', 'line', 'parametriccurve2d', 'point', 'polarcurve', 'polygon', 'scatter', 'text', 'wedge'}) then
-				u = H .. 'gobjs.html'
-			elseif ismember(w, {'plotparametriccurve2d', 'plotpolarcurve'}) then
+				u = H .. '3d.html#' .. w
+			elseif ismember(w, {'arc', 'circle', 'line', 'parametriccurve2d', 'plotparametriccurve2d', 'plotpolarcurve', 'point', 'polarcurve', 'polygon', 'scatter', 'text', 'wedge'}) then
 				u = H .. 'gobjs.html#' .. w
 			elseif ismember(w, {'boxplot', 'dotplot', 'freqpolygon', 'hist', 'hist1', 'histfreqpolygon', 'pareto', 'pie'}) then
 				u = H .. 'stats.html#' .. w
