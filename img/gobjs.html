@@ -78,7 +78,7 @@ plot(polarcurve('@(t) 2 - 2*sin(t) + sin(t)*sqrt(abs(cos(t))) / (sin(t) + 1.8)',
 plot(
   polarcurve(1.5),
   polarcurve('@(t) sqrt(t) * cos(t)', {0, 4*pi}, '-b'),
-  '@(x) sqrt(abs(x))*cos(x^2)',
+  '@(x) sqrt(abs(x))*cos(x^2)', '--r',
   polarcurve('@(t) cos(4*t)', {0, 2*pi}, '-rfs'),
   parametriccurve2d({cos, sin}, {3/4*pi, 5/4*pi}, '-gfs'),
   {xrange={-2, 3}, yrange={-2, 2}}
