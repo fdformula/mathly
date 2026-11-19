@@ -46,10 +46,10 @@ pentagon, square, square-open, star, triangle-left, triangle-right, triangle-up,
 <tr><td><code>w</code></td><td> &nbsp; <td>white</td></tr>
 </tbody></table>
 <p></p>
-<p>&#x2713; &nbsp; Filling specific regions? See <a href=../mathly.html#ff><code>examples</code></a>.</p>
-<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining an anonymous function</a>; <a href=#layout>Plotly JavaScript Figure Reference: <code>layout</code></a>.</p>
+<p>&#x2713; &nbsp; Filling specific regions? See <a href=#ff><code>examples</code></a>.</p>
+<p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining an anonymous function</a>; <a href=grid.html>Plotly JavaScript Figure Reference: <code>layout</code> and <code>grid</code></a>.</p>
 <p></p>
-<p><b>Some examples</b></p>
+<p>Examples:</p>
 <pre>require('mathly')
 
 clear()
@@ -63,24 +63,24 @@ specs2 = {color='blue', name='cos <i>x</i>', layout={width=500, height=500, grid
 specs3 = {width=3, name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4}
 
 plot(sin)
---<img src=p1.png width=320>
+--<img src=p1.png width=280>
 
 plot('@(x) x^2', {xrange={-6, 6}})
---<img src=p2.png width=320>
+--<img src=p2.png width=280>
 
 plot(sin, '-r',
      '@(x) x^2', {color='blue'},
      {xrange = {-0.5, 1}},
      {layout = {title = 'Demo', xaxis = {title = 'x'}, yaxis = {title = 'y'},
                 margin = {l = 40, r = 40, t = 40, b = 40, pad = 40}}})
---<img src=p3.png width=320>
+--<img src=p3.png width=280>
 
 shownotlegend()
 plot(x, y1, '--xr',
      x, y2, ':g',
      text(0.79, 0.71 - 0.08, 'A'),
      point(0.79, 0.71, {symbol='circle', size=10, color='blue'}))
---<img src=p4.png width=320>
+--<img src=p4.png width=280>
 
 plot(x, y1, x, y2, specs1, sin, '--r')
 --<img src=p5.png width=400>
@@ -130,15 +130,15 @@ plot({xrange = {-6, 6, 0.01}}, table.unpack(fs)) -- smoother
 
 axisnotsquare()
 plot(sin, '-rfa')
---<img src=plot6.png width=320>
+--<img src=plot6.png width=280>
 
 x = linspace(-2.337, 0.779, 100)
 X = linspace(-5, 5, 200)
 plot(X, cos(X), X, sin(X), '-rff') -- shade regions between two curves
---<img src=plot7.png width=320>
+--<img src=plot7.png width=280>
 
 plot(x, cos(x), x, sin(x), '-rff', X, cos(X), X, sin(X))
---<img src=plot8.png width=320>
+--<img src=plot8.png width=280>
 
 f = ff('@(x) sqrt(1 - x^2)')
 g = ff('@(x) 6 - (x - 2)^2')
