@@ -85,12 +85,11 @@ With each parametric curve in <code>enhancements</code>, field <code>resolution<
 fstr = '@(x) x^2'
 opts = {
   xrange = {-6, 6}, yrange = {-2, 40},
-  layout = {width = 500, height = 350, square = false}, -- square aspect ratio, square = true, by default
+  layout = {width = 500, height = 350, square = false}, -- square aspect ratio: square = true (default)
   enhancements = {{x = 'X', y = 'Y', color = 'red', size = 10, point = true}}
 }
 animate(fstr, opts)
 --<p><a href=animate1.html target=_blank><img src=a1.png width=200></a></p>
-
 
 jscode = [[
   function displaytext() { return "<em>x</em>(<em>t</em>) = 3 cos <em>t</em>, <em>y</em>(<em>t</em>) = 3 sin <em>t</em> (Counterclockwise)"; }
@@ -107,7 +106,6 @@ opts = {
 }
 animate({'@(t) 3*cos(t)', '@(t) 3*sin(t)'}, opts)
 --<p><a href=../animations/circle.html target=_blank><img src=a2.png width=200></a></p>
-
 
 jscode = [[
   function displaytext() { return "<em>x</em>(<em>t</em>) = 2 cos(<em>-t</em>), <em>y</em>(<em>t</em>) = 3 sin(<em>-t</em>) (Clockwise)"; }
@@ -126,7 +124,6 @@ opts = {
 }
 animate({'@(t) 2*cos(-t)', '@(t) 3*sin(-t)'}, opts)
 --<p><a href=../animations/ellipse.html target=_blank><img src=a3.png width=200></a>
-
 
 -- Mathly around Lua
 fstr = {'@(t) 5 * cos(t)', '@(t) 5 * sin(t)'}
@@ -148,7 +145,6 @@ opts = {
 animate(fstr, opts)
 --<p><a href=animate4.html target=_blank><img src=a4.png width=200></a></p>
 
-
 -- polar curves: the code below may be used as a template
 -- butterfly curve: polar function r(θ) = e^sin(θ) - 2cos(4θ) + sin^5(θ/12)
 -------------------------------------------------------------------------
@@ -169,7 +165,6 @@ opts = {
 animate(fstr, opts)
 --<p><a href=../animations/polar-curves_butterfly.html target=_blank><img src=a5.png width=200></a></p>
 
-
 -- Lituus spiral: polar equation r(t)^2 = a^2 / t
 r = 'a / sqrt(t)' -- try: a sqrt(t)
 -----------------------------------
@@ -187,7 +182,6 @@ opts = {
 }
 animate(fstr1, opts)
 --<p><a href="../animations/lituus-polar-curve.html" target=_blank><img src=a6.png width=200></a></p>
-
 </pre>
 
 <p>See more examples below:</p>
@@ -274,7 +268,6 @@ opts = {
 manipulate({'@(t) a*sin(m * t)', '@(t) b*sin(n * t)'}, opts)
 --<p><a href=../animations/lissajous-curves.html target=_blank><img src=ae.png width=120></a></p>
 
-
 fstr = {'@(t) cos(t) + 1/m * cos(a*t) + 1/n * cos(b*t+3.1416/2)',
         '@(t) sin(t) + 1/m * sin(a*t) + 1/n * sin(b*t+3.1416/2)'}
 opts = {
@@ -294,7 +287,6 @@ manipulate(fstr, opts)
 -- m = 2, (n = 5 | 9), a = 9, b = -15
 -- m = 2, n = 2, a = 8, b = -6
 
-
 -- polar curves: the code below may be used as a template
 ---------------------------------------------------------
 r = 'sin(n*t)'        -- r(θ) = sin(nθ); change this only
@@ -308,7 +300,6 @@ opts = {
   layout = {width = 500, height = 500, square = true, title = '&lt;h3&gt;Polar curve: r(t) = sin(nt)&lt;/h3&gt;'}}
 manipulate(fstr, opts)
 --<p><a href="../animations/polar-curves_sin(nt).html" target=_blank><img src=ag.png width=150></a></p>
-
 
 r = 'm + 1/n * sin(a*t)'
 s = 't + sin(b*t)/c'
@@ -360,7 +351,7 @@ animate(fstr, opts)
 --<p><a href="../animations/beautiful-polar-curves_plotting.html" target=_blank><img src=aj.png width=200></a></p>
 </pre>
 
-<p>JavaScript and enhancements are allowed as with <code>animate</code>.</p>
+JavaScript and enhancements are allowed as with <code>animate</code>.
 <pre>require('mathly')
 
 jcode = [[

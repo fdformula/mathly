@@ -70,20 +70,8 @@ plot(
 )
 --<img src=plot5.png width=320>
 
-axissquare()
 plot(polarcurve('@(t) 2 - 2*sin(t) + sin(t)*sqrt(abs(cos(t))) / (sin(t) + 1.8)', {0, 2*pi}, 'rfs'))
 --<img src=plot9.png width=320>
-
-<a name=pc></a>
-plot(
-  polarcurve(1.5),
-  polarcurve('@(t) sqrt(t) * cos(t)', {0, 4*pi}, '-b'),
-  '@(x) sqrt(abs(x))*cos(x^2)', '--r',
-  polarcurve('@(t) cos(4*t)', {0, 2*pi}, '-rfs'),
-  parametriccurve2d({cos, sin}, {3/4*pi, 5/4*pi}, '-gfs'),
-  {xrange={-2, 3}, yrange={-2, 2}}
-)
---<img src=plot10.png width=320>
 
 do -- https://en.wikipedia.org/wiki/Butterfly_curve_(transcendental)
   local function f(t) return (exp(cos(t)) - 2*cos(4*t) - sin(t/12)^5) end
@@ -101,6 +89,33 @@ plot(polarcurve(r, {0, 8*pi}, '-sfn'), {layout={width=800, height=800}})
 plot(polarcurve(r, {0, 8*pi}, '-sfn', 10000), {layout={width=800, height=800}}) -- increase resolution to improve smoothness
 --<img src=plot13.png width=500>
 
+gobjs = {}
+for i = 1, 6 do
+  gobjs[i] = polarcurve(function(t) return sin(1.6 * t^2) + cos(i * t)^5 end, {0, 8*pi}, '-sfn', 10000)
+end
+plot({layout={width=1300, height=1200, grid={rows=2, columns=3}, title='Example'},
+      names={'i=1', 'i=2', 'i=3', 'i=4', 'i=5', 'i=6'}}, table.unpack(gobjs))
+
+x = linspace(-pi, pi, 200)
+plot(x, cos(x), point(-pi/3, cos(-pi/3)),
+     text(-pi/3+0.3, cos(-pi/3) - 0.1, 'Point A'),
+     point(pi/3, cos(pi/3)), text(1.6, cos(pi/3) - 0.1, 'Point B'))
+--<img src=t1.png width=320>
+
+plot(x, cos(x), text(0, -0.2, 'Demo', {family = 'Sans Serif', size = 28, color = '#00aaff'}))
+--<img src=t2.png width=320>
+
+axissquare() -- <a name=pc></a>
+plot(
+  polarcurve(1.5),
+  polarcurve('@(t) sqrt(t) * cos(t)', {0, 4*pi}, '-b'),
+  '@(x) sqrt(abs(x))*cos(x^2)', '--r',
+  polarcurve('@(t) cos(4*t)', {0, 2*pi}, '-rfs'),
+  parametriccurve2d({cos, sin}, {3/4*pi, 5/4*pi}, '-gfs'),
+  {xrange={-2, 3}, yrange={-2, 2}}
+)
+--<img src=plot10.png width=320>
+
 plot(polarcurve('@(t) sin(cos(tan(t)))', {0, 2*pi}), -- the mosquito curve
      polarcurve('@(t) t*sin(t)*cos(t)^2', {0, 20*pi}),
      polarcurve('@(t) exp(cos(t)) - 2*cos(4*t) + sin(t/4)^3', {0, 10*pi}),
@@ -112,31 +127,15 @@ plot(polarcurve('@(t) sin(cos(tan(t)))', {0, 2*pi}), -- the mosquito curve
      })
 --<img src=plot14.png width=600>
 
-gobjs = {}
-for i = 1, 6 do
-  gobjs[i] = polarcurve(function(t) return sin(1.6 * t^2) + cos(i * t)^5 end, {0, 8*pi}, '-sfn', 10000)
-end
-plot({layout={width=1300, height=1200, grid={rows=2, columns=3}, title='Example'},
-      names={'i=1', 'i=2', 'i=3', 'i=4', 'i=5', 'i=6'}}, table.unpack(gobjs))
-
-axissquare()
 plot(
   parametriccurve2d({'@(t) 3*cos(t)', '@(t) 3*sin(t)'}, {0, 2*pi}, {orientationq = true}), -- counter clockwise
   parametriccurve2d({'@(t) 2*sin(t)', '@(t) cos(t)'}, {0, 2*pi}, {orientationq = true}),   -- clockwise
-  parametriccurve2d({'@(t) 2.5*sin(t)', '@(t) 2.5*cos(t)'}, {0, 2*pi}, {color = 'green'}))
+  polarcurve(2.5, {0, 2*pi}, {color = 'green'}))
 --<img src=plot15.png width=320>
-
-x = linspace(-pi, pi, 200)
-plot(x, cos(x), point(-pi/3, cos(-pi/3)), text(-pi/3+0.3, cos(-pi/3) - 0.1, 'Point A'), point(pi/3, cos(pi/3)), text(1.6, cos(pi/3) - 0.1, 'Point B'))
---<img src=t1.png width=320>
-
-plot(x, cos(x), text(0, -0.2, 'Demo', {family = 'Sans Serif', size = 28, color = '#00aaff'}))
---<img src=t2.png width=320>
 </pre>
 
 <h3>&bull; &nbsp; <a name=plotpolarcurve href=../mathly.html#m><code>plotpolarcurve(r, trange, style, resolution, orientationq)</code></a></h3>
-<p>Plot a single polar curve defined by <code>r(θ)</code>. It is simply <code>plot(plotpolarcurve(r, trange, style, resolution, orientationq))</code>.</p>
-<p>&#x2713; &nbsp; To plot multiple (polar) curves on a single figure or a polar curve with more configurations, please use <a href=gobjs.html><code>polarcurve</code></a> together with <a href=plot.html><code>plot</code></a>.</p>
+<p>Plot a single polar curve defined by <code>r(θ)</code>. It is simply <code>plot(<a href=#arc>polarcurve</a>(r, trange, style, resolution, orientationq))</code>.</p>
 <p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
 <pre>require 'mathly'
 axissquare()
@@ -149,8 +148,8 @@ plotpolarcurve(function(t) return sin(cos(tan(t))) end, {0, 2*pi}, 'rfs')
 plotpolarcurve('@(t) exp(cos(t)) - 2*cos(4*t) + sin(t/4)^3', {0, 10*pi})
 --<img src=po3.png width=320>
 </pre>
-<p>To plot multiple polar curves in a single figure, use <a href=plot.html><code>plot</code></a> together with <a href=#pc><code>polarcurve</code></a>.
-Below can be a different version of <code>plotpolarcurve</code>.</p>
+<p>&#x2713; &nbsp; To plot multiple (polar) curves on a single figure or a polar curve with more configurations, please use <a href=#arc><code>polarcurve</code></a> together with <a href=plot.html><code>plot</code></a>. See: <a href=#pc>examples</a>.</p>
+<p>Below can be a different version of <code>plotpolarcurve</code>.</p>
 <pre>require('mathly')
 
 function plotpolarcurve(r, trange, style, resolution, orientationq)
@@ -180,16 +179,14 @@ plotpolarcurve(
 </pre>
 
 <h3>&bull; &nbsp; <a name=plotparametriccurve2d href=../mathly.html#m><code>plotparametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq)</code></a></h3>
-<p>Plot a single 2D curve defined by <code>{x(t), y(t)}</code>. It is simply <code>plot(parametriccurve2d({x(t), y(t)}, trange, style, resolution, orientationq))</code>.</p>
-<p><code>resolution</code> and <code>orientationq</code>? See <a href=#resol><code>parametriccurve2d</code> and <code>polarcurve</code></a>.</p>
-<p>&#x2713; &nbsp; To plot multiple (parametric) curves on a single figure or a parametric curve with more configurations, please use <a href=gobjs.html><code>parametriccurve2d</code></a> together with <a href=plot.html><code>plot</code></a>. See: <a href=#pc>example</code>.</p>
+<p>Plot a single 2D curve defined by <code>{x(t), y(t)}</code>. It is simply <code>plot(<a href=#arc>parametriccurve2d</a>({x(t), y(t)}, trange, style, resolution, orientationq))</code>.</p>
 <p>&#x2713; &nbsp; See also: <a href=../mathly.html#easyf>Shortcut for defining a function for this function.</a></p>
 <pre>require('mathly')
 axissquare()
 plotparametriccurve2d({cos, sin}, {0, 6*pi}, "--rfs")
 plotparametriccurve2d({'@(t) t*cos(t)', '@(t) t*sin(t)'}, {0, 8*pi})
 </pre>
-<p>To plot multiple parametric curves in a single figure, use <a href=plot.html><code>plot</code></a>. See <a href=#pc><code>polarcurve</code></a>.</p>
+<p>&#x2713; &nbsp; To plot multiple (parametric) curves on a single figure or a parametric curve with more configurations, please use <a href=#arc><code>parametriccurve2d</code></a> together with <a href=plot.html><code>plot</code></a>. See: <a href=#pc>examples</code>.</p>
 </div>
 </body>
 </html>
