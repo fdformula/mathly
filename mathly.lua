@@ -5124,55 +5124,59 @@ end
 
 function figure.toplotstring(self)
 	if self.layout == nil then self.layout = {} end
-	if self.layout.xaxis == nil then self.layout.xaxis = {} end
-	if self.layout.yaxis == nil then self.layout.yaxis = {} end
-	if (not _3d_plotq) and (not self.layout.grid) and _axis_equalq then
-		self.layout.xaxis.scaleanchor = 'y'
-		self.layout.yaxis.scaleratio = 1
+	local l = self.layout
+	if l.xaxis == nil then l.xaxis = {} end
+	if l.yaxis == nil then l.yaxis = {} end
+	if (not _3d_plotq) and (not l.grid) and _axis_equalq then
+		l.xaxis.scaleanchor = 'y'
+		l.yaxis.scaleratio = 1
 	end
 
 	if _3d_plotq then
-		if self.layout.zaxis == nil then self.layout.zaxis = {} end
+		if l.zaxis == nil then l.zaxis = {} end
 	else
-		self.layout.showlegend = _showlegendq
-		if not self.layout.grid then -- to make it simple, only valid for 2d graphs on a single figure; invalid for a grid of subplots
-			self.layout.xaxis.visible = _xaxis_visibleq
-			self.layout.xaxis.showgrid = _gridline_visibleq
-			self.layout.yaxis.visible = _yaxis_visibleq
-			self.layout.yaxis.showgrid = _gridline_visibleq
-			if _xrange then self.layout.xaxis.range = _xrange end
-			if _yrange then self.layout.yaxis.range = _yrange end
+		l.showlegend = _showlegendq
+		if not l.grid then -- to make it simple, only valid for 2d graphs on a single figure; invalid for a grid of subplots
+			l.xaxis.visible = _xaxis_visibleq
+			l.xaxis.showgrid = _gridline_visibleq
+			l.yaxis.visible = _yaxis_visibleq
+			l.yaxis.showgrid = _gridline_visibleq
+			if _xrange then l.xaxis.range = _xrange end
+			if _yrange then l.yaxis.range = _yrange end
 		end
 	end
 	if _vecfield_annotations ~= nil then
-		self.layout.showlegend = false
-		self.layout.annotations = _vecfield_annotations
+		l.showlegend = false
+		l.annotations = _vecfield_annotations
 		_vecfield_annotations = nil
 	end
 	self:update_layout(plotly.layout)
-	local r = 1 -- ratio: 4x3, 11/20/26
+	local r = 1
 	if not _axis_equalq then
-		r = 4/3
+		r = 4/3 -- 4x3
 	elseif _xrange and _yrange then
 		r = (_xrange[2] - _xrange[1]) / (_yrange[2]- _yrange[1])
 	end
-	if self.layout.width == nil and self.layout.height == nil then -- xrange and yrange can overwirte width and height
-		self.layout.width, self.layout.height = round(r * 450), 450
-	elseif self.layout.height == nil then
-		self.layout.height = round(1/r * self.layout.width)
-	elseif self.layout.width == nil then
-		self.layout.width = round(r * self.layout.height)
+	if l.width == nil and l.height == nil then -- xrange and yrange can overwrite width and height
+		l.width, l.height = round(r * 450), 450
+	elseif l.width == nil then
+		l.width = round(r * l.height)
+	elseif l.height == nil then
+		l.height = round(1/r * l.width)
+	elseif _axis_equalq then
+		l.height = math.max(round(1/r * l.width), l.height)
 	end
-	if self.layout.grid ~= nil then
-		if type(self.layout.grid.rows) == 'string' then
-			self.layout.grid.rows = tonumber(self.layout.grid.rows)
+	if l.grid ~= nil then
+	  local g = l.grid
+		if type(g.rows) == 'string' then
+			g.rows = tonumber(g.rows)
 		end
-		if type(self.layout.grid.columns) == 'string' then
-			self.layout.grid.columns = tonumber(self.layout.grid.columns)
+		if type(g.columns) == 'string' then
+			g.columns = tonumber(g.columns)
 		end
-		if self.layout.grid.columns == nil or
-			 self.layout.grid.rows == nil or
-			 self.layout.grid.rows * self.layout.grid.columns < #self.data then
+		if g.columns == nil or
+			 g.rows == nil or
+			 g.rows * g.columns < #self.data then
 			return '<html><body>Invalid grid: rows and/or columns not defined, or rows * columns &lt; the number of traces.</body></html>'
 		end
 
@@ -5183,18 +5187,15 @@ function figure.toplotstring(self)
 				self['data'][i]['xaxis'] = 'x' .. i -- they are different :-)
 				self['data'][i]['yaxis'] = 'y' .. i
 			end
-			local g = self.layout.grid
-			if g then
-				if g.xranges and g.xranges[i] then
-					local axis = 'xaxis' .. qq(i == 1, '', i)
-					if self['layout'][axis] == nil then self['layout'][axis] = {} end
-					self['layout'][axis]['range'] = g.xranges[i]
-				end
-				if g.yranges and g.yranges[i] then
-					local axis = 'yaxis' .. qq(i == 1, '', i)
-					if self['layout'][axis] == nil then self['layout'][axis] = {} end
-					self['layout'][axis]['range'] = g.yranges[i]
-				end
+			if g.xranges and g.xranges[i] then
+				local axis = 'xaxis' .. qq(i == 1, '', i)
+				if self['layout'][axis] == nil then self['layout'][axis] = {} end
+				self['layout'][axis]['range'] = g.xranges[i]
+			end
+			if g.yranges and g.yranges[i] then
+				local axis = 'yaxis' .. qq(i == 1, '', i)
+				if self['layout'][axis] == nil then self['layout'][axis] = {} end
+				self['layout'][axis]['range'] = g.yranges[i]
 			end
 			if _3d_plotq then self['data'][i]['zaxis'] = 'z' .. i end
 		end
@@ -5258,16 +5259,15 @@ function plotly.plots(traces)
 	return fig
 end
 
+--[[
+	The code above is obtained from URL: https://github.com/kenloen/plotly.lua
+	All variables in functions are made 'local' in addition to some changes. Some
+	functions have been removed. All credit belongs to the original auther.
 
-
---[[ The code above is obtained from URL: https://github.com/kenloen/plotly.lua
-		 All variables in functions are made 'local' in addition to some changes. Some
-		 functions have been removed. All credit belongs to the original auther. --]]
-
-
---[[ The following code is obtained from URL: http://dkolf.de/dkjson-lua
-		 Names are changed to _dk_ and some functions or so have been removed.
-		 All credit belongs to the original auther. --]]
+	The following code is obtained from URL: http://dkolf.de/dkjson-lua
+	Names are changed to _dk_ and some functions or so have been removed.
+	All credit belongs to the original auther.
+--]]
 
 -- global dependencies:
 local _dk_pairs, _dk_type, _dk_tostring = pairs, type, tostring
@@ -5532,9 +5532,11 @@ function json.encode(value, state)
 	end
 end
 
---[[ The above code is obtained from URL: http://dkolf.de/dkjson-lua
-		 Names are changed to _dk_ and some functions or so have been removed.
-		 All credit belongs to the original auther. --]]
+--[[
+	The above code is obtained from URL: http://dkolf.de/dkjson-lua
+	Names are changed to _dk_ and some functions or so have been removed.
+	All credit belongs to the original auther.
+--]]
 
 return mathly
 
