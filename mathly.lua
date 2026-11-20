@@ -5150,13 +5150,18 @@ function figure.toplotstring(self)
 		_vecfield_annotations = nil
 	end
 	self:update_layout(plotly.layout)
-	if self.layout.width == nil and self.layout.height == nil then
-		self.layout.width = 600 -- 4x3
-		self.layout.height = 450
+	local r = 1 -- ratio: 4x3, 11/20/26
+	if not _axis_equalq then
+		r = 4/3
+	elseif _xrange and _yrange then
+		r = (_xrange[2] - _xrange[1]) / (_yrange[2]- _yrange[1])
+	end
+	if self.layout.width == nil and self.layout.height == nil then -- xrange and yrange can overwirte width and height
+		self.layout.width, self.layout.height = round(r * 450), 450
 	elseif self.layout.height == nil then
-		self.layout.height = self.layout.width
+		self.layout.height = round(1/r * self.layout.width)
 	elseif self.layout.width == nil then
-		self.layout.width = self.layout.height
+		self.layout.width = round(r * self.layout.height)
 	end
 	if self.layout.grid ~= nil then
 		if type(self.layout.grid.rows) == 'string' then
