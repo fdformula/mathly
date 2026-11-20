@@ -41,11 +41,11 @@ each take also a last argument, <code>orientationq</code> (default: false). If i
 <pre>require 'mathly'
 
 clear()
+axisnotsquare()
 plot(sin, point({{-2, 1.5}, {2, -1}, {2.5, 2}}), point(-1, sin(-1), {symbol='circle-open', size=18, color='red'}))
 --<img src=plot1.png width=320>
 
 x = 0.5 - rand(1, 100) * 10
-axisnotsquare()
 plot(scatter(x, cos(x)))
 --<img src=plot2.png width=320>
 
