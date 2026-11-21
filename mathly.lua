@@ -5157,14 +5157,13 @@ function figure.toplotstring(self)
 	elseif _xrange and _yrange then
 		r = (_xrange[2] - _xrange[1]) / (_yrange[2]- _yrange[1])
 	end
-	if l.width == nil and l.height == nil then -- xrange and yrange can overwrite width and height
+	if l.width == nil and l.height == nil then
 		l.width, l.height = round(r * 450), 450
 	elseif l.width == nil then
 		l.width = round(r * l.height)
-	elseif l.height == nil then
-		l.height = round(1/r * l.width)
-	elseif _axis_equalq then
-		l.height = math.max(round(1/r * l.width), l.height)
+	else
+		local h = round(1/r * l.width)
+		l.height = (l.height == nil and h) or math.max(h, l.height)
 	end
 	if l.grid ~= nil then
 	  local g = l.grid
