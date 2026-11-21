@@ -5165,6 +5165,12 @@ function figure.toplotstring(self)
 		local h = round(1/r * l.width)
 		l.height = (l.height == nil and h) or math.max(h, l.height)
 	end
+	local m = 150 -- min width & height
+	l.width, l.height = math.max(l.width, m), math.max(l.height, m)
+	if _axis_equalq and r ~= 1 and l.width == l.height then
+		l.height = round(1/r * l.width)
+		if l.height < m then l.height, l.width = m, round(m * r) end
+	end
 	if l.grid ~= nil then
 	  local g = l.grid
 		if type(g.rows) == 'string' then
