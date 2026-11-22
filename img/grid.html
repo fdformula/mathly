@@ -52,7 +52,7 @@ plot(data_functions_and_styles, options)
 <p>You may use it as a template, remove some attributes, and fine-tune some others for your needs.</p>
 <p>&#x2713; &nbsp; To insert such a template, press Ctrl-P P in <a href=#cudatext>CudaText</a>, and press Ctrl-T in <a href=#cudatext>Lite XL</a>.</p>
 <p>For example,</p>
-<pre>axissquare()
+<pre>
 shownotlegend()
 options = {layout = {
   width = 500, height = 200,
@@ -67,6 +67,7 @@ plot(sin, '-r', options)
 <p>Attributes <code>gridaxes</code> and <code>gridaxisnames</code> can specify axis labels of subplots.</p>
 <pre>require('mathly')
 
+axissquare()
 plot(
   sin, cos, '@(x) x', '@(x) x^2',
   {layout = {
