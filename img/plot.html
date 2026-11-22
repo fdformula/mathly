@@ -60,7 +60,10 @@ y3 = x^2 * sin(x)
 
 specs1 = {layout={width=600, height=600, grid={rows=2, columns=2}, title='Example'}}
 specs2 = {color='blue', name='cos <i>x</i>', layout={width=500, height=500, grid={rows=4, columns=1}, title='Demo'}}
-specs3 = {width=3, name='x<sup>2</sup>', style=':', color='cyan', symbol='circle-open', size=4}
+specs3 = {width=3, -- pen size or thickness in pixels (default: 2)
+  color='cyan', name='x<sup>2</sup>', style=':',
+  symbol='circle-open', size=4
+}
 
 plot(sin)
 --<img src=p1.png width=280>
