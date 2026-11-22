@@ -26,8 +26,8 @@ output, the HTML file <code>_tmp-mathly_plot-6_4.html</code></em>.</p>
 -- showgridlines() -- shownotgridlines() --
 -- showlegend()    -- shownotlegend()
 options = {
-  -- xrange = {-5, 5},
-  -- yrange = {-5, 5},
+  -- xrange = {-5, 5}, -- default setting
+  -- yrange = {-5, 5}, --
   -- names = {'name_of_first_graph', ...}, -- run first: showlegend()
   -- layout = {
     -- width = 600, height = 450, -- default setting
@@ -50,12 +50,26 @@ options = {
 plot(data_functions_and_styles, options)
 </pre>
 <p>You may use it as a template, remove some attributes, and fine-tune some others for your needs.</p>
-<p>&#x2713; &nbsp; To insert such a template, press Ctrl-P P in <a href=#cudatext>CudaText</a>, and press Ctrl-T in <a href=#cudatext>Lite XL</a>.</p>
+<p>&#x2713; &nbsp; To insert such a template, press Ctrl-P P in MathLua IDE <a href=#cudatext>CudaText</a>, and press Ctrl-T in <a href=#cudatext>Lite XL</a>.</p>
+<p>&#x2713; &nbsp; Except that we want full control, we can specify eithor <code>width</code> or <code>height</code>, rather than both,
+and let MathLua determine the other one according to <code>xrange</code> and <code>yrange</code>. If no one is spcified, they default to
+600 (or 450 if <code>axissquare()</code> is called) and 450, respectively.</p>
+<p>&#x2713; &nbsp; <code>xrange</code> and <code>yrange</code> each default to {-5, 5}. Note: <a href="https://plotly.com/javascript/" target="_blank">Plotly JavaScript
+graphing library</a> behind MathLua may adjust the ranges a little according to <code>width</code>, <code>height</code>, and whether <code>axissquare()</code> is called.</p>
 <p>For example,</p>
 <pre>
 shownotlegend()
+axisnotsquare()
+plot(sin, '-r')
+--<img src=sin1a.png width=320>
+
+axissquare()
+plot(sin, '-r', {layout = {width = 500}})
+--<img src=sin1b.png width=320>
+
 options = {layout = {
   width = 500, height = 200,
+  xrange = {-pi, pi}, yrange = {-1.1, 1.1},
   xaxis = {title = "<i>x</i>"}, yaxis = {title = "sin <i>x</i>"},
   margin = {l = 70, r = 40, t = 40, b = 40, pad = 5},
   autosize = false
@@ -67,7 +81,6 @@ plot(sin, '-r', options)
 <p>Attributes <code>gridaxes</code> and <code>gridaxisnames</code> can specify axis labels of subplots.</p>
 <pre>require('mathly')
 
-axissquare()
 plot(
   sin, cos, '@(x) x', '@(x) x^2',
   {layout = {
